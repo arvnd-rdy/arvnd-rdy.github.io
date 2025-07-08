@@ -4,33 +4,70 @@ import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
 import {
   SiHtml5, SiCss3, SiJavascript, SiPython, SiC, SiCplusplus, SiReact, SiNodedotjs, 
   SiExpress, SiNumpy, SiPandas, SiScikitlearn, SiGithub, SiPostman, SiMongodb, 
-  SiDocker, SiNetlify, SiUnity, SiBlender, SiVscodium
+  SiDocker, SiNetlify, SiUnity, SiBlender, SiVscodium, SiDjango, SiGraphql,
+  SiAmazonwebservices, SiVercel, SiPostgresql, SiSqlite, SiTensorflow, SiPytorch,
+  SiOpencv, SiGithubactions
 } from "react-icons/si";
 import { FaGitAlt } from "react-icons/fa";
-import { Brain, Code, Database, Wrench, Gamepad2, Sparkles } from "lucide-react";
+import { Brain, Code, Database, Wrench, Gamepad2, Sparkles, Cloud, Eye } from "lucide-react";
 
 const skillCategories = [
   {
-    title: "Programming Languages",
+    title: "Frontend Development",
     icon: <Code className="w-6 h-6" />,
     gradient: "from-blue-500 to-purple-600",
     skills: [
-      { name: "JavaScript", icon: <SiJavascript />, color: "text-yellow-500" },
-      { name: "Python", icon: <SiPython />, color: "text-blue-500" },
       { name: "HTML5", icon: <SiHtml5 />, color: "text-orange-500" },
       { name: "CSS3", icon: <SiCss3 />, color: "text-blue-400" },
-      { name: "C++", icon: <SiCplusplus />, color: "text-blue-600" },
-      { name: "C", icon: <SiC />, color: "text-gray-600" }
+      { name: "JavaScript (ES6+)", icon: <SiJavascript />, color: "text-yellow-500" },
+      { name: "React", icon: <SiReact />, color: "text-cyan-400" }
     ]
   },
   {
-    title: "Frameworks & Libraries",
-    icon: <Sparkles className="w-6 h-6" />,
+    title: "Backend Development",
+    icon: <Database className="w-6 h-6" />,
     gradient: "from-emerald-500 to-teal-600",
     skills: [
-      { name: "React", icon: <SiReact />, color: "text-cyan-400" },
       { name: "Node.js", icon: <SiNodedotjs />, color: "text-green-500" },
-      { name: "Express", icon: <SiExpress />, color: "text-gray-700" }
+      { name: "Express.js", icon: <SiExpress />, color: "text-gray-700" },
+      { name: "Django (DRF)", icon: <SiDjango />, color: "text-green-600" },
+      { name: "REST APIs", icon: null, color: "text-gray-700" },
+      { name: "GraphQL APIs", icon: <SiGraphql />, color: "text-pink-500" }
+    ]
+  },
+  {
+    title: "Programming Languages",
+    icon: <Sparkles className="w-6 h-6" />,
+    gradient: "from-violet-500 to-purple-600",
+    skills: [
+      { name: "Python", icon: <SiPython />, color: "text-blue-500" },
+      { name: "JavaScript", icon: <SiJavascript />, color: "text-yellow-500" },
+      { name: "C++", icon: <SiCplusplus />, color: "text-blue-600" },
+      { name: "C", icon: <SiC />, color: "text-gray-600" },
+      { name: "C#", icon: null, color: "text-purple-600" }
+    ]
+  },
+  {
+    title: "Databases",
+    icon: <Database className="w-6 h-6" />,
+    gradient: "from-indigo-500 to-blue-600",
+    skills: [
+      { name: "PostgreSQL", icon: <SiPostgresql />, color: "text-blue-600" },
+      { name: "MongoDB", icon: <SiMongodb />, color: "text-green-500" },
+      { name: "SQLite", icon: <SiSqlite />, color: "text-blue-400" }
+    ]
+  },
+  {
+    title: "Cloud & DevOps",
+    icon: <Cloud className="w-6 h-6" />,
+    gradient: "from-amber-500 to-orange-600",
+    skills: [
+      { name: "AWS", icon: <SiAmazonwebservices />, color: "text-orange-500" },
+      { name: "Azure", icon: null, color: "text-blue-500" },
+      { name: "Docker", icon: <SiDocker />, color: "text-blue-400" },
+      { name: "GitHub Actions", icon: <SiGithubactions />, color: "text-gray-800" },
+      { name: "Vercel", icon: <SiVercel />, color: "text-gray-800" },
+      { name: "Netlify", icon: <SiNetlify />, color: "text-teal-500" }
     ]
   },
   {
@@ -38,48 +75,54 @@ const skillCategories = [
     icon: <Brain className="w-6 h-6" />,
     gradient: "from-pink-500 to-rose-600",
     skills: [
+      { name: "Python", icon: <SiPython />, color: "text-blue-500" },
       { name: "NumPy", icon: <SiNumpy />, color: "text-blue-600" },
       { name: "Pandas", icon: <SiPandas />, color: "text-purple-600" },
-      { name: "Scikit-learn", icon: <SiScikitlearn />, color: "text-orange-500" },
-      { name: "Transformers", icon: null, color: "text-gray-700" },
-      { name: "Fine-tuning", icon: null, color: "text-gray-700" },
-      { name: "RAG Pipelines", icon: null, color: "text-gray-700" },
-      { name: "Vector DBs", icon: null, color: "text-gray-700" },
-      { name: "Model Training", icon: null, color: "text-gray-700" }
+      { name: "SciPy", icon: null, color: "text-gray-700" },
+      { name: "scikit-learn", icon: <SiScikitlearn />, color: "text-orange-500" },
+      { name: "TensorFlow", icon: <SiTensorflow />, color: "text-orange-600" },
+      { name: "PyTorch", icon: <SiPytorch />, color: "text-red-500" },
+      { name: "Hugging Face", icon: null, color: "text-gray-700" },
+      { name: "BERT & GPT", icon: null, color: "text-gray-700" },
+      { name: "PEFT/LoRA", icon: null, color: "text-gray-700" },
+      { name: "spaCy", icon: null, color: "text-gray-700" },
+      { name: "MLflow", icon: null, color: "text-gray-700" },
+      { name: "Weights & Biases", icon: null, color: "text-gray-700" }
+    ]
+  },
+  {
+    title: "Computer Vision",
+    icon: <Eye className="w-6 h-6" />,
+    gradient: "from-cyan-500 to-blue-600",
+    skills: [
+      { name: "OpenCV", icon: <SiOpencv />, color: "text-green-600" },
+      { name: "Albumentations", icon: null, color: "text-gray-700" },
+      { name: "Image Processing", icon: null, color: "text-gray-700" }
+    ]
+  },
+  {
+    title: "AR/VR Development",
+    icon: <Gamepad2 className="w-6 h-6" />,
+    gradient: "from-purple-500 to-indigo-600",
+    skills: [
+      { name: "Unity", icon: <SiUnity />, color: "text-gray-800" },
+      { name: "C#", icon: null, color: "text-purple-600" },
+      { name: "Blender", icon: <SiBlender />, color: "text-orange-500" },
+      { name: "ARKit", icon: null, color: "text-gray-700" },
+      { name: "3D Modeling", icon: null, color: "text-gray-700" },
+      { name: "Scene Creation", icon: null, color: "text-gray-700" }
     ]
   },
   {
     title: "Development Tools",
     icon: <Wrench className="w-6 h-6" />,
-    gradient: "from-amber-500 to-orange-600",
+    gradient: "from-gray-500 to-slate-600",
     skills: [
       { name: "Git", icon: <FaGitAlt />, color: "text-red-500" },
       { name: "GitHub", icon: <SiGithub />, color: "text-gray-800" },
       { name: "VS Code", icon: <SiVscodium />, color: "text-blue-500" },
-      { name: "Docker", icon: <SiDocker />, color: "text-blue-400" },
-      { name: "Postman", icon: <SiPostman />, color: "text-orange-500" }
-    ]
-  },
-  {
-    title: "Databases & Cloud",
-    icon: <Database className="w-6 h-6" />,
-    gradient: "from-indigo-500 to-blue-600",
-    skills: [
-      { name: "MongoDB", icon: <SiMongodb />, color: "text-green-500" },
-      { name: "Netlify", icon: <SiNetlify />, color: "text-teal-500" },
-      { name: "Render", icon: null, color: "text-gray-700" }
-    ]
-  },
-  {
-    title: "3D & XR Development",
-    icon: <Gamepad2 className="w-6 h-6" />,
-    gradient: "from-violet-500 to-purple-600",
-    skills: [
-      { name: "Unity", icon: <SiUnity />, color: "text-gray-800" },
-      { name: "Blender", icon: <SiBlender />, color: "text-orange-500" },
-      { name: "AR/VR", icon: null, color: "text-gray-700" },
-      { name: "Scene Design", icon: null, color: "text-gray-700" },
-      { name: "3D Animation", icon: null, color: "text-gray-700" }
+      { name: "Postman", icon: <SiPostman />, color: "text-orange-500" },
+      { name: "Docker", icon: <SiDocker />, color: "text-blue-400" }
     ]
   }
 ];
@@ -115,15 +158,13 @@ const SkillsSection = () => {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6"
           variants={staggerContainer}
         >
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
-              className={`group relative bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 ${
-                categoryIndex === 2 ? 'md:col-span-2 lg:col-span-1' : ''
-              } ${categoryIndex === 0 ? 'lg:row-span-2' : ''}`}
+              className="group relative bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 break-inside-avoid"
               variants={staggerItem}
               whileHover={{ y: -4 }}
             >
@@ -136,15 +177,15 @@ const SkillsSection = () => {
               </div>
 
               {/* Skills Grid */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
-                    className="flex items-center gap-2 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200 group/skill"
+                    className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200 group/skill"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: skillIndex * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
+                    transition={{ delay: skillIndex * 0.05 }}
+                    whileHover={{ scale: 1.02 }}
                   >
                     {skill.icon && (
                       <span className={`text-lg ${skill.color} group-hover/skill:scale-110 transition-transform duration-200`}>
