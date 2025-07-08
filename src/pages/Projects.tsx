@@ -133,7 +133,8 @@ const Projects = () => {
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.3 }}
               >
-                <Card className="bg-white border-gray-200 overflow-hidden group cursor-pointer h-full">
+                <Link to={`/projects/${project.id}`}>
+                  <Card className="bg-white border-gray-200 overflow-hidden group cursor-pointer h-full">
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden">
                       <motion.img
@@ -189,7 +190,8 @@ const Projects = () => {
                       </div>
                     </div>
                   </CardContent>
-                </Card>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
           </div>

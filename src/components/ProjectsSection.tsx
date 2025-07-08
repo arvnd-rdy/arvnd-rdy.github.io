@@ -3,6 +3,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const projects = [
   {
@@ -112,14 +113,14 @@ const ProjectsSection = () => {
           variants={staggerContainer}
         >
           {featuredProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              className={`group relative bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-500 ${
-                index === 0 ? 'lg:col-span-2' : ''
-              }`}
-              variants={staggerItem}
-              whileHover={{ y: -8 }}
-            >
+            <Link key={project.id} to={`/projects/${project.id}`}>
+              <motion.div
+                className={`group relative bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-500 cursor-pointer ${
+                  index === 0 ? 'lg:col-span-2' : ''
+                }`}
+                variants={staggerItem}
+                whileHover={{ y: -8 }}
+              >
               <div className="relative overflow-hidden">
                 <img 
                   src={project.image} 
@@ -181,7 +182,8 @@ const ProjectsSection = () => {
                   <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all" />
                 </div>
               </div>
-            </motion.div>
+              </motion.div>
+            </Link>
           ))}
         </motion.div>
 
@@ -199,12 +201,12 @@ const ProjectsSection = () => {
             variants={staggerContainer}
           >
             {otherProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                className="group bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300"
-                variants={staggerItem}
-                whileHover={{ y: -4 }}
-              >
+              <Link key={project.id} to={`/projects/${project.id}`}>
+                <motion.div
+                  className="group bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                  variants={staggerItem}
+                  whileHover={{ y: -4 }}
+                >
                 <div className="flex items-center justify-between mb-4">
                   <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium">
                     {project.category}
@@ -242,7 +244,8 @@ const ProjectsSection = () => {
                     </span>
                   )}
                 </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </motion.div>
         </motion.div>
