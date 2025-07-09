@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
-import { ExternalLink, Github, ArrowRight, Calendar, Users, Code2 } from "lucide-react";
+import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -87,7 +87,7 @@ const ProjectsSection = () => {
   const otherProjects = projects.filter(project => !project.featured);
 
   return (
-    <section id="projects" className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
+    <section id="projects" className="py-16 md:py-24 bg-gray-50">
       <motion.div
         className="container mx-auto max-w-7xl px-4 md:px-8"
         ref={ref}
@@ -123,289 +123,244 @@ const ProjectsSection = () => {
           </motion.p>
         </motion.div>
 
-        {/* Featured Projects Grid */}
+        {/* Featured Projects - Bento Grid */}
         <motion.div 
-          className="mb-20 md:mb-24"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-20"
           variants={staggerContainer}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 auto-rows-[300px] md:auto-rows-[350px]">
-            {featuredProjects.map((project, index) => (
-              <Link key={project.id} to={`/projects/${project.id}`}>
-                <motion.div
-                  className={`group relative bg-gradient-to-br from-white to-gray-50/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-100/50 backdrop-blur-sm ${
-                    index === 0 ? 'md:col-span-2 md:row-span-2' : index === 1 ? 'lg:row-span-2' : ''
-                  }`}
-                  variants={staggerItem}
-                  initial={{ opacity: 0, y: 60, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  whileHover={{ 
-                    y: -12, 
-                    scale: 1.03,
-                    rotateX: 5,
-                    rotateY: 5,
-                    transition: { duration: 0.3, ease: "easeOut" }
-                  }}
-                  transition={{ 
-                    duration: 0.6, 
-                    delay: index * 0.1,
-                    ease: [0.25, 0.1, 0.25, 1]
-                  }}
-                  style={{
-                    transformStyle: "preserve-3d",
-                    perspective: "1000px"
-                  }}
-                >
-                  {/* Animated Background Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/20 via-purple-50/20 to-pink-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Image Container */}
-                  <div className="relative overflow-hidden h-2/3">
-                    <motion.img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.6, ease: "easeOut" }}
-                    />
-                    
-                    {/* Dynamic Gradient Overlay */}
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
-                      initial={{ opacity: 0.6 }}
-                      whileHover={{ opacity: 0.3 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    
-                    {/* Floating Action Buttons */}
-                    <motion.div 
-                      className="absolute top-4 right-4 flex gap-2"
-                      initial={{ opacity: 0, x: 20 }}
-                      whileHover={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: 0.1 }}
-                    >
-                      <motion.button 
-                        className="w-10 h-10 bg-white/90 backdrop-blur-md hover:bg-white rounded-full flex items-center justify-center shadow-lg"
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <ExternalLink className="w-4 h-4 text-gray-700" />
-                      </motion.button>
-                      <motion.button 
-                        className="w-10 h-10 bg-white/90 backdrop-blur-md hover:bg-white rounded-full flex items-center justify-center shadow-lg"
-                        whileHover={{ scale: 1.1, rotate: -5 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <Github className="w-4 h-4 text-gray-700" />
-                      </motion.button>
-                    </motion.div>
-
-                    {/* Category Badge */}
-                    <motion.div 
-                      className="absolute top-4 left-4"
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      <span className="inline-block px-4 py-2 bg-white/95 backdrop-blur-md text-gray-900 text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
-                        {project.category}
-                      </span>
-                    </motion.div>
-
-                    {/* Project Stats - Animated */}
-                    <motion.div 
-                      className="absolute bottom-4 left-4 right-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileHover={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: 0.1 }}
-                    >
-                      <div className="flex gap-4 text-white text-xs font-medium">
-                        <motion.div 
-                          className="flex items-center gap-1 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          <Calendar className="w-3 h-3" />
-                          <span>{project.stats.duration}</span>
-                        </motion.div>
-                        <motion.div 
-                          className="flex items-center gap-1 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          <Users className="w-3 h-3" />
-                          <span>{project.stats.team}</span>
-                        </motion.div>
-                        <motion.div 
-                          className="flex items-center gap-1 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          <Code2 className="w-3 h-3" />
-                          <span>{project.stats.lines}</span>
-                        </motion.div>
-                      </div>
-                    </motion.div>
+          {/* Large Project Card - Left */}
+          <motion.div 
+            className="lg:col-span-6 group"
+            variants={staggerItem}
+          >
+            <Link to={`/projects/${featuredProjects[0]?.id}`}>
+              <motion.div
+                className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 h-full"
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              >
+                <div className="relative h-80 overflow-hidden">
+                  <img 
+                    src={featuredProjects[0]?.image} 
+                    alt={featuredProjects[0]?.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute top-6 left-6">
+                    <span className="inline-block px-4 py-2 bg-white/95 backdrop-blur-sm text-gray-900 text-sm font-semibold rounded-full">
+                      {featuredProjects[0]?.category}
+                    </span>
                   </div>
-                  
-                  {/* Content */}
-                  <div className="p-6 h-1/3 flex flex-col justify-between">
-                    <div>
-                      <motion.h3 
-                        className="font-bold text-gray-900 mb-2 text-lg leading-tight group-hover:text-gray-700 transition-colors"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors">
+                    {featuredProjects[0]?.title}
+                  </h3>
+                  <p className="text-gray-600 text-base leading-relaxed mb-6">
+                    {featuredProjects[0]?.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {featuredProjects[0]?.tags.map((tag) => (
+                      <span 
+                        key={tag}
+                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
                       >
-                        {project.title}
-                      </motion.h3>
-                      
-                      <motion.p 
-                        className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-2"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                      >
-                        {project.description}
-                      </motion.p>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-base font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      Explore Project
+                    </span>
+                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
+          </motion.div>
+
+          {/* Right Column */}
+          <div className="lg:col-span-6 space-y-6">
+            {/* Medium Project Card - Top Right */}
+            <motion.div 
+              className="group"
+              variants={staggerItem}
+            >
+              <Link to={`/projects/${featuredProjects[1]?.id}`}>
+                <motion.div
+                  className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100"
+                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={featuredProjects[1]?.image} 
+                      alt={featuredProjects[1]?.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="inline-block px-3 py-1 bg-white/95 backdrop-blur-sm text-gray-900 text-sm font-semibold rounded-full">
+                        {featuredProjects[1]?.category}
+                      </span>
                     </div>
-                    
-                    {/* Tags */}
-                    <motion.div 
-                      className="flex flex-wrap gap-1 mb-3"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
-                    >
-                      {project.tags.slice(0, 3).map((tag, tagIndex) => (
-                        <motion.span 
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors">
+                      {featuredProjects[1]?.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                      {featuredProjects[1]?.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {featuredProjects[1]?.tags.slice(0, 3).map((tag) => (
+                        <span 
                           key={tag}
-                          className="px-2 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium hover:bg-gray-200 transition-colors"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.5 + tagIndex * 0.1 }}
-                          whileHover={{ scale: 1.05 }}
+                          className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium"
                         >
                           {tag}
-                        </motion.span>
-                      ))}
-                      {project.tags.length > 3 && (
-                        <span className="px-2 py-1 text-gray-400 text-xs">
-                          +{project.tags.length - 3}
                         </span>
-                      )}
-                    </motion.div>
-                    
-                    {/* Learn More Link */}
-                    <motion.div 
-                      className="flex items-center justify-between"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.6 }}
-                    >
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-between">
                       <span className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
                         Explore Project
                       </span>
-                      <motion.div
-                        whileHover={{ x: 5 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
-                      </motion.div>
-                    </motion.div>
+                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                    </div>
                   </div>
-
-                  {/* Subtle Border Animation */}
-                  <motion.div
-                    className="absolute inset-0 rounded-3xl border-2 border-transparent"
-                    whileHover={{
-                      borderColor: "rgba(59, 130, 246, 0.3)",
-                      transition: { duration: 0.3 }
-                    }}
-                  />
                 </motion.div>
               </Link>
-            ))}
+            </motion.div>
+
+            {/* Large Project Card - Bottom Right */}
+            <motion.div 
+              className="group"
+              variants={staggerItem}
+            >
+              <Link to={`/projects/${featuredProjects[2]?.id}`}>
+                <motion.div
+                  className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100"
+                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={featuredProjects[2]?.image} 
+                      alt={featuredProjects[2]?.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="inline-block px-3 py-1 bg-white/95 backdrop-blur-sm text-gray-900 text-sm font-semibold rounded-full">
+                        {featuredProjects[2]?.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors">
+                      {featuredProjects[2]?.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                      {featuredProjects[2]?.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {featuredProjects[2]?.tags.slice(0, 3).map((tag) => (
+                        <span 
+                          key={tag}
+                          className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        Explore Project
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
 
-        {/* Other Projects */}
+        {/* More Projects */}
         <motion.div variants={staggerContainer}>
           <motion.h3 
-            className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 md:mb-12"
+            className="text-3xl md:text-4xl font-bold text-gray-900 mb-12"
             variants={staggerItem}
           >
             More Projects
           </motion.h3>
           
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={staggerContainer}
           >
             {otherProjects.map((project) => (
-              <Link key={project.id} to={`/projects/${project.id}`}>
-                <motion.div
-                  className="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-100"
-                  variants={staggerItem}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="inline-block px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">
-                      {project.category}
-                    </span>
-                    <div className="flex gap-2">
-                      <ExternalLink className="w-4 h-4 text-gray-400 hover:text-gray-600 transition-colors" />
-                      <Github className="w-4 h-4 text-gray-400 hover:text-gray-600 transition-colors" />
+              <motion.div
+                key={project.id}
+                variants={staggerItem}
+                className="group"
+              >
+                <Link to={`/projects/${project.id}`}>
+                  <motion.div
+                    className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100"
+                    whileHover={{ y: -6, transition: { duration: 0.3 } }}
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <span className="inline-block px-3 py-1 bg-white/95 backdrop-blur-sm text-gray-900 text-xs font-semibold rounded-full">
+                          {project.category}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <h4 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
-                    {project.title}
-                  </h4>
-                  
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span 
-                        key={tag}
-                        className="px-2 py-1 bg-gray-50 text-gray-600 rounded text-xs"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {project.tags.length > 3 && (
-                      <span className="px-2 py-1 text-gray-400 text-xs">
-                        +{project.tags.length - 3}
-                      </span>
-                    )}
-                  </div>
+                    
+                    <div className="p-6">
+                      <h4 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors">
+                        {project.title}
+                      </h4>
+                      
+                      <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2">
+                        {project.description}
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.slice(0, 3).map((tag) => (
+                          <span 
+                            key={tag}
+                            className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                        {project.tags.length > 3 && (
+                          <span className="px-2 py-1 text-gray-400 text-xs">
+                            +{project.tags.length - 3}
+                          </span>
+                        )}
+                      </div>
 
-                  {/* Project Stats */}
-                  <div className="flex gap-3 text-xs text-gray-500 mb-3">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      <span>{project.stats.duration}</span>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                          View Details
+                        </span>
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Code2 className="w-3 h-3" />
-                      <span>{project.stats.lines}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-900 group-hover:text-gray-600 transition-colors">
-                      View Details
-                    </span>
-                    <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all" />
-                  </div>
-                </motion.div>
-              </Link>
+                  </motion.div>
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
         </motion.div>
 
         {/* CTA */}
         <motion.div 
-          className="text-center"
+          className="text-center mt-16"
           variants={staggerItem}
         >
           <motion.div
