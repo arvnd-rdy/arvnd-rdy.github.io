@@ -31,7 +31,7 @@ const HeroSection = () => {
       className="min-h-screen bg-gray-50 flex flex-col"
     >
       {/* Social Icons - Left Side */}
-      <div className="hidden md:flex flex-col items-center space-y-4 absolute left-8 top-1/2 -translate-y-1/2 z-20">
+      <div className="hidden lg:flex flex-col items-center space-y-4 absolute left-4 xl:left-8 top-1/2 -translate-y-1/2 z-20">
         {socialLinks.map(({ icon: Icon, href }) => (
           <a
             key={href}
@@ -40,25 +40,26 @@ const HeroSection = () => {
             rel="noopener noreferrer"
             className="text-gray-500 hover:text-gray-900 transition-colors duration-200"
           >
-            <Icon className="w-6 h-6" />
+            <Icon className="w-5 h-5 xl:w-6 xl:h-6" />
           </a>
         ))}
       </div>
       {/* Navigation */}
       <motion.nav 
-        className="flex justify-between items-center p-8 text-sm text-gray-600"
+        className="flex justify-between items-center p-4 sm:p-6 lg:p-8 text-xs sm:text-sm text-gray-600"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         <motion.div 
-          className="transition-colors duration-300 hover:text-gray-900"
+          className="transition-colors duration-300 hover:text-gray-900 text-xs sm:text-sm lg:text-base"
           whileHover={{ scale: 1.05 }}
         >
-          Full Stack & AI/ML Developer
+          <span className="hidden sm:inline">Full Stack & AI/ML Developer</span>
+          <span className="sm:hidden">Developer</span>
         </motion.div>
         <motion.div 
-          className="flex space-x-8"
+          className="hidden md:flex space-x-4 lg:space-x-8"
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
@@ -75,15 +76,32 @@ const HeroSection = () => {
             </motion.a>
           ))}
         </motion.div>
+        
+        {/* Mobile Menu Button */}
+        <motion.div className="md:hidden">
+          <div className="flex space-x-3">
+            {socialLinks.slice(0, 2).map(({ icon: Icon, href }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-gray-900 transition-colors duration-200"
+              >
+                <Icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
+        </motion.div>
       </motion.nav>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center px-8">
-        <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Side - Text */}
-          <motion.div className="space-y-8">
+          <motion.div className="space-y-6 lg:space-y-8 text-center lg:text-left order-2 lg:order-1">
             <motion.h1 
-              className="text-7xl md:text-8xl lg:text-9xl font-black text-gray-900 leading-none tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-gray-900 leading-none tracking-tight"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -106,20 +124,20 @@ const HeroSection = () => {
             </motion.h1>
             
             <motion.div 
-              className="space-y-4 max-w-md"
+              className="space-y-4 max-w-md mx-auto lg:mx-0"
               variants={fadeInUp}
               initial="hidden"
               animate="visible"
               transition={{ delay: 1.2 }}
             >
               <motion.p 
-                className="text-gray-600 leading-relaxed"
+                className="text-gray-600 leading-relaxed text-sm sm:text-base"
                 variants={fadeInUp}
               >
                 Open to job opportunities.
               </motion.p>
               <motion.p 
-                className="text-gray-600 leading-relaxed"
+                className="text-gray-600 leading-relaxed text-sm sm:text-base"
                 variants={fadeInUp}
               >
                 I build websites, AI tools, and 3D experiences that are simple, smart, and fun to use.
@@ -135,7 +153,7 @@ const HeroSection = () => {
             >
               <Button 
                 asChild
-                className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full transition-all duration-500 hover:scale-105 hover:shadow-lg"
+                className="bg-gray-900 hover:bg-gray-800 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all duration-500 hover:scale-105 hover:shadow-lg text-sm sm:text-base"
               >
                 <a href="https://www.linkedin.com/in/arvnd-rdy/" target="_blank" rel="noopener noreferrer">
                   CONTACT →
@@ -146,7 +164,7 @@ const HeroSection = () => {
 
           {/* Right Side - Image */}
           <motion.div 
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center lg:justify-end order-1 lg:order-2"
             variants={fadeInRight}
             initial="hidden"
             animate="visible"
@@ -160,7 +178,7 @@ const HeroSection = () => {
               <motion.img 
                 src="/hero2.png"
                 alt="Arvind Reddy"
-                className="w-[384px] h-[460px] object-cover transition-all duration-700"
+                className="w-[280px] h-[340px] sm:w-[320px] sm:h-[380px] md:w-[350px] md:h-[420px] lg:w-[384px] lg:h-[460px] object-cover transition-all duration-700 rounded-lg shadow-xl"
                 whileHover={{ scale: 1.02 }}
               />
             </motion.div>
@@ -170,18 +188,18 @@ const HeroSection = () => {
 
       {/* Bottom Right Text */}
       <motion.div 
-        className="absolute bottom-8 right-8 text-right"
+        className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 text-right"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.6 }}
       >
-        <div className="text-gray-400 text-sm">AVAILABLE FOR WORK</div>
-        <div className="text-4xl font-black text-gray-900">JUN'25</div>
+        <div className="text-gray-400 text-xs sm:text-sm">AVAILABLE FOR WORK</div>
+        <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900">JUN'25</div>
       </motion.div>
 
       {/* Small Arrow Indicator */}
       <motion.div 
-        className="absolute bottom-8 left-8"
+        className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.8 }}
