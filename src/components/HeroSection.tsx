@@ -46,19 +46,20 @@ const HeroSection = () => {
       </div>
       {/* Navigation */}
       <motion.nav 
-        className="flex justify-between items-center p-8 text-sm text-gray-600"
+        className="flex justify-between items-center p-4 md:p-8 text-sm text-gray-600"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         <motion.div 
-          className="transition-colors duration-300 hover:text-gray-900"
+          className="transition-colors duration-300 hover:text-gray-900 text-xs md:text-sm"
           whileHover={{ scale: 1.05 }}
         >
-          Full Stack & AI/ML Developer
+          <span className="hidden sm:inline">Full Stack & AI/ML Developer</span>
+          <span className="sm:hidden">Developer</span>
         </motion.div>
         <motion.div 
-          className="flex space-x-8"
+          className="hidden md:flex space-x-4 lg:space-x-8"
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
@@ -75,15 +76,27 @@ const HeroSection = () => {
             </motion.a>
           ))}
         </motion.div>
+        {/* Mobile menu button */}
+        <motion.button 
+          className="md:hidden p-2"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <div className="w-6 h-6 flex flex-col justify-center space-y-1">
+            <div className="w-full h-0.5 bg-gray-600"></div>
+            <div className="w-full h-0.5 bg-gray-600"></div>
+            <div className="w-full h-0.5 bg-gray-600"></div>
+          </div>
+        </motion.button>
       </motion.nav>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center px-8">
-        <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="flex-1 flex items-center justify-center px-4 md:px-8">
+        <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Side - Text */}
-          <motion.div className="space-y-8">
+          <motion.div className="space-y-6 md:space-y-8 text-center lg:text-left">
             <motion.h1 
-              className="text-7xl md:text-8xl lg:text-9xl font-black text-gray-900 leading-none tracking-tight"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-900 leading-none tracking-tight"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -106,20 +119,20 @@ const HeroSection = () => {
             </motion.h1>
             
             <motion.div 
-              className="space-y-4 max-w-md"
+              className="space-y-4 max-w-md mx-auto lg:mx-0"
               variants={fadeInUp}
               initial="hidden"
               animate="visible"
               transition={{ delay: 1.2 }}
             >
               <motion.p 
-                className="text-gray-600 leading-relaxed"
+                className="text-gray-600 leading-relaxed text-sm md:text-base"
                 variants={fadeInUp}
               >
                 Open to job opportunities.
               </motion.p>
               <motion.p 
-                className="text-gray-600 leading-relaxed"
+                className="text-gray-600 leading-relaxed text-sm md:text-base"
                 variants={fadeInUp}
               >
                 I build websites, AI tools, and 3D experiences that are simple, smart, and fun to use.
@@ -135,7 +148,7 @@ const HeroSection = () => {
             >
               <Button 
                 asChild
-                className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full transition-all duration-500 hover:scale-105 hover:shadow-lg"
+                className="bg-gray-900 hover:bg-gray-800 text-white px-6 md:px-8 py-2 md:py-3 rounded-full transition-all duration-500 hover:scale-105 hover:shadow-lg text-sm md:text-base"
               >
                 <a href="https://www.linkedin.com/in/arvnd-rdy/" target="_blank" rel="noopener noreferrer">
                   CONTACT →
@@ -146,7 +159,7 @@ const HeroSection = () => {
 
           {/* Right Side - Image */}
           <motion.div 
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center lg:justify-end mt-8 lg:mt-0"
             variants={fadeInRight}
             initial="hidden"
             animate="visible"
@@ -160,7 +173,7 @@ const HeroSection = () => {
               <motion.img 
                 src="/hero2.png"
                 alt="Arvind Reddy"
-                className="w-[384px] h-[460px] object-cover transition-all duration-700"
+                className="w-64 h-80 sm:w-80 sm:h-96 md:w-[384px] md:h-[460px] object-cover transition-all duration-700"
                 whileHover={{ scale: 1.02 }}
               />
             </motion.div>
@@ -170,18 +183,18 @@ const HeroSection = () => {
 
       {/* Bottom Right Text */}
       <motion.div 
-        className="absolute bottom-8 right-8 text-right"
+        className="absolute bottom-4 md:bottom-8 right-4 md:right-8 text-right"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.6 }}
       >
-        <div className="text-gray-400 text-sm">AVAILABLE FOR WORK</div>
-        <div className="text-4xl font-black text-gray-900">JUN'25</div>
+        <div className="text-gray-400 text-xs md:text-sm">AVAILABLE FOR WORK</div>
+        <div className="text-2xl md:text-4xl font-black text-gray-900">JUN'25</div>
       </motion.div>
 
       {/* Small Arrow Indicator */}
       <motion.div 
-        className="absolute bottom-8 left-8"
+        className="absolute bottom-4 md:bottom-8 left-4 md:left-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.8 }}

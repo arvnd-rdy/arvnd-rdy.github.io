@@ -12,19 +12,19 @@ const AboutSection = () => {
   return (
     <motion.section 
       id="about" 
-      className="min-h-screen bg-white relative z-10 scroll-mt-28 flex items-center"
+      className="min-h-screen bg-white relative z-10 scroll-mt-28 flex items-center py-16 md:py-20"
     >
       <motion.div 
-        className="container mx-auto max-w-6xl px-8 w-full" 
+        className="container mx-auto max-w-6xl px-4 md:px-8 w-full" 
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
           {/* Left Side - Hero Image */}
           <motion.div 
             variants={fadeInLeft}
-            className="flex justify-center lg:justify-start"
+            className="flex justify-center lg:justify-start order-2 lg:order-1"
           >
             <motion.div 
               className="relative"
@@ -34,7 +34,7 @@ const AboutSection = () => {
               <motion.img 
                 src="/hero.png"
                 alt="Arvind Reddy - About"
-                className="w-[400px] h-[500px] object-cover rounded-lg shadow-2xl"
+                className="w-64 h-80 sm:w-80 sm:h-96 md:w-[400px] md:h-[500px] object-cover rounded-lg shadow-2xl"
                 whileHover={{ 
                   scale: 1.02,
                   boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
@@ -48,11 +48,11 @@ const AboutSection = () => {
           
           {/* Right Side - About Content */}
           <motion.div 
-            className="space-y-8"
+            className="space-y-6 md:space-y-8 order-1 lg:order-2 text-center lg:text-left"
             variants={fadeInRight}
           >
             <motion.h2 
-              className="text-5xl md:text-6xl font-black text-gray-900 mb-8 leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 md:mb-8 leading-tight"
               variants={staggerContainer}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
@@ -78,7 +78,7 @@ Always curious, always learning — especially when it comes to how AI is changi
               </motion.p>
             </motion.div>
             <motion.div 
-              className="flex gap-4 pt-8"
+              className="flex flex-col sm:flex-row gap-4 pt-6 md:pt-8 justify-center lg:justify-start"
               variants={staggerContainer}
             >
               <motion.div
@@ -87,7 +87,7 @@ Always curious, always learning — especially when it comes to how AI is changi
                 whileTap={{ scale: 0.95 }}
               >
                 <Button 
-                  className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full transition-all duration-300 hover:shadow-lg"
+                  className="bg-gray-900 hover:bg-gray-800 text-white px-6 md:px-8 py-2 md:py-3 rounded-full transition-all duration-300 hover:shadow-lg text-sm md:text-base w-full sm:w-auto"
                 >
                   DOWNLOAD RESUME →
                 </Button>
@@ -100,7 +100,7 @@ Always curious, always learning — especially when it comes to how AI is changi
                 >
                   <Button 
                     variant="outline"
-                    className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-3 rounded-full transition-all duration-300 group"
+                    className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-6 md:px-8 py-2 md:py-3 rounded-full transition-all duration-300 group text-sm md:text-base w-full sm:w-auto"
                   >
                     LEARN MORE 
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />

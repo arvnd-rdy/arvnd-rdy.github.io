@@ -53,18 +53,18 @@ const About = () => {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <motion.header 
-        className="bg-gray-900 text-white py-20"
+        className="bg-gray-900 text-white py-12 md:py-20"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="container mx-auto max-w-6xl px-8">
-          <Link to="/" className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors">
+        <div className="container mx-auto max-w-6xl px-4 md:px-8">
+          <Link to="/" className="inline-flex items-center text-gray-400 hover:text-white mb-6 md:mb-8 transition-colors text-sm md:text-base">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
           <motion.h1 
-            className="text-6xl md:text-8xl font-black leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black leading-tight"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
@@ -77,24 +77,24 @@ const About = () => {
 
       {/* Main Content */}
       <motion.main 
-        className="container mx-auto max-w-6xl px-8 py-20"
+        className="container mx-auto max-w-6xl px-4 md:px-8 py-12 md:py-20"
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
         {/* Personal Introduction */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div>
+        <motion.section className="mb-16 md:mb-20" variants={fadeInUp}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
+            <div className="order-2 lg:order-1">
               <img 
                 src="/hero.png"
                 alt="Arvind Reddy"
-                className="w-full h-96 object-cover rounded-lg shadow-xl"
+                className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg shadow-xl"
               />
             </div>
-            <div className="space-y-6">
-              <h2 className="text-4xl font-black text-gray-900">MY STORY</h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
+            <div className="space-y-4 md:space-y-6 order-1 lg:order-2">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900">MY STORY</h2>
+              <div className="space-y-4 text-gray-600 leading-relaxed text-sm md:text-base">
                 <p>
                   Born and raised in India, my fascination with technology began at age 12 when I wrote my first 
                   "Hello World" program. This spark ignited a passion that has driven my entire career.

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { ExternalLink, Github, ArrowRight, Calendar, Users, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -9,13 +9,14 @@ const projects = [
   {
     id: 1,
     title: "AI-Powered Content Generator",
-    description: "A full-stack application that uses advanced AI models to generate high-quality content for various use cases. Features real-time generation, user authentication, and cloud deployment.",
+    description: "A sophisticated full-stack application leveraging advanced AI models to generate high-quality content for various use cases, featuring real-time generation capabilities.",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=smart",
     tags: ["React", "Node.js", "OpenAI", "MongoDB"],
     category: "AI/ML",
     demoUrl: "#",
     githubUrl: "#",
-    featured: true
+    featured: true,
+    stats: { duration: "3 months", team: "4 people", lines: "12K+" }
   },
   {
     id: 2,
@@ -26,18 +27,20 @@ const projects = [
     category: "Full Stack",
     demoUrl: "#",
     githubUrl: "#",
-    featured: false
+    featured: false,
+    stats: { duration: "4 months", team: "3 people", lines: "8K+" }
   },
   {
     id: 3,
     title: "VR Experience Builder",
-    description: "Interactive VR application built with Unity for creating immersive educational experiences. Features spatial audio and haptic feedback.",
+    description: "Interactive VR application built with Unity for creating immersive educational experiences with spatial audio and haptic feedback.",
     image: "https://images.unsplash.com/photo-1592478411213-6153e4ebc696?w=800&h=600&fit=crop&crop=smart",
     tags: ["Unity", "C#", "VR", "Blender"],
     category: "XR Development",
     demoUrl: "#",
     githubUrl: "#",
-    featured: true
+    featured: true,
+    stats: { duration: "6 months", team: "5 people", lines: "15K+" }
   },
   {
     id: 4,
@@ -48,7 +51,8 @@ const projects = [
     category: "Data Science",
     demoUrl: "#",
     githubUrl: "#",
-    featured: false
+    featured: false,
+    stats: { duration: "2 months", team: "2 people", lines: "6K+" }
   },
   {
     id: 5,
@@ -59,7 +63,8 @@ const projects = [
     category: "IoT",
     demoUrl: "#",
     githubUrl: "#",
-    featured: false
+    featured: false,
+    stats: { duration: "5 months", team: "4 people", lines: "10K+" }
   },
   {
     id: 6,
@@ -70,7 +75,8 @@ const projects = [
     category: "AI/ML",
     demoUrl: "#",
     githubUrl: "#",
-    featured: true
+    featured: true,
+    stats: { duration: "4 months", team: "3 people", lines: "9K+" }
   }
 ];
 
@@ -81,119 +87,162 @@ const ProjectsSection = () => {
   const otherProjects = projects.filter(project => !project.featured);
 
   return (
-    <section id="projects" className="py-20 bg-white">
+    <section id="projects" className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
       <motion.div
-        className="container mx-auto max-w-7xl px-8"
+        className="container mx-auto max-w-7xl px-4 md:px-8"
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={staggerContainer}
       >
+        {/* Header */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-16 md:mb-20"
           variants={fadeInUp}
         >
-          <motion.h2 
-            className="text-5xl md:text-6xl font-black text-gray-900 mb-6"
+          <motion.div
+            className="inline-block px-4 py-2 bg-gray-900 text-white text-xs md:text-sm font-medium rounded-full mb-6"
             variants={staggerItem}
           >
-            FEATURED PROJECTS
+            PORTFOLIO
+          </motion.div>
+          <motion.h2 
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-6 leading-tight"
+            variants={staggerItem}
+          >
+            FEATURED
+            <br />
+            <span className="text-gray-400">PROJECTS</span>
           </motion.h2>
           <motion.p 
-            className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
             variants={staggerItem}
           >
-            A collection of projects that showcase my technical expertise and passion for innovation
+            A curated selection of projects that showcase my technical expertise, 
+            creative problem-solving, and passion for building exceptional digital experiences.
           </motion.p>
         </motion.div>
 
-        {/* Featured Projects */}
+        {/* Featured Projects Grid */}
         <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
+          className="mb-20 md:mb-24"
           variants={staggerContainer}
         >
-          {featuredProjects.map((project, index) => (
-            <Link key={project.id} to={`/projects/${project.id}`}>
-              <motion.div
-                className={`group relative bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-2xl transition-all duration-500 cursor-pointer ${
-                  index === 0 ? 'lg:col-span-2' : ''
-                }`}
-                variants={staggerItem}
-                whileHover={{ y: -8 }}
-              >
-              <div className="relative overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className={`w-full object-cover group-hover:scale-105 transition-transform duration-500 ${
-                    index === 0 ? 'h-64 lg:h-80' : 'h-48'
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+            {featuredProjects.map((project, index) => (
+              <Link key={project.id} to={`/projects/${project.id}`}>
+                <motion.div
+                  className={`group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 cursor-pointer border border-gray-100 ${
+                    index === 0 ? 'xl:col-span-2 xl:row-span-2' : ''
                   }`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-sm font-medium">
-                    {project.category}
-                  </span>
-                </div>
+                  variants={staggerItem}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                >
+                  {/* Image Container */}
+                  <div className="relative overflow-hidden">
+                    <motion.img 
+                      src={project.image} 
+                      alt={project.title}
+                      className={`w-full object-cover group-hover:scale-110 transition-transform duration-700 ${
+                        index === 0 ? 'h-64 lg:h-80 xl:h-96' : 'h-48 md:h-56'
+                      }`}
+                    />
+                    
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+                    
+                    {/* Floating Action Buttons */}
+                    <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      <motion.button 
+                        className="w-10 h-10 bg-white/90 backdrop-blur-sm hover:bg-white rounded-full flex items-center justify-center shadow-lg"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <ExternalLink className="w-4 h-4 text-gray-700" />
+                      </motion.button>
+                      <motion.button 
+                        className="w-10 h-10 bg-white/90 backdrop-blur-sm hover:bg-white rounded-full flex items-center justify-center shadow-lg"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <Github className="w-4 h-4 text-gray-700" />
+                      </motion.button>
+                    </div>
 
-                {/* Action Buttons */}
-                <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Button size="sm" variant="secondary" className="bg-white/90 backdrop-blur-sm hover:bg-white">
-                    <ExternalLink className="w-4 h-4" />
-                  </Button>
-                  <Button size="sm" variant="secondary" className="bg-white/90 backdrop-blur-sm hover:bg-white">
-                    <Github className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span 
-                      key={tag}
-                      className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <a href={project.demoUrl} className="text-gray-900 hover:text-gray-600 transition-colors">
-                      <ExternalLink className="w-5 h-5" />
-                    </a>
-                    <a href={project.githubUrl} className="text-gray-900 hover:text-gray-600 transition-colors">
-                      <Github className="w-5 h-5" />
-                    </a>
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4">
+                      <span className="inline-block px-3 py-1 bg-white/95 backdrop-blur-sm text-gray-900 text-xs font-semibold rounded-full shadow-sm">
+                        {project.category}
+                      </span>
+                    </div>
+
+                    {/* Project Stats */}
+                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      <div className="flex gap-4 text-white text-xs">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          <span>{project.stats.duration}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Users className="w-3 h-3" />
+                          <span>{project.stats.team}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Code2 className="w-3 h-3" />
+                          <span>{project.stats.lines}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   
-                  <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all" />
-                </div>
-              </div>
-              </motion.div>
-            </Link>
-          ))}
+                  {/* Content */}
+                  <div className={`p-6 ${index === 0 ? 'xl:p-8' : ''}`}>
+                    <h3 className={`font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors ${
+                      index === 0 ? 'text-xl md:text-2xl xl:text-3xl' : 'text-lg md:text-xl'
+                    }`}>
+                      {project.title}
+                    </h3>
+                    
+                    <p className={`text-gray-600 mb-4 leading-relaxed ${
+                      index === 0 ? 'text-base md:text-lg' : 'text-sm md:text-base'
+                    }`}>
+                      {project.description}
+                    </p>
+                    
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag) => (
+                        <span 
+                          key={tag}
+                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium hover:bg-gray-200 transition-colors"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* Learn More Link */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-gray-900 group-hover:text-gray-600 transition-colors">
+                        Learn More
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
+          </div>
         </motion.div>
 
         {/* Other Projects */}
         <motion.div variants={staggerContainer}>
           <motion.h3 
-            className="text-3xl font-bold text-gray-900 mb-8"
+            className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 md:mb-12"
             variants={staggerItem}
           >
-            Other Notable Projects
+            More Projects
           </motion.h3>
           
           <motion.div 
@@ -203,64 +252,85 @@ const ProjectsSection = () => {
             {otherProjects.map((project) => (
               <Link key={project.id} to={`/projects/${project.id}`}>
                 <motion.div
-                  className="group bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                  className="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-100"
                   variants={staggerItem}
-                  whileHover={{ y: -4 }}
+                  whileHover={{ y: -4, scale: 1.02 }}
                 >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium">
-                    {project.category}
-                  </span>
-                  <div className="flex gap-2">
-                    <a href={project.demoUrl} className="text-gray-400 hover:text-gray-600 transition-colors">
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                    <a href={project.githubUrl} className="text-gray-400 hover:text-gray-600 transition-colors">
-                      <Github className="w-4 h-4" />
-                    </a>
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="inline-block px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">
+                      {project.category}
+                    </span>
+                    <div className="flex gap-2">
+                      <ExternalLink className="w-4 h-4 text-gray-400 hover:text-gray-600 transition-colors" />
+                      <Github className="w-4 h-4 text-gray-400 hover:text-gray-600 transition-colors" />
+                    </div>
                   </div>
-                </div>
-                
-                <h4 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
-                  {project.title}
-                </h4>
-                
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-1">
-                  {project.tags.slice(0, 3).map((tag) => (
-                    <span 
-                      key={tag}
-                      className="px-2 py-1 bg-gray-50 text-gray-600 rounded text-xs"
-                    >
-                      {tag}
+                  
+                  <h4 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
+                    {project.title}
+                  </h4>
+                  
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <span 
+                        key={tag}
+                        className="px-2 py-1 bg-gray-50 text-gray-600 rounded text-xs"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {project.tags.length > 3 && (
+                      <span className="px-2 py-1 text-gray-400 text-xs">
+                        +{project.tags.length - 3}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Project Stats */}
+                  <div className="flex gap-3 text-xs text-gray-500 mb-3">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      <span>{project.stats.duration}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Code2 className="w-3 h-3" />
+                      <span>{project.stats.lines}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-900 group-hover:text-gray-600 transition-colors">
+                      View Details
                     </span>
-                  ))}
-                  {project.tags.length > 3 && (
-                    <span className="px-2 py-1 text-gray-400 text-xs">
-                      +{project.tags.length - 3}
-                    </span>
-                  )}
-                </div>
+                    <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all" />
+                  </div>
                 </motion.div>
               </Link>
             ))}
           </motion.div>
         </motion.div>
 
+        {/* CTA */}
         <motion.div 
           className="text-center"
           variants={staggerItem}
         >
-          <Button 
-            variant="outline"
-            className="bg-transparent border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-3 rounded-full transition-all duration-300 font-medium"
-            onClick={() => window.location.href = '/projects'}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            VIEW ALL PROJECTS →
-          </Button>
+            <Button 
+              variant="outline"
+              className="bg-transparent border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-3 rounded-full transition-all duration-500 font-medium shadow-lg hover:shadow-xl"
+              onClick={() => window.location.href = '/projects'}
+            >
+              VIEW ALL PROJECTS →
+            </Button>
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>
