@@ -1,7 +1,7 @@
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem } from "@/utils/animations";
 import { Github, Linkedin, Mail } from "lucide-react";
 
@@ -13,6 +13,7 @@ const socialLinks = [
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -46,7 +47,7 @@ const HeroSection = () => {
       </div>
       {/* Navigation */}
       <motion.nav 
-        className="flex justify-between items-center p-4 sm:p-6 lg:p-8 text-xs sm:text-sm text-gray-600"
+        className="flex justify-between items-center p-4 sm:p-6 lg:p-8 text-xs sm:text-sm text-gray-600 relative"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
@@ -58,6 +59,8 @@ const HeroSection = () => {
           <span className="hidden sm:inline">Full Stack & AI/ML Developer</span>
           <span className="sm:hidden">Developer</span>
         </motion.div>
+        
+        {/* Desktop Navigation */}
         <motion.div 
           className="hidden md:flex space-x-4 lg:space-x-8"
           variants={staggerContainer}
@@ -78,22 +81,65 @@ const HeroSection = () => {
         </motion.div>
         
         {/* Mobile Menu Button */}
-        <motion.div className="md:hidden">
-          <div className="flex space-x-3">
-            {socialLinks.slice(0, 2).map(({ icon: Icon, href }) => (
-              <a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-900 transition-colors duration-200"
-              >
-                <Icon className="w-4 h-4" />
-              </a>
-            ))}
-          </div>
-        </motion.div>
+        <motion.button
+          className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          {isMobileMenuOpen ? (
+            <X className="w-5 h-5 text-gray-600" />
+          ) : (
+            <Menu className="w-5 h-5 text-gray-600" />
+          )}
+        </motion.button>
       </motion.nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="md:hidden absolute top-[80px] left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="px-4 py-6 space-y-4">
+              {navItems.map((item, index) => (
+                <motion.a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="block py-3 px-4 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all duration-300 text-center"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {item}
+                </motion.a>
+              ))}
+              
+              {/* Mobile Social Links */}
+              <div className="flex justify-center space-x-6 pt-4 border-t border-gray-200">
+                {socialLinks.map(({ icon: Icon, href }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-gray-900 transition-colors duration-200"
+                  >
+                    <Icon className="w-5 h-5" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
