@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
+import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
+import { EnhancedButton } from "@/components/EnhancedButton";
+import { downloadResume } from "@/utils/downloadResume";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInLeft, fadeInRight, staggerContainer, staggerItem } from "@/utils/animations";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 
 const AboutSection = () => {
   const { ref, isInView } = useScrollAnimation();
@@ -30,16 +33,20 @@ const AboutSection = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              <motion.img 
-                src="/hero.png"
-                alt="Arvind Reddy - About"
-                className="w-[280px] h-[350px] sm:w-[320px] sm:h-[400px] md:w-[360px] md:h-[450px] lg:w-[400px] lg:h-[500px] object-cover rounded-lg shadow-2xl"
+              <motion.div
                 whileHover={{ 
                   scale: 1.02,
                   boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
                 }}
                 transition={{ duration: 0.3 }}
-              />
+              >
+                <ImageWithSkeleton
+                  src="/hero.png"
+                  alt="Arvind Reddy - About"
+                  className="w-[280px] h-[350px] sm:w-[320px] sm:h-[400px] md:w-[360px] md:h-[450px] lg:w-[400px] lg:h-[500px] object-cover rounded-lg shadow-2xl"
+                  skeletonClassName="rounded-lg"
+                />
+              </motion.div>
               {/* Decorative overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-gray-900/20 to-transparent rounded-lg"></div>
             </motion.div>
@@ -80,30 +87,26 @@ Always curious, always learning — especially when it comes to how AI is changi
               className="flex flex-col sm:flex-row gap-4 pt-6 lg:pt-8 justify-center lg:justify-start"
               variants={staggerContainer}
             >
-              <motion.div
-                variants={staggerItem}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  className="bg-gray-900 hover:bg-gray-800 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all duration-300 hover:shadow-lg text-sm sm:text-base w-full sm:w-auto"
+              <motion.div variants={staggerItem}>
+                <EnhancedButton
+                  onClick={downloadResume}
+                  className="bg-gray-900 hover:bg-gray-800 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-base w-full sm:w-auto group"
                 >
-                  DOWNLOAD RESUME →
-                </Button>
+                  DOWNLOAD RESUME
+                  <Download className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
+                </EnhancedButton>
               </motion.div>
               <Link to="/about">
-                <motion.div
-                  variants={staggerItem}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button 
-                    variant="outline"
-                    className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all duration-300 group text-sm sm:text-base w-full sm:w-auto"
-                  >
-                    LEARN MORE 
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                <motion.div variants={staggerItem}>
+                  <Link to="/about">
+                    <EnhancedButton
+                      variant="outline"
+                      className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full group text-sm sm:text-base w-full sm:w-auto"
+                    >
+                      LEARN MORE 
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </EnhancedButton>
+                  </Link>
                 </motion.div>
               </Link>
             </motion.div>

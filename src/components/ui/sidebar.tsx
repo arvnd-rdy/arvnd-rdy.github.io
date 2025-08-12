@@ -744,13 +744,53 @@ const navItems = [
 
 export default function SidebarNav() {
   const [show, setShow] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     function onScroll() {
       // 100vh in pixels
       const heroHeight = window.innerHeight;
       setShow(window.scrollY >= heroHeight - 10); // -10 for a slight buffer
+
+      // Get all sections
+      const sections = navItems.map(item => {
+        const element = document.querySelector(item.href);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return {
+            id: item.href,
+            top: rect.top,
+            bottom: rect.bottom,
+            height: rect.height
+          };
+        }
+        return null;
+      }).filter(Boolean);
+
+      // Find the section that's most in view
+      const viewportHeight = window.innerHeight;
+      const viewportCenter = viewportHeight / 2;
+      
+      let currentSection = "";
+      let minDistance = Infinity;
+
+      sections.forEach(section => {
+        if (section) {
+          // Calculate distance from section center to viewport center
+          const sectionCenter = section.top + section.height / 2;
+          const distance = Math.abs(sectionCenter - viewportCenter);
+          
+          // If section is in viewport and closer to center
+          if (section.top < viewportHeight && section.bottom > 0 && distance < minDistance) {
+            minDistance = distance;
+            currentSection = section.id;
+          }
+        }
+      });
+
+      setActiveSection(currentSection);
     }
+    
     window.addEventListener("scroll", onScroll);
     onScroll(); // run on mount
     return () => window.removeEventListener("scroll", onScroll);
@@ -758,16 +798,23 @@ export default function SidebarNav() {
 
   return (
     <nav
-      className={`fixed top-1/4 left-8 z-[100] hidden md:flex flex-col space-y-6 bg-white/80 rounded-xl shadow-lg px-4 py-6 transition-opacity duration-500 ${show ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+      className={`fixed top-1/4 left-8 z-[100] hidden md:flex flex-col space-y-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg px-4 py-6 transition-opacity duration-500 ${show ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
       aria-label="Section Navigation"
     >
       {navItems.map((item) => (
         <a
           key={item.href}
           href={item.href}
-          className="text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200"
+          className={`relative text-sm font-medium transition-all duration-300 py-2 px-3 rounded-lg ${
+            activeSection === item.href
+              ? "text-gray-900 bg-gray-100 shadow-sm"
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+          }`}
         >
           {item.label}
+          {activeSection === item.href && (
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-gray-900 rounded-full -ml-4 transition-all duration-300" />
+          )}
         </a>
       ))}
     </nav>

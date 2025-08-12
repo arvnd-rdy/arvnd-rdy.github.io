@@ -3,97 +3,120 @@ import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, Calendar, Star } from "lucide-react";
+import { useState } from "react";
 
 const Projects = () => {
   const { ref, isInView } = useScrollAnimation();
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const allProjects = [
     {
       id: 1,
-      title: "AI-POWERED ANALYTICS DASHBOARD",
-      description: "Real-time data visualization platform with machine learning insights and predictive analytics for enterprise clients.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      tags: ["React", "Python", "TensorFlow", "D3.js"],
-      category: "Data Science",
+      title: "AI-Powered Content Generator",
+      description: "A full-stack application that uses advanced AI models to generate high-quality content for various use cases. Features real-time generation, user authentication, and cloud deployment.",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop&crop=smart",
+      tags: ["React", "Node.js", "OpenAI", "MongoDB"],
+      category: "AI/ML",
+      status: "Live",
+      year: "2024",
+      stars: 127,
       featured: true
     },
     {
       id: 2,
-      title: "SMART E-COMMERCE PLATFORM",
-      description: "Full-stack application with AI-driven product recommendations and dynamic pricing optimization.",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      tags: ["Next.js", "Node.js", "PostgreSQL", "Stripe"],
-      category: "E-Commerce",
+      title: "E-Commerce Platform",
+      description: "Modern e-commerce solution with real-time inventory management, secure payment processing, and responsive design.",
+      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop&crop=smart",
+      tags: ["React", "Express", "Stripe", "PostgreSQL"],
+      category: "Full Stack",
+      status: "In Development",
+      year: "2024",
+      stars: 89,
       featured: true
     },
     {
       id: 3,
-      title: "NEURAL NETWORK OPTIMIZER",
-      description: "Advanced ML toolkit for optimizing neural network architectures and hyperparameters at scale.",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      tags: ["PyTorch", "FastAPI", "Docker", "AWS"],
-      category: "Machine Learning",
+      title: "VR Experience Builder",
+      description: "Interactive VR application built with Unity for creating immersive educational experiences. Features spatial audio and haptic feedback.",
+      image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=800&h=600&fit=crop&crop=smart",
+      tags: ["Unity", "C#", "VR", "Blender"],
+      category: "XR Development",
+      status: "Live",
+      year: "2023",
+      stars: 203,
       featured: true
     },
     {
       id: 4,
-      title: "BLOCKCHAIN WALLET",
-      description: "Secure cryptocurrency wallet with multi-chain support and DeFi integration for seamless trading.",
-      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      tags: ["Web3", "Solidity", "React", "Ethereum"],
-      category: "Blockchain",
+      title: "Data Visualization Dashboard",
+      description: "Interactive dashboard for analyzing complex datasets with real-time updates and customizable visualizations.",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=smart",
+      tags: ["React", "D3.js", "Python", "FastAPI"],
+      category: "Data Science",
+      status: "Live",
+      year: "2023",
+      stars: 156,
       featured: false
     },
     {
       id: 5,
-      title: "MOBILE HEALTH TRACKER",
-      description: "Cross-platform health monitoring app with real-time vitals tracking and AI-powered health insights.",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      tags: ["React Native", "Firebase", "TensorFlow", "HealthKit"],
-      category: "Healthcare",
+      title: "Smart Home IoT System",
+      description: "Complete IoT ecosystem for home automation with mobile app control, voice commands, and energy monitoring.",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=smart",
+      tags: ["React Native", "Node.js", "IoT", "AWS"],
+      category: "IoT",
+      status: "Live",
+      year: "2023",
+      stars: 74,
       featured: false
     },
     {
       id: 6,
-      title: "REAL-TIME CHAT APPLICATION",
-      description: "Scalable messaging platform with end-to-end encryption and multimedia support.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      tags: ["Socket.io", "Node.js", "MongoDB", "WebRTC"],
-      category: "Communication",
+      title: "Machine Learning Pipeline",
+      description: "End-to-end ML pipeline for predictive analytics with automated model training, validation, and deployment.",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=smart",
+      tags: ["Python", "TensorFlow", "Docker", "Kubernetes"],
+      category: "AI/ML",
+      status: "Live",
+      year: "2024",
+      stars: 312,
       featured: false
     }
   ];
 
-  const categories = ["All", "Data Science", "E-Commerce", "Machine Learning", "Blockchain", "Healthcare", "Communication"];
+  const categories = ["All", "AI/ML", "Full Stack", "XR Development", "Data Science", "IoT"];
+  
+  const filteredProjects = selectedCategory === "All" 
+    ? allProjects 
+    : allProjects.filter(project => project.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <motion.header 
-        className="bg-black text-white py-20"
+        className="bg-white py-20"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
         <div className="container mx-auto max-w-7xl px-8">
-          <Link to="/" className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors">
+          <Link to="/" className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8 transition-colors font-medium">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
           <motion.h1 
-            className="text-6xl md:text-8xl font-black leading-tight"
+            className="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
           >
-            <motion.span variants={staggerItem} className="block">ALL</motion.span>
-            <motion.span variants={staggerItem} className="block text-gray-400">PROJECTS</motion.span>
+            <motion.span variants={staggerItem}>ALL PROJECTS</motion.span>
           </motion.h1>
           <motion.p 
-            className="text-gray-400 text-xl mt-8 max-w-2xl"
+            className="text-gray-600 leading-relaxed max-w-2xl"
             variants={staggerItem}
           >
             A comprehensive showcase of my work spanning multiple technologies and industries.
@@ -103,19 +126,24 @@ const Projects = () => {
 
       {/* Main Content */}
       <motion.main 
-        className="container mx-auto max-w-7xl px-8 py-20"
+        className="container mx-auto max-w-7xl px-8 py-16"
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
         {/* Filter Categories */}
-        <motion.section className="mb-16" variants={fadeInUp}>
-          <div className="flex flex-wrap gap-4 justify-center">
+        <motion.section className="mb-12" variants={fadeInUp}>
+          <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((category) => (
               <Button 
                 key={category}
-                variant="outline"
-                className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-6 py-2 rounded-full transition-all duration-300"
+                variant={selectedCategory === category ? "default" : "outline"}
+                className={`px-6 py-2 rounded-full transition-all duration-300 font-medium ${
+                  selectedCategory === category 
+                    ? "bg-gray-900 text-white hover:bg-gray-800" 
+                    : "border-gray-300 text-gray-700 hover:bg-gray-900 hover:text-white hover:border-gray-900"
+                }`}
+                onClick={() => setSelectedCategory(category)}
               >
                 {category}
               </Button>
@@ -126,84 +154,107 @@ const Projects = () => {
         {/* Projects Grid */}
         <motion.section variants={staggerContainer}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allProjects.map((project, index) => (
+            {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 variants={staggerItem}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
+                className="bg-white hover:bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-300 overflow-hidden group cursor-pointer"
               >
-                <Card className="bg-white border-gray-200 overflow-hidden group cursor-pointer h-full">
-                  <CardContent className="p-0">
-                    <div className="relative overflow-hidden">
-                      <motion.img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-all duration-300" />
-                      
-                      {/* Category Badge */}
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-white text-black px-3 py-1 text-xs font-bold uppercase tracking-wide">
-                          {project.category}
-                        </span>
-                      </div>
+                {/* Project Image */}
+                <div className="relative overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 object-cover transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  
+                  {/* Status Badge */}
+                  <div className="absolute top-4 left-4">
+                    <Badge variant="secondary" className="bg-white/90 text-gray-900 backdrop-blur-sm">
+                      {project.status}
+                    </Badge>
+                  </div>
 
-                      {/* Featured Badge */}
-                      {project.featured && (
-                        <div className="absolute top-4 right-4">
-                          <span className="bg-yellow-400 text-black px-3 py-1 text-xs font-bold uppercase tracking-wide">
-                            FEATURED
-                          </span>
-                        </div>
-                      )}
+                  {/* Featured Badge */}
+                  {project.featured && (
+                    <div className="absolute top-4 right-4">
+                      <Badge className="bg-gray-900 text-white">
+                        Featured
+                      </Badge>
+                    </div>
+                  )}
 
-                      {/* Action Buttons */}
-                      <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <Button size="sm" className="bg-white text-black hover:bg-gray-200">
-                          <ExternalLink className="h-4 w-4" />
-                        </Button>
-                        <Button size="sm" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
-                          <Github className="h-4 w-4" />
-                        </Button>
-                      </div>
+                  {/* Action Buttons */}
+                  <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Button size="sm" className="bg-white/90 backdrop-blur-sm text-gray-900 hover:bg-white">
+                      <ExternalLink className="h-4 w-4" />
+                    </Button>
+                    <Button size="sm" className="bg-white/90 backdrop-blur-sm text-gray-900 hover:bg-white">
+                      <Github className="h-4 w-4" />
+                    </Button>
+                  </div>
+
+                  {/* Stats Overlay */}
+                  <div className="absolute bottom-4 left-4 flex items-center gap-3 text-white text-sm">
+                    <div className="flex items-center gap-1 bg-black/30 backdrop-blur-sm px-2 py-1 rounded">
+                      <Star className="w-3 h-3 fill-current" />
+                      <span>{project.stars}</span>
                     </div>
-                    
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold mb-3 group-hover:text-gray-700 transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="bg-gray-100 text-gray-800 px-3 py-1 text-xs rounded-full uppercase tracking-wide hover:bg-gray-200 transition-colors"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="flex items-center gap-1 bg-black/30 backdrop-blur-sm px-2 py-1 rounded">
+                      <Calendar className="w-3 h-3" />
+                      <span>{project.year}</span>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
+                
+                {/* Project Content */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <Badge variant="outline" className="border-gray-300 text-gray-700">
+                      {project.category}
+                    </Badge>
+                  </div>
+                  
+                  <h3 className="text-xl font-black text-gray-900 mb-3 uppercase tracking-wide">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="outline"
+                        className="border-gray-300 text-gray-600 text-xs"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
         </motion.section>
 
         {/* Call to Action */}
-        <motion.section className="text-center mt-20" variants={fadeInUp}>
-          <h2 className="text-4xl font-black text-gray-900 mb-8">INTERESTED IN COLLABORATING?</h2>
-          <p className="text-gray-600 text-xl mb-8 max-w-2xl mx-auto">
+        <motion.section className="text-center mt-20 bg-gray-900 rounded-lg p-12 text-white" variants={fadeInUp}>
+          <h2 className="text-3xl font-black mb-6 uppercase tracking-wide">
+            Interested in Collaborating?
+          </h2>
+          <p className="text-gray-300 leading-relaxed mb-8 max-w-2xl mx-auto">
             I'm always open to discussing new opportunities and exciting projects.
           </p>
           <Link to="/#contact">
-            <Button className="bg-gray-900 hover:bg-gray-800 text-white px-12 py-4 rounded-full text-lg font-bold uppercase tracking-wide">
-              LET'S TALK →
+            <Button className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3 rounded-full font-medium">
+              Let's Talk
+              <ArrowLeft className="w-4 h-4 ml-2 rotate-180" />
             </Button>
           </Link>
         </motion.section>

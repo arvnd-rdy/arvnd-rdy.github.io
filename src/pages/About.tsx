@@ -2,197 +2,252 @@ import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Calendar, Award, Book } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Award, Book, GraduationCap, ExternalLink } from "lucide-react";
 
 const About = () => {
   const { ref, isInView } = useScrollAnimation();
 
   const education = [
     {
-      degree: "Master's degree, Applied computing",
+      degree: "Master's in Applied Computing",
       school: "University of Windsor",
-      year: "Sep 2024 - Sep 2026",
-      details: ""
+      year: "2024 - 2026",
+      status: "Current",
+      type: "Master's Degree"
     },
     {
-      degree: "Bachelor of Technology - BTech, Computer Science",
+      degree: "Bachelor of Technology in Computer Science",
       school: "Lovely Professional University",
       year: "2019 - 2023",
-      details: "Grade: 8.6"
-    },
-    {
-      degree: "INTER, MPC",
-      school: "Sri Chaitanya College of Education",
-      year: "Mar 2017 - 2019",
-      details: "Grade: 9.6"
-    },
-    {
-      degree: "St. Peter's Model School - India",
-      school: "St. Peter's Model School - India",
-      year: "Jun 2010 - May 2015",
-      details: "Grade: 9.3"
+      status: "Completed",
+      grade: "8.6 CGPA",
+      type: "Bachelor's Degree"
     }
   ];
 
-  const certifications = [
-    "AWS Certified Solutions Architect",
-    "Google Cloud Professional ML Engineer", 
-    "Meta Front-End Developer Professional",
-    "Deep Learning Specialization - Deeplearning.ai"
+  const skills = [
+    "Full Stack Development",
+    "AI & Machine Learning",
+    "Cloud Architecture",
+    "DevOps & CI/CD",
+    "Mobile Development",
+    "Data Science",
+    "UI/UX Design",
+    "Technical Leadership"
   ];
 
-  const personalInfo = [
-    { label: "Location", value: "San Francisco, CA", icon: MapPin },
-    { label: "Experience", value: "5+ Years", icon: Calendar },
-    { label: "Projects Completed", value: "50+", icon: Award },
-    { label: "Continuous Learning", value: "Always", icon: Book }
+  const interests = [
+    "Quantum Computing",
+    "Space Technology",
+    "Open Source",
+    "Photography",
+    "Hiking",
+    "Cooking",
+    "Reading",
+    "Travel"
+  ];
+
+  const stats = [
+    { label: "Years Experience", value: "2+", icon: Calendar },
+    { label: "Projects Built", value: "15+", icon: Award },
+    { label: "Technologies", value: "25+", icon: Book },
+    { label: "Current Location", value: "Canada", icon: MapPin }
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <motion.header 
-        className="bg-gray-900 text-white py-20"
+        className="bg-white py-20"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="container mx-auto max-w-6xl px-8">
-          <Link to="/" className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors">
+        <div className="container mx-auto max-w-7xl px-8">
+          <Link to="/" className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8 transition-colors font-medium">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
           <motion.h1 
-            className="text-6xl md:text-8xl font-black leading-tight"
+            className="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
           >
-            <motion.span variants={staggerItem} className="block">ABOUT</motion.span>
-            <motion.span variants={staggerItem} className="block text-gray-400">ARVIND</motion.span>
+            <motion.span variants={staggerItem}>ABOUT ME</motion.span>
           </motion.h1>
+          <motion.p 
+            className="text-gray-600 leading-relaxed max-w-2xl"
+            variants={staggerItem}
+          >
+            Get to know the person behind the code - my journey, passions, and what drives me to create.
+          </motion.p>
         </div>
       </motion.header>
 
       {/* Main Content */}
       <motion.main 
-        className="container mx-auto max-w-6xl px-8 py-20"
+        className="container mx-auto max-w-7xl px-8 py-16"
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
         {/* Personal Introduction */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div>
-              <img 
+        <motion.section className="mb-16" variants={fadeInUp}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="order-2 lg:order-1">
+              <motion.img 
                 src="/hero.png"
                 alt="Arvind Reddy"
-                className="w-full h-96 object-cover rounded-lg shadow-xl"
+                className="w-full h-96 object-cover rounded-lg shadow-lg"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
               />
             </div>
-            <div className="space-y-6">
-              <h2 className="text-4xl font-black text-gray-900">MY STORY</h2>
+            <div className="space-y-6 order-1 lg:order-2">
+              <h2 className="text-3xl font-black text-gray-900 uppercase tracking-wide">My Journey</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  Born and raised in India, my fascination with technology began at age 12 when I wrote my first 
-                  "Hello World" program. This spark ignited a passion that has driven my entire career.
+                  Hey! I'm someone who just really enjoys building cool stuff with tech. 
+                  I work across full-stack web dev, AI/ML, and XR — so one day I might be coding a web app, 
+                  and the next I'm fine-tuning a model or playing around in Unity.
                 </p>
                 <p>
-                  After completing my education at prestigious institutions, I moved to Silicon Valley to pursue 
-                  my dreams of building technology that makes a difference. Over the past 5 years, I've had the 
-                  privilege of working with cutting-edge technologies and brilliant minds.
+                  I like making things that actually help people or feel fun to use. Whether it's a smart tool, 
+                  a clean UI, or an immersive 3D scene, I'm all in. Always curious, always learning — 
+                  especially when it comes to how AI is changing everything.
                 </p>
                 <p>
-                  When I'm not coding, you'll find me exploring San Francisco's hiking trails, experimenting with 
-                  new cuisines, or reading about the latest developments in quantum computing and space exploration.
+                  Right now, I'm pursuing my Master's in Applied Computing at the University of Windsor 
+                  while looking for full-time roles where I can keep creating, growing, and working with 
+                  people who love what they do.
                 </p>
               </div>
             </div>
           </div>
         </motion.section>
 
-        {/* Personal Info Grid */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <h2 className="text-4xl font-black text-gray-900 mb-12">QUICK FACTS</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {personalInfo.map((info, index) => (
+        {/* Stats Grid */}
+        <motion.section className="mb-16" variants={fadeInUp}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {stats.map((stat, index) => (
               <motion.div 
-                key={info.label}
-                className="bg-gray-50 p-6 text-center group hover:bg-gray-900 hover:text-white transition-all duration-300"
+                key={stat.label}
+                className="bg-white rounded-lg p-6 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-300"
                 variants={staggerItem}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -4 }}
               >
-                <info.icon className="h-8 w-8 mx-auto mb-4 text-gray-600 group-hover:text-white" />
-                <h3 className="font-bold text-lg mb-2">{info.label}</h3>
-                <p className="text-gray-600 group-hover:text-gray-300">{info.value}</p>
+                <stat.icon className="h-8 w-8 mx-auto mb-4 text-gray-600" />
+                <div className="text-3xl font-black text-gray-900 mb-2">{stat.value}</div>
+                <div className="text-gray-600 text-sm uppercase tracking-wide">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </motion.section>
 
         {/* Education */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <h2 className="text-4xl font-black text-gray-900 mb-12">EDUCATION</h2>
-          <div className="space-y-8">
+        <motion.section className="mb-16" variants={fadeInUp}>
+          <h2 className="text-3xl font-black text-gray-900 mb-8 uppercase tracking-wide">Education</h2>
+          <div className="space-y-6">
             {education.map((edu, index) => (
               <motion.div 
                 key={index}
-                className="bg-gray-50 p-8 group hover:bg-gray-900 hover:text-white transition-all duration-300"
+                className="bg-white rounded-lg p-6 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-300"
                 variants={staggerItem}
-                whileHover={{ x: 10 }}
+                whileHover={{ y: -2 }}
               >
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold mb-2">{edu.degree}</h3>
-                    <p className="text-xl text-gray-600 group-hover:text-gray-300">{edu.school}</p>
-                    <p className="text-gray-500 group-hover:text-gray-400">{edu.details}</p>
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <GraduationCap className="w-5 h-5 text-gray-600" />
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">
+                        {edu.type}
+                      </Badge>
+                    </div>
+                    <h3 className="text-xl font-black text-gray-900 mb-2 uppercase tracking-wide">
+                      {edu.degree}
+                    </h3>
+                    <p className="text-gray-600 font-medium mb-2">{edu.school}</p>
+                    {edu.grade && (
+                      <p className="text-sm text-gray-500">Grade: {edu.grade}</p>
+                    )}
                   </div>
-                  <span className="text-lg font-bold text-gray-500 group-hover:text-gray-300">{edu.year}</span>
+                  <div className="text-right">
+                    <Badge 
+                      variant={edu.status === 'Current' ? 'default' : 'secondary'}
+                      className={edu.status === 'Current' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-700'}
+                    >
+                      {edu.status}
+                    </Badge>
+                    <p className="text-sm text-gray-500 mt-2">{edu.year}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
         </motion.section>
 
-        {/* Certifications */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <h2 className="text-4xl font-black text-gray-900 mb-12">CERTIFICATIONS</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {certifications.map((cert, index) => (
-              <motion.div 
-                key={index}
-                className="bg-gray-50 p-6 group hover:bg-gray-900 hover:text-white transition-all duration-300"
-                variants={staggerItem}
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="flex items-center space-x-3">
-                  <Award className="h-6 w-6 text-gray-600 group-hover:text-white flex-shrink-0" />
-                  <span className="font-semibold">{cert}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
+        {/* Skills & Interests */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          {/* Skills */}
+          <motion.section variants={fadeInUp}>
+            <h2 className="text-3xl font-black text-gray-900 mb-8 uppercase tracking-wide">Core Skills</h2>
+            <div className="bg-white rounded-lg p-6 border border-gray-200">
+              <div className="grid grid-cols-2 gap-3">
+                {skills.map((skill, index) => (
+                  <motion.div
+                    key={skill}
+                    variants={staggerItem}
+                    className="flex items-center gap-2"
+                  >
+                    <div className="w-2 h-2 bg-gray-900 rounded-full" />
+                    <span className="text-gray-700 font-medium text-sm">{skill}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.section>
+
+          {/* Interests */}
+          <motion.section variants={fadeInUp}>
+            <h2 className="text-3xl font-black text-gray-900 mb-8 uppercase tracking-wide">Interests</h2>
+            <div className="bg-white rounded-lg p-6 border border-gray-200">
+              <div className="flex flex-wrap gap-2">
+                {interests.map((interest, index) => (
+                  <Badge
+                    key={interest}
+                    variant="outline"
+                    className="border-gray-300 text-gray-700"
+                  >
+                    {interest}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </motion.section>
+        </div>
 
         {/* Call to Action */}
-        <motion.section className="text-center" variants={fadeInUp}>
-          <h2 className="text-4xl font-black text-gray-900 mb-8">LET'S WORK TOGETHER</h2>
-          <p className="text-gray-600 text-xl mb-8 max-w-2xl mx-auto">
+        <motion.section className="text-center bg-gray-900 rounded-lg p-12 text-white" variants={fadeInUp}>
+          <h2 className="text-3xl font-black mb-6 uppercase tracking-wide">
+            Let's Work Together
+          </h2>
+          <p className="text-gray-300 leading-relaxed mb-8 max-w-2xl mx-auto">
             Ready to bring your ideas to life? I'm always excited to collaborate on innovative projects.
           </p>
-          <div className="flex gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/#contact">
-              <Button className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full">
-                GET IN TOUCH →
+              <Button className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3 rounded-full font-medium">
+                Get In Touch
+                <ExternalLink className="w-4 h-4 ml-2" />
               </Button>
             </Link>
             <Button 
-              variant="outline"
-              className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-3 rounded-full"
+              className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3 rounded-full font-medium"
             >
-              DOWNLOAD CV
+              Download Resume
             </Button>
           </div>
         </motion.section>
