@@ -31,75 +31,90 @@ const ContextualGreeting = () => {
 
     // Day-based greetings
     if (day === 1) { // Monday
-      return { text: "Monday again. Here we go.", emoji: "💪" };
+      const greetings = [
+        "Starting the week with a portfolio visit? I like your style.",
+        "Monday's rough, maybe some cool projects will help.",
+        "If Monday's a climb, consider this a scenic stop."
+      ];
+      return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "💪" };
     }
     if (day === 5) { // Friday
-      return { text: "Friday. Weekend's near.", emoji: "🎉" };
+      const greetings = [
+        "Friday feels, thanks for ending the week here.",
+        "Before the weekend kicks in, take a look around.",
+        "Friday and you're browsing portfolios? That's dedication."
+      ];
+      return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🎉" };
     }
     if (day === 0 || day === 6) { // Weekend
-      return { text: "Weekend. Hope it's a good one.", emoji: "😌" };
+      const greetings = [
+        "Weekend mode, perfect time to wander through some creative work.",
+        "Thanks for stopping by, even on your weekend.",
+        "Weekend visits are my favorite, no rush, just vibes."
+      ];
+      return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "😌" };
     }
 
     // Time-based greetings
     if (hour >= 5 && hour < 8) {
       const greetings = [
-        "You're up early.",
-        "Early start today.",
-        "Morning came quick, huh."
+        "You're up early, checking out portfolios before the world wakes up?",
+        "Morning already? Glad you stopped by my little corner of the internet.",
+        "Early start, huh? Let's see if my work can keep you awake."
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🌅" };
     }
     
     if (hour >= 8 && hour < 12) {
       const greetings = [
-        "Good morning.",
-        "Morning. Hope today's kind to you.",
-        "Morning — how's your day starting?"
+        "Good morning, perfect time to browse through some projects.",
+        "Morning! Coffee in one hand, portfolio in the other?",
+        "Morning, thanks for swinging by before the day gets too busy."
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "☀️" };
     }
     
     if (hour >= 12 && hour < 14) {
       const greetings = [
-        "Lunch time.",
-        "Time to take a break.",
-        "Step away for a bit — it's lunch."
+        "Lunch break scroll? I'll try to make it worth it.",
+        "Taking a break? Let's make it a creative one.",
+        "Lunch time and you're here, I'm flattered."
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🍽️" };
     }
     
     if (hour >= 14 && hour < 18) {
       const greetings = [
-        "Good afternoon.",
-        "Hope your day's going well.",
-        "Still moving forward."
+        "Hey, glad you stopped by. Let me show you what I've been working on.",
+        "Afternoon visits are the best, fresh eyes, fresh ideas.",
+        "Hope your day's going well. Let's make it a bit more inspiring."
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🌤️" };
     }
     
     if (hour >= 18 && hour < 21) {
       const greetings = [
-        "Good evening.",
-        "Evening — time to slow down.",
-        "Hope your night's peaceful."
+        "Evening, perfect time to explore something new.",
+        "Glad you're here, let's make your night a bit more interesting.",
+        "Evening scroll? I've got some work you might like."
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🌆" };
     }
     
     if (hour >= 21 && hour < 24) {
       const greetings = [
-        "It's getting late.",
-        "Late hours.",
-        "Quiet night tonight."
+        "Burning the midnight oil? Me too, check this out.",
+        "Late night browsing, I respect that.",
+        "You're here when most people are asleep. That's dedication."
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🌙" };
     }
     
     // After midnight (0-5 AM)
     const greetings = [
-      "Middle of the night.",
-      "You're up late.",
-      "Past midnight now."
+      "It's past midnight and you're here, love the commitment.",
+      "Guess we're both awake when we probably shouldn't be.",
+      "This is prime creative hour, welcome."
     ];
     return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🌃" };
   };
@@ -119,7 +134,7 @@ const ContextualGreeting = () => {
     if (isVisible) {
       const autoHideTimer = setTimeout(() => {
         setIsVisible(false);
-      }, 6000); // Auto-hide after 6 seconds
+      }, 30000); // Auto-hide after 30 seconds
 
       return () => clearTimeout(autoHideTimer);
     }

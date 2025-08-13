@@ -221,7 +221,7 @@ const HeroSection = () => {
                 variants={fadeInUp}
               >
                 <TypingAnimation 
-                  text="I build websites, AI tools, and 3D experiences that are simple, smart, and fun to use. Always curious, always creating — let's make something cool."
+                  text="I build websites, AI tools, and 3D experiences that are simple, smart, and fun to use. Always curious, always creating...let's make something cool."
                   delay={2000}
                   speed={30}
                 />

@@ -1,5 +1,6 @@
 
 import { ScrollProgress } from "@/components/ScrollProgress";
+import ContextualGreeting from "@/components/ContextualGreeting";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import SkillsSection from "@/components/SkillsSection";
@@ -11,6 +12,7 @@ const Index = () => {
   return (
     <div className="overflow-y-auto">
       <ScrollProgress />
+      <ContextualGreeting />
       <section><HeroSection /></section>
       <section><AboutSection /></section>
       <section><SkillsSection /></section>
