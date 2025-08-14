@@ -10,6 +10,7 @@ import Projects from "./pages/Projects";
 import JobMonitorBot from "./pages/JobMonitorBot";
 import PortfolioWebsite from "./pages/PortfolioWebsite";
 import InsightAdvantage from "./pages/InsightAdvantage";
+import EcoArtMarket from "./pages/EcoArtMarket";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/projects/job-monitor-bot" element={<JobMonitorBot />} />
           <Route path="/projects/portfolio-website" element={<PortfolioWebsite />} />
           <Route path="/projects/insight-advantage" element={<InsightAdvantage />} />
+          <Route path="/projects/ecoart-market" element={<EcoArtMarket />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

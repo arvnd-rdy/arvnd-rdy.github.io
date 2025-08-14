@@ -3,11 +3,12 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
 import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
 import { EnhancedButton } from "@/components/EnhancedButton";
-import { ExternalLink, Github, ArrowRight, Star, Calendar, Code2 } from "lucide-react";
+import { ExternalLink, Github, ArrowRight, Star, Calendar, Code2, Shuffle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
 
-const projects = [
+const allProjects = [
   {
     id: 1,
     title: "Job Monitor Bot",
@@ -49,13 +50,42 @@ const projects = [
     status: "Live",
     year: "2024",
     stars: 23
+  },
+  {
+    id: 4,
+    title: "EcoArt Market",
+    description: "Sustainable art marketplace built with Django where artists showcase and sell eco-friendly artwork. Features comprehensive authentication, order management, real-time notifications, and payment processing with sustainability ratings.",
+    image: "/projects/ecoart1.png",
+    tags: ["Django", "Python", "Bootstrap", "SQLite", "Gmail SMTP"],
+    category: "Full Stack",
+    demoUrl: "/projects/ecoart-market",
+    githubUrl: "https://github.com/arvnd-rdy/Eco-art",
+    featured: true,
+    status: "Live",
+    year: "2024",
+    stars: 18
   }
 ];
+
+// Function to get 3 random projects
+const getRandomProjects = (projects, count = 3) => {
+  const shuffled = [...projects].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+};
 
 const ProjectsSection = () => {
   const { ref, isInView } = useScrollAnimation();
 
-  const featuredProjects = projects.filter(project => project.featured);
+  // Initialize with first 3 projects, then allow randomization
+  const [displayedProjects, setDisplayedProjects] = useState(() =>
+    getRandomProjects(allProjects, 3)
+  );
+
+  const handleRandomize = () => {
+    setDisplayedProjects(getRandomProjects(allProjects, 3));
+  };
+
+  const featuredProjects = displayedProjects;
 
   return (
     <section id="projects" className="py-20 bg-white">
@@ -78,11 +108,21 @@ const ProjectsSection = () => {
             FEATURED PROJECTS
           </motion.h2>
           <motion.p
-            className="text-gray-600 leading-relaxed max-w-2xl mx-auto"
+            className="text-gray-600 leading-relaxed max-w-2xl mx-auto mb-8"
             variants={staggerItem}
           >
             Crafting digital experiences that solve real problems and push the boundaries of what's possible
           </motion.p>
+          <motion.div variants={staggerItem}>
+            <Button
+              onClick={handleRandomize}
+              variant="outline"
+              className="border-gray-300 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all duration-300 group"
+            >
+              <Shuffle className="w-4 h-4 mr-2 group-hover:rotate-180 transition-transform duration-300" />
+              Randomize Projects
+            </Button>
+          </motion.div>
         </motion.div>
 
         {/* Featured Projects - Hero Layout */}

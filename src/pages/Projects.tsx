@@ -54,6 +54,20 @@ const Projects = () => {
       featured: true,
       demoUrl: "/projects/insight-advantage",
       githubUrl: "https://github.com/arvnd-rdy/Advantage_match"
+    },
+    {
+      id: 4,
+      title: "EcoArt Market",
+      description: "Sustainable art marketplace built with Django where artists showcase and sell eco-friendly artwork. Features comprehensive authentication, order management, real-time notifications, and payment processing with sustainability ratings.",
+      image: "/projects/ecoart1.png",
+      tags: ["Django", "Python", "Bootstrap", "SQLite", "Gmail SMTP"],
+      category: "Full Stack",
+      status: "Live",
+      year: "2024",
+      stars: 18,
+      featured: true,
+      demoUrl: "/projects/ecoart-market",
+      githubUrl: "https://github.com/arvnd-rdy/Eco-art"
     }
   ];
 

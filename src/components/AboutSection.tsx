@@ -90,7 +90,7 @@ Always curious, always learning — especially when it comes to how AI is changi
               <motion.div variants={staggerItem}>
                 <EnhancedButton
                   onClick={downloadResume}
-                  className="bg-gray-900 hover:bg-gray-800 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-base w-full sm:w-auto group"
+                  className="bg-gray-900 hover:bg-gray-800 text-white px-5 sm:px-6 py-2 rounded-full text-sm w-full sm:w-auto group"
                 >
                   DOWNLOAD RESUME
                   <Download className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
@@ -98,15 +98,13 @@ Always curious, always learning — especially when it comes to how AI is changi
               </motion.div>
               <Link to="/about">
                 <motion.div variants={staggerItem}>
-                  <Link to="/about">
-                    <EnhancedButton
-                      variant="outline"
-                      className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full group text-sm sm:text-base w-full sm:w-auto"
-                    >
-                      LEARN MORE 
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </EnhancedButton>
-                  </Link>
+                  <EnhancedButton
+                    variant="outline"
+                    className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-5 sm:px-6 py-2 rounded-full group text-sm w-full sm:w-auto"
+                  >
+                    KNOW MORE ABOUT ME
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </EnhancedButton>
                 </motion.div>
               </Link>
             </motion.div>
