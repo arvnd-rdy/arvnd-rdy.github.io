@@ -367,115 +367,145 @@ const About = () => {
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-black text-gray-900 mb-16 text-center uppercase tracking-wide">Skills & Expertise</h2>
             
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* Left Column - Skills */}
-              <div className="space-y-8">
-                <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="bg-gray-900 rounded-lg p-3">
-                      <Code2 className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-black text-gray-900 uppercase tracking-wide">Frontend Development</h3>
-                      <p className="text-gray-600 text-sm">Building responsive and interactive user interfaces</p>
-                    </div>
+            <div className="space-y-6">
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                <div className="flex items-start gap-6">
+                  <div className="bg-gray-900 rounded-lg p-3 flex-shrink-0">
+                    <Code2 className="w-6 h-6 text-white" />
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">React</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">TypeScript</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Tailwind CSS</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Next.js</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Framer Motion</Badge>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="bg-gray-900 rounded-lg p-3">
-                      <Database className="w-6 h-6 text-white" />
+                  <div className="flex-1">
+                    <h3 className="text-lg font-black text-gray-900 uppercase tracking-wide mb-2">Frontend Development</h3>
+                    <p className="text-gray-600 text-sm mb-4">Building responsive and interactive user interfaces</p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">React</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">TypeScript</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Tailwind CSS</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Next.js</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Framer Motion</Badge>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-black text-gray-900 uppercase tracking-wide">Backend Development</h3>
-                      <p className="text-gray-600 text-sm">Creating robust server-side applications and APIs</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Node.js</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Python</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">SQL Server</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Express.js</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Socket.IO</Badge>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="bg-gray-900 rounded-lg p-3">
-                      <Zap className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-black text-gray-900 uppercase tracking-wide">Automation & Tools</h3>
-                      <p className="text-gray-600 text-sm">Automating processes and building efficient tools</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Selenium</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Web Scraping</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">APIs</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Git</Badge>
-                    <Badge variant="outline" className="border-gray-300 text-gray-700">Docker</Badge>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column - Philosophy */}
-              <div className="space-y-8">
-                <div className="bg-gray-900 rounded-lg p-8 text-white">
-                  <h3 className="text-2xl font-black mb-6 uppercase tracking-wide">My Philosophy</h3>
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="font-bold mb-2">Code Quality</h4>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        I'm a strong advocate for writing readable, maintainable code. Clean code isn't just 
-                        about following conventions—it's about respecting the next developer.
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="font-bold mb-2">Problem-First Approach</h4>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        I start by understanding the real problem behind the technical requirement. 
-                        Then I research, prototype, and iterate with user needs first.
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="font-bold mb-2">Continuous Learning</h4>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        Technology evolves rapidly, and I believe in staying curious and adapting. 
-                        Every project teaches me something new.
-                      </p>
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                <div className="flex items-start gap-6">
+                  <div className="bg-gray-900 rounded-lg p-3 flex-shrink-0">
+                    <Database className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-black text-gray-900 uppercase tracking-wide mb-2">Backend Development</h3>
+                    <p className="text-gray-600 text-sm mb-4">Creating robust server-side applications and APIs</p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Node.js</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Python</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">SQL Server</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Express.js</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Socket.IO</Badge>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
-                  <h3 className="text-xl font-black text-gray-900 mb-6 uppercase tracking-wide">Current Focus</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
-                      <span className="text-gray-600">Master's in Applied Computing</span>
+              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                <div className="flex items-start gap-6">
+                  <div className="bg-gray-900 rounded-lg p-3 flex-shrink-0">
+                    <Zap className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-black text-gray-900 uppercase tracking-wide mb-2">Automation & Tools</h3>
+                    <p className="text-gray-600 text-sm mb-4">Automating processes and building efficient tools</p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Selenium</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Web Scraping</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">APIs</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Git</Badge>
+                      <Badge variant="outline" className="border-gray-300 text-gray-700">Docker</Badge>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
-                      <span className="text-gray-600">Full-Stack Development</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
-                      <span className="text-gray-600">AI/ML Integration</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
-                      <span className="text-gray-600">Process Automation</span>
-                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* My Philosophy */}
+        <motion.section className="mb-20" variants={fadeInUp}>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-black text-gray-900 mb-16 text-center uppercase tracking-wide">My Philosophy</h2>
+            
+            <div className="bg-gray-900 rounded-lg p-12 text-white">
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Code2 className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="font-black mb-3 uppercase tracking-wide">Code Quality</h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    I'm a strong advocate for writing readable, maintainable code. Clean code isn't just 
+                    about following conventions—it's about respecting the next developer.
+                  </p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Users className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="font-black mb-3 uppercase tracking-wide">Problem-First Approach</h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    I start by understanding the real problem behind the technical requirement. 
+                    Then I research, prototype, and iterate with user needs first.
+                  </p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Book className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="font-black mb-3 uppercase tracking-wide">Continuous Learning</h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    Technology evolves rapidly, and I believe in staying curious and adapting. 
+                    Every project teaches me something new.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Current Focus */}
+        <motion.section className="mb-20" variants={fadeInUp}>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-black text-gray-900 mb-16 text-center uppercase tracking-wide">Current Focus</h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-black text-gray-900 mb-6 uppercase tracking-wide">Academic Pursuits</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <GraduationCap className="w-5 h-5 text-gray-600" />
+                    <span className="text-gray-600">Master's in Applied Computing</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-5 h-5 text-gray-600" />
+                    <span className="text-gray-600">University of Windsor, Canada</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-black text-gray-900 mb-6 uppercase tracking-wide">Technical Focus</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <Code2 className="w-5 h-5 text-gray-600" />
+                    <span className="text-gray-600">Full-Stack Development</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Database className="w-5 h-5 text-gray-600" />
+                    <span className="text-gray-600">AI/ML Integration</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Zap className="w-5 h-5 text-gray-600" />
+                    <span className="text-gray-600">Process Automation</span>
                   </div>
                 </div>
               </div>
@@ -488,35 +518,44 @@ const About = () => {
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-black text-gray-900 mb-16 text-center uppercase tracking-wide">Beyond the Code</h2>
             
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="space-y-8">
               {/* Personal Interests */}
-              <div className="lg:col-span-2 bg-white rounded-lg p-8 shadow-sm border border-gray-200">
+              <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
                 <h3 className="text-2xl font-black text-gray-900 mb-6 uppercase tracking-wide">
                   What I Love Doing
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-8">
-                  When I'm not at my keyboard, you can usually find me exploring new hiking trails around Windsor, 
-                  experimenting with photography to capture the perfect shot, or getting lost in a good sci-fi novel. 
-                  I'm also passionate about cooking—there's something therapeutic about following a recipe and creating 
-                  something delicious from scratch (much like coding, actually!).
+                  When I'm not coding, you'll find me binge-watching the latest web series or getting completely absorbed 
+                  in a captivating movie. I'm also an avid reader of web novels—there's something magical about diving into 
+                  different worlds and storylines that keeps my imagination active. Whether it's a thrilling sci-fi series, 
+                  a mind-bending movie, or an epic fantasy web novel, I love stories that challenge perspectives and spark creativity.
                 </p>
                 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                  {interests.map((interest, index) => (
-                    <div key={interest} className="text-center p-4 bg-gray-50 rounded-lg">
-                      <div className="text-2xl mb-2">
-                        {interest === 'Photography' && '📸'}
-                        {interest === 'Hiking' && '🥾'}
-                        {interest === 'Cooking' && '👨‍🍳'}
-                        {interest === 'Reading' && '📚'}
-                        {interest === 'Travel' && '✈️'}
-                        {interest === 'Quantum Computing' && '⚛️'}
-                        {interest === 'Space Technology' && '🚀'}
-                        {interest === 'Open Source' && '💻'}
-                      </div>
-                      <div className="text-sm font-medium text-gray-700">{interest}</div>
-                    </div>
-                  ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div className="text-2xl flex-shrink-0">🎬</div>
+                    <div className="text-sm font-medium text-gray-700">Movies</div>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div className="text-2xl flex-shrink-0">📺</div>
+                    <div className="text-sm font-medium text-gray-700">Web Series</div>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div className="text-2xl flex-shrink-0">📖</div>
+                    <div className="text-sm font-medium text-gray-700">Web Novels</div>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div className="text-2xl flex-shrink-0">🎮</div>
+                    <div className="text-sm font-medium text-gray-700">Gaming</div>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div className="text-2xl flex-shrink-0">🍕</div>
+                    <div className="text-sm font-medium text-gray-700">Food Exploration</div>
+                  </div>
+                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                    <div className="text-2xl flex-shrink-0">🎵</div>
+                    <div className="text-sm font-medium text-gray-700">Music Discovery</div>
+                  </div>
                 </div>
 
                 {/* Fun Fact */}
@@ -561,11 +600,7 @@ const About = () => {
                   ></iframe>
                 </div>
                 
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  Music fuels my coding sessions. Currently vibing to some lo-fi beats while working on projects.
-                </p>
-                
-                <div className="flex items-center gap-2 text-green-400 text-sm mt-3">
+                <div className="flex items-center gap-2 text-green-400 text-sm">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                   Live from Spotify
                 </div>
