@@ -1,4 +1,5 @@
 import { ArrowDown, Menu, X, AlertTriangle } from "lucide-react";
+import { playSound } from "@/utils/soundEffects";
 import { Button } from "@/components/ui/button";
 import { TypingAnimation } from "@/components/TypingAnimation";
 import { useActiveSection } from "@/hooks/useActiveSection";
@@ -80,12 +81,14 @@ const HeroSection = () => {
             <motion.button
               key={item}
               onClick={() => {
+                playSound('click');
                 if (item === 'Blog') {
                   window.open('https://avilogs.blogspot.com/', '_blank', 'noopener noreferrer');
                 } else {
                   scrollToSection(item.toLowerCase());
                 }
               }}
+              onMouseEnter={() => playSound('hover')}
               className={`hover:text-gray-900 transition-all duration-300 relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0 after:bg-gray-900 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left font-medium ${
                 activeSection === item.toLowerCase() || (activeSection === '' && item === 'About')
                   ? 'text-gray-900 after:scale-x-100' 
@@ -102,7 +105,10 @@ const HeroSection = () => {
         {/* Mobile Menu Button */}
         <motion.button
           className="md:hidden p-2 hover:bg-white/50 rounded-lg transition-colors backdrop-blur-sm"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          onClick={() => {
+            playSound('click');
+            setIsMobileMenuOpen(!isMobileMenuOpen);
+          }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -129,6 +135,7 @@ const HeroSection = () => {
                 <motion.button
                   key={item}
                   onClick={() => {
+                    playSound('click');
                     if (item === 'Blog') {
                       window.open('https://avilogs.blogspot.com/', '_blank', 'noopener noreferrer');
                     } else {
@@ -136,6 +143,7 @@ const HeroSection = () => {
                     }
                     setIsMobileMenuOpen(false);
                   }}
+                  onMouseEnter={() => playSound('hover')}
                   className="block py-3 px-4 text-gray-600 hover:text-gray-900 hover:bg-white/50 rounded-lg transition-all duration-300 text-center font-medium w-full"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}

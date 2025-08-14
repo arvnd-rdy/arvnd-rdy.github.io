@@ -15,79 +15,49 @@ const Projects = () => {
   const allProjects = [
     {
       id: 1,
-      title: "AI-Powered Content Generator",
-      description: "A full-stack application that uses advanced AI models to generate high-quality content for various use cases. Features real-time generation, user authentication, and cloud deployment.",
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop&crop=smart",
-      tags: ["React", "Node.js", "OpenAI", "MongoDB"],
-      category: "AI/ML",
+      title: "Job Monitor Bot",
+      description: "Automated job application tracker that monitors Walmart and Loblaw careers 24/7, sending instant Telegram notifications when new positions are posted. Built to solve the 'first come, first served' challenge in competitive job markets.",
+      image: "/projects/jobmonitor1.png",
+      tags: ["Python", "Selenium", "Web Scraping", "Telegram API", "Automation"],
+      category: "Automation",
       status: "Live",
       year: "2024",
-      stars: 127,
-      featured: true
+      stars: 45,
+      featured: true,
+      demoUrl: "/projects/job-monitor-bot",
+      githubUrl: "https://github.com/arvnd-rdy/walmart_and_lowblow_jobmonitor"
     },
     {
       id: 2,
-      title: "E-Commerce Platform",
-      description: "Modern e-commerce solution with real-time inventory management, secure payment processing, and responsive design.",
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop&crop=smart",
-      tags: ["React", "Express", "Stripe", "PostgreSQL"],
-      category: "Full Stack",
-      status: "In Development",
+      title: "Interactive Portfolio Website",
+      description: "Modern, responsive portfolio website built with React and TypeScript. Features smooth animations, dark/light themes, and modular component architecture. Showcases projects, skills, and professional experience with engaging user interactions.",
+      image: "/projects/portfolio1.png",
+      tags: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite"],
+      category: "Frontend",
+      status: "Live",
       year: "2024",
-      stars: 89,
-      featured: true
+      stars: 8,
+      featured: true,
+      demoUrl: "/projects/portfolio-website",
+      githubUrl: "https://github.com/arvnd-rdy/arvnd-rdy.github.io"
     },
     {
       id: 3,
-      title: "VR Experience Builder",
-      description: "Interactive VR application built with Unity for creating immersive educational experiences. Features spatial audio and haptic feedback.",
-      image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=800&h=600&fit=crop&crop=smart",
-      tags: ["Unity", "C#", "VR", "Blender"],
-      category: "XR Development",
-      status: "Live",
-      year: "2023",
-      stars: 203,
-      featured: true
-    },
-    {
-      id: 4,
-      title: "Data Visualization Dashboard",
-      description: "Interactive dashboard for analyzing complex datasets with real-time updates and customizable visualizations.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=smart",
-      tags: ["React", "D3.js", "Python", "FastAPI"],
-      category: "Data Science",
-      status: "Live",
-      year: "2023",
-      stars: 156,
-      featured: false
-    },
-    {
-      id: 5,
-      title: "Smart Home IoT System",
-      description: "Complete IoT ecosystem for home automation with mobile app control, voice commands, and energy monitoring.",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=smart",
-      tags: ["React Native", "Node.js", "IoT", "AWS"],
-      category: "IoT",
-      status: "Live",
-      year: "2023",
-      stars: 74,
-      featured: false
-    },
-    {
-      id: 6,
-      title: "Machine Learning Pipeline",
-      description: "End-to-end ML pipeline for predictive analytics with automated model training, validation, and deployment.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=smart",
-      tags: ["Python", "TensorFlow", "Docker", "Kubernetes"],
-      category: "AI/ML",
+      title: "Insight Advantage",
+      description: "Professional consulting platform connecting organizations with skilled consultants. Features real-time messaging, AI-powered matching, payment integration, and comprehensive user management with microservices architecture.",
+      image: "/projects/advatage_match.png",
+      tags: ["React", "Node.js", "SQL Server", "Socket.IO", "Stripe"],
+      category: "Full Stack",
       status: "Live",
       year: "2024",
-      stars: 312,
-      featured: false
+      stars: 23,
+      featured: true,
+      demoUrl: "/projects/insight-advantage",
+      githubUrl: "https://github.com/arvnd-rdy/Advantage_match"
     }
   ];
 
-  const categories = ["All", "AI/ML", "Full Stack", "XR Development", "Data Science", "IoT"];
+  const categories = ["All", "Automation", "Frontend", "Full Stack"];
   
   const filteredProjects = selectedCategory === "All" 
     ? allProjects 
@@ -161,6 +131,11 @@ const Projects = () => {
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
                 className="bg-white hover:bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-300 overflow-hidden group cursor-pointer"
+                onClick={() => {
+                  if (project.demoUrl && !project.demoUrl.startsWith('http') && project.demoUrl !== "#") {
+                    window.location.href = project.demoUrl;
+                  }
+                }}
               >
                 {/* Project Image */}
                 <div className="relative overflow-hidden">
@@ -189,12 +164,34 @@ const Projects = () => {
 
                   {/* Action Buttons */}
                   <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Button size="sm" className="bg-white/90 backdrop-blur-sm text-gray-900 hover:bg-white">
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
-                    <Button size="sm" className="bg-white/90 backdrop-blur-sm text-gray-900 hover:bg-white">
-                      <Github className="h-4 w-4" />
-                    </Button>
+                    {project.demoUrl && (
+                      <Button 
+                        size="sm" 
+                        className="bg-white/90 backdrop-blur-sm text-gray-900 hover:bg-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (project.demoUrl.startsWith('http')) {
+                            window.open(project.demoUrl, '_blank');
+                          } else {
+                            window.location.href = project.demoUrl;
+                          }
+                        }}
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </Button>
+                    )}
+                    {project.githubUrl && project.githubUrl !== "#" && (
+                      <Button 
+                        size="sm" 
+                        className="bg-white/90 backdrop-blur-sm text-gray-900 hover:bg-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(project.githubUrl, '_blank');
+                        }}
+                      >
+                        <Github className="h-4 w-4" />
+                      </Button>
+                    )}
                   </div>
 
                   {/* Stats Overlay */}

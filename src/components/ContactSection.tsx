@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail, ArrowUp, Sparkles, Heart } from "lucide-react";
+import { playSound } from "@/utils/soundEffects";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
@@ -8,6 +9,36 @@ const ContactSection = () => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const getCurrentMood = () => {
+    const moods = [
+      { text: "caffeinated but calm", emoji: "☕", color: "bg-amber-100 border-amber-300 text-amber-800" },
+      { text: "casually crushing deadlines", emoji: "💪", color: "bg-blue-100 border-blue-300 text-blue-800" },
+      { text: "ideas per minute — slightly above average", emoji: "💡", color: "bg-yellow-100 border-yellow-300 text-yellow-800" },
+      { text: "one coffee away from genius", emoji: "🧠", color: "bg-purple-100 border-purple-300 text-purple-800" },
+      { text: "designing like it's Friday", emoji: "🎉", color: "bg-green-100 border-green-300 text-green-800" },
+      { text: "quietly unstoppable", emoji: "🚀", color: "bg-indigo-100 border-indigo-300 text-indigo-800" },
+      { text: "making pixels behave", emoji: "🎨", color: "bg-pink-100 border-pink-300 text-pink-800" },
+      { text: "curious and caffeinated", emoji: "🤔", color: "bg-orange-100 border-orange-300 text-orange-800" },
+      { text: "full battery (for now)", emoji: "🔋", color: "bg-emerald-100 border-emerald-300 text-emerald-800" },
+      { text: "coasting in creative mode", emoji: "🌊", color: "bg-cyan-100 border-cyan-300 text-cyan-800" },
+      { text: "running on playlists and pixels", emoji: "🎵", color: "bg-violet-100 border-violet-300 text-violet-800" },
+      { text: "in the zone, but chill about it", emoji: "😎", color: "bg-slate-100 border-slate-300 text-slate-800" },
+      { text: "minimal chaos, maximum focus", emoji: "🎯", color: "bg-red-100 border-red-300 text-red-800" },
+      { text: "brainstorming without the storm", emoji: "🌤️", color: "bg-sky-100 border-sky-300 text-sky-800" },
+      { text: "just enough coffee to function", emoji: "☕", color: "bg-amber-100 border-amber-300 text-amber-800" },
+      { text: "cruising through the day", emoji: "🛣️", color: "bg-teal-100 border-teal-300 text-teal-800" },
+      { text: "calm, collected, and creative", emoji: "🧘", color: "bg-green-100 border-green-300 text-green-800" },
+      { text: "slightly ahead of schedule", emoji: "⏰", color: "bg-blue-100 border-blue-300 text-blue-800" },
+      { text: "designing with a side of snacks", emoji: "🍿", color: "bg-yellow-100 border-yellow-300 text-yellow-800" },
+      { text: "balanced between 'let's go' and 'let's nap'", emoji: "⚖️", color: "bg-purple-100 border-purple-300 text-purple-800" }
+    ];
+    
+    // Use date to ensure same mood for the day
+    const today = new Date().toDateString();
+    const moodIndex = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % moods.length;
+    return moods[moodIndex];
   };
 
   const contactLinks = [
@@ -75,6 +106,8 @@ const ContactSection = () => {
               target={item.label !== "Email" ? "_blank" : undefined}
               rel={item.label !== "Email" ? "noopener noreferrer" : undefined}
               className="group flex flex-col items-center text-center transition-all duration-300"
+              onClick={() => playSound('click')}
+              onMouseEnter={() => playSound('hover')}
               variants={staggerItem}
               whileHover={{ y: -4 }}
             >
@@ -96,6 +129,8 @@ const ContactSection = () => {
               key={link.label}
               href={link.href}
               className="text-gray-500 hover:text-gray-900 transition-colors duration-300 font-medium relative group"
+              onClick={() => playSound('click')}
+              onMouseEnter={() => playSound('hover')}
               variants={staggerItem}
               whileHover={{ scale: 1.05 }}
             >
@@ -103,6 +138,23 @@ const ContactSection = () => {
               <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gray-900 group-hover:w-full transition-all duration-300" />
             </motion.a>
           ))}
+        </motion.div>
+
+        {/* Mood Section */}
+        <motion.div 
+          className="flex justify-center mb-8"
+          variants={staggerContainer}
+        >
+          <motion.div
+            className={`flex items-center gap-3 px-4 py-2 rounded-full text-sm shadow-sm ${getCurrentMood().color}`}
+            variants={staggerItem}
+            whileHover={{ scale: 1.05, y: -2 }}
+            transition={{ duration: 0.2 }}
+          >
+            <span className="text-lg">{getCurrentMood().emoji}</span>
+            <span className="font-medium">Current mood:</span>
+            <span className="italic font-medium">{getCurrentMood().text}</span>
+          </motion.div>
         </motion.div>
 
         {/* Footer Bottom */}
@@ -128,7 +180,11 @@ const ContactSection = () => {
               </motion.div>
               
               <motion.button
-                onClick={scrollToTop}
+                onClick={() => {
+                  playSound('click');
+                  scrollToTop();
+                }}
+                onMouseEnter={() => playSound('hover')}
                 className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors duration-300 font-medium group"
                 variants={staggerItem}
                 whileHover={{ y: -2 }}
