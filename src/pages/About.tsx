@@ -65,13 +65,13 @@ const About = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="container mx-auto max-w-7xl px-8">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link to="/" className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8 transition-colors font-medium">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
           <motion.h1 
-            className="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-4 lg:mb-6"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
@@ -79,7 +79,7 @@ const About = () => {
             <motion.span variants={staggerItem}>THE STORY BEHIND THE CODE</motion.span>
           </motion.h1>
           <motion.p 
-            className="text-xl text-gray-600 leading-relaxed max-w-3xl"
+            className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl"
             variants={staggerItem}
           >
             From curious kid taking apart electronics to building enterprise applications—
@@ -97,21 +97,21 @@ const About = () => {
       >
         {/* Hero Introduction */}
         <motion.section className="mb-20" variants={fadeInUp}>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
             {/* Profile Image */}
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-1 order-1 lg:order-1">
               <motion.div 
-                className="sticky top-8"
+                className="lg:sticky lg:top-8"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
                 <img 
                   src="/hero.png"
                   alt="Arvind Reddy - Full Stack & AI/ML Developer"
-                  className="w-full aspect-square object-cover rounded-2xl shadow-2xl"
+                  className="w-full max-w-sm mx-auto lg:max-w-none aspect-square object-cover rounded-2xl shadow-2xl"
                 />
-                <div className="mt-6 text-center">
-                  <div className="inline-block bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-medium">
+                <div className="mt-4 lg:mt-6 text-center">
+                  <div className="inline-block bg-gray-900 text-white px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">
                     👋 Available for opportunities
                   </div>
                 </div>
@@ -119,7 +119,7 @@ const About = () => {
             </div>
             
             {/* Content */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-6 lg:space-y-8 order-2 lg:order-2">
               <div>
                 <h2 className="text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
                   Driven by curiosity and a love for clean code
@@ -156,7 +156,7 @@ const About = () => {
         {/* My Story - Timeline Layout */}
         <motion.section className="mb-20" variants={fadeInUp}>
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-black text-gray-900 mb-16 text-center uppercase tracking-wide">My Journey</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-12 lg:mb-16 text-center uppercase tracking-wide">My Journey</h2>
             
             <div className="relative">
               {/* Timeline line */}
@@ -365,7 +365,7 @@ const About = () => {
         {/* Skills & Expertise */}
         <motion.section className="mb-20" variants={fadeInUp}>
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-black text-gray-900 mb-16 text-center uppercase tracking-wide">Skills & Expertise</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-12 lg:mb-16 text-center uppercase tracking-wide">Skills & Expertise</h2>
             
             <div className="space-y-6">
               <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
@@ -431,7 +431,7 @@ const About = () => {
         {/* My Philosophy */}
         <motion.section className="mb-20" variants={fadeInUp}>
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-black text-gray-900 mb-16 text-center uppercase tracking-wide">My Philosophy</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-12 lg:mb-16 text-center uppercase tracking-wide">My Philosophy</h2>
             
             <div className="bg-gray-900 rounded-lg p-12 text-white">
               <div className="grid md:grid-cols-3 gap-8">
@@ -475,7 +475,7 @@ const About = () => {
         {/* Current Focus */}
         <motion.section className="mb-20" variants={fadeInUp}>
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-black text-gray-900 mb-16 text-center uppercase tracking-wide">Current Focus</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-12 lg:mb-16 text-center uppercase tracking-wide">Current Focus</h2>
             
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
@@ -516,7 +516,7 @@ const About = () => {
         {/* Beyond the Code */}
         <motion.section className="mb-20" variants={fadeInUp}>
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-black text-gray-900 mb-16 text-center uppercase tracking-wide">Beyond the Code</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-12 lg:mb-16 text-center uppercase tracking-wide">Beyond the Code</h2>
             
             <div className="space-y-8">
               {/* Personal Interests */}

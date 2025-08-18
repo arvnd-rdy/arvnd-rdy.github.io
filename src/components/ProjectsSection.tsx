@@ -90,7 +90,7 @@ const ProjectsSection = () => {
   return (
     <section id="projects" className="py-20 bg-white">
       <motion.div
-        className="container mx-auto max-w-7xl px-8"
+        className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -98,26 +98,26 @@ const ProjectsSection = () => {
       >
         {/* Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
           variants={fadeInUp}
         >
           <motion.h2
-            className="text-5xl md:text-6xl font-black text-gray-900 mb-8 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 md:mb-8 leading-tight px-4"
             variants={staggerItem}
           >
             FEATURED PROJECTS
           </motion.h2>
           <motion.p
-            className="text-gray-600 leading-relaxed max-w-2xl mx-auto mb-8"
+            className="text-gray-600 leading-relaxed max-w-2xl mx-auto mb-6 md:mb-8 px-4 text-sm sm:text-base"
             variants={staggerItem}
           >
             Crafting digital experiences that solve real problems and push the boundaries of what's possible
           </motion.p>
-          <motion.div variants={staggerItem}>
+          <motion.div variants={staggerItem} className="px-4">
             <Button
               onClick={handleRandomize}
               variant="outline"
-              className="border-gray-300 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all duration-300 group"
+              className="border-gray-300 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all duration-300 group w-full sm:w-auto"
             >
               <Shuffle className="w-4 h-4 mr-2 group-hover:rotate-180 transition-transform duration-300" />
               Randomize Projects
@@ -133,13 +133,13 @@ const ProjectsSection = () => {
           {featuredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              className={`group relative mb-16 last:mb-0 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                } flex flex-col lg:flex gap-12 items-center`}
+              className={`group relative mb-12 md:mb-16 last:mb-0 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                } flex flex-col lg:flex gap-8 md:gap-12 items-center px-4`}
               variants={staggerItem}
             >
               {/* Project Image */}
               <motion.div
-                className="lg:w-1/2 relative"
+                className="w-full lg:w-1/2 relative"
                 whileHover={{
                   rotateX: 2,
                   rotateY: 2,
@@ -148,12 +148,12 @@ const ProjectsSection = () => {
                 transition={{ duration: 0.3 }}
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                <div className="relative overflow-hidden rounded-xl md:rounded-2xl shadow-2xl">
                   <ImageWithSkeleton
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-80 lg:h-96 object-cover transition-transform duration-300"
-                    skeletonClassName="rounded-2xl"
+                    className="w-full h-64 sm:h-80 lg:h-96 object-cover transition-transform duration-300"
+                    skeletonClassName="rounded-xl md:rounded-2xl"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
@@ -205,19 +205,19 @@ const ProjectsSection = () => {
 
               {/* Project Content */}
               <motion.div
-                className="lg:w-1/2 space-y-6"
+                className="w-full lg:w-1/2 space-y-4 md:space-y-6 mt-6 lg:mt-0"
                 variants={staggerItem}
               >
-                <div className="space-y-4">
-                  <Badge variant="outline" className="text-gray-700 border-gray-300">
+                <div className="space-y-3 md:space-y-4">
+                  <Badge variant="outline" className="text-gray-700 border-gray-300 text-xs sm:text-sm">
                     {project.category}
                   </Badge>
 
-                  <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
                     {project.title}
                   </h3>
 
-                  <p className="text-gray-600 text-lg leading-relaxed">
+                  <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                     {project.description}
                   </p>
                 </div>
@@ -236,9 +236,9 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
                   <EnhancedButton
-                    className="bg-gray-900 hover:bg-gray-800 text-white shadow-lg"
+                    className="bg-gray-900 hover:bg-gray-800 text-white shadow-lg w-full sm:w-auto justify-center"
                     href={project.demoUrl}
                     target={project.demoUrl.startsWith('http') ? "_blank" : "_self"}
                     rel={project.demoUrl.startsWith('http') ? "noopener noreferrer" : undefined}
@@ -248,7 +248,7 @@ const ProjectsSection = () => {
                   </EnhancedButton>
                   <EnhancedButton
                     variant="outline"
-                    className="border-gray-300 hover:bg-gray-50"
+                    className="border-gray-300 hover:bg-gray-50 w-full sm:w-auto justify-center"
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -266,18 +266,18 @@ const ProjectsSection = () => {
 
         {/* CTA Section */}
         <motion.div
-          className="text-center bg-gray-900 rounded-lg p-12 text-white"
+          className="text-center bg-gray-900 rounded-lg p-6 md:p-12 text-white mx-4"
           variants={staggerItem}
         >
-          <h3 className="text-2xl font-black mb-4 uppercase tracking-wide">
+          <h3 className="text-xl sm:text-2xl font-black mb-4 uppercase tracking-wide">
             Want to see more of my work?
           </h3>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
             Explore my complete portfolio with detailed case studies, technical deep-dives, and behind-the-scenes insights.
           </p>
           <EnhancedButton
             size="lg"
-            className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3 rounded-full font-medium shadow-lg"
+            className="bg-white text-gray-900 hover:bg-gray-100 px-6 md:px-8 py-3 rounded-full font-medium shadow-lg w-full sm:w-auto"
             onClick={() => window.location.href = '/projects'}
           >
             View Complete Portfolio

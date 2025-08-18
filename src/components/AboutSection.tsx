@@ -84,23 +84,23 @@ Always curious, always learning — especially when it comes to how AI is changi
               </motion.p>
             </motion.div>
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 pt-6 lg:pt-8 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 lg:pt-8 justify-center lg:justify-start"
               variants={staggerContainer}
             >
-              <motion.div variants={staggerItem}>
+              <motion.div variants={staggerItem} className="w-full sm:w-auto">
                 <EnhancedButton
                   onClick={downloadResume}
-                  className="bg-gray-900 hover:bg-gray-800 text-white px-5 sm:px-6 py-2 rounded-full text-sm w-full sm:w-auto group"
+                  className="bg-gray-900 hover:bg-gray-800 text-white px-5 sm:px-6 py-2 rounded-full text-sm w-full sm:w-auto group justify-center"
                 >
                   DOWNLOAD RESUME
                   <Download className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
                 </EnhancedButton>
               </motion.div>
-              <Link to="/about">
-                <motion.div variants={staggerItem}>
+              <Link to="/about" className="w-full sm:w-auto">
+                <motion.div variants={staggerItem} className="w-full">
                   <EnhancedButton
                     variant="outline"
-                    className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-5 sm:px-6 py-2 rounded-full group text-sm w-full sm:w-auto"
+                    className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-5 sm:px-6 py-2 rounded-full group text-sm w-full sm:w-auto justify-center"
                   >
                     KNOW MORE ABOUT ME
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
