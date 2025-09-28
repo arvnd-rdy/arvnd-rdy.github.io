@@ -1,4 +1,5 @@
 [[headers]]
-  for = "*.xml"
+  for = "/sitemap.xml"
   [headers.values]
-    Content-Type = "application/xml"
+    Content-Type = "text/plain"
+    X-Content-Type-Options = "nosniff"
