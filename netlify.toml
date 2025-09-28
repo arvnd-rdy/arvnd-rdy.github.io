@@ -1,4 +1,4 @@
 [[headers]]
-  for = "/sitemap.xml"
+  for = "*.xml"
   [headers.values]
     Content-Type = "application/xml"
