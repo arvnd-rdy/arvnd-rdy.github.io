@@ -3,7 +3,7 @@ import { playSound } from "@/utils/soundEffects";
 import { Button } from "@/components/ui/button";
 import { TypingAnimation } from "@/components/TypingAnimation";
 import { useActiveSection } from "@/hooks/useActiveSection";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem } from "@/utils/animations";
 import { Github, Linkedin, Mail } from "lucide-react";
@@ -21,6 +21,25 @@ const HeroSection = () => {
   const { isScrolled } = useScrollNavigation();
   const { activeSection, scrollToSection } = useActiveSection();
 
+  // Mouse tracking for 3D tilt effect
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setMousePosition({ x, y });
+  };
+
+  const handleMouseEnter = () => setIsHovering(true);
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setMousePosition({ x: 0, y: 0 });
+  };
+
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
     setIsLoaded(true);
@@ -34,7 +53,7 @@ const HeroSection = () => {
   const navItems = ['About', 'Skills', 'Projects', 'Experience', 'Blog', 'Contact'];
 
   return (
-    <motion.section 
+    <motion.section
       className="min-h-screen bg-gray-50 flex flex-col"
     >
       {/* Social Icons - Left Side */}
@@ -52,26 +71,25 @@ const HeroSection = () => {
         ))}
       </div>
       {/* Sticky Glass Navigation */}
-      <motion.nav 
-        className={`fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4 sm:p-6 lg:px-8 lg:py-4 text-xs sm:text-sm text-gray-600 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white/90 backdrop-blur-lg border-b border-gray-200/50 shadow-lg' 
-            : 'bg-white/80 backdrop-blur-md border-b border-white/20 shadow-sm'
-        }`}
+      <motion.nav
+        className={`fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4 sm:p-6 lg:px-8 lg:py-4 text-xs sm:text-sm text-gray-600 transition-all duration-300 ${isScrolled
+          ? 'bg-white/90 backdrop-blur-lg border-b border-gray-200/50 shadow-lg'
+          : 'bg-white/80 backdrop-blur-md border-b border-white/20 shadow-sm'
+          }`}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1 }}
       >
-        <motion.div 
+        <motion.div
           className="transition-colors duration-300 hover:text-gray-900 text-xs sm:text-sm lg:text-base font-medium"
           whileHover={{ scale: 1.05 }}
         >
           <span className="hidden sm:inline">Full Stack & AI/ML Developer</span>
           <span className="sm:hidden">Developer</span>
         </motion.div>
-        
+
         {/* Desktop Navigation */}
-        <motion.div 
+        <motion.div
           className="hidden md:flex space-x-4 lg:space-x-8"
           variants={staggerContainer}
           initial="hidden"
@@ -89,11 +107,10 @@ const HeroSection = () => {
                 }
               }}
               onMouseEnter={() => playSound('hover')}
-              className={`hover:text-gray-900 transition-all duration-300 relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0 after:bg-gray-900 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left font-medium ${
-                activeSection === item.toLowerCase() || (activeSection === '' && item === 'About')
-                  ? 'text-gray-900 after:scale-x-100' 
-                  : 'after:scale-x-0'
-              }`}
+              className={`hover:text-gray-900 transition-all duration-300 relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0 after:bg-gray-900 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left font-medium ${activeSection === item.toLowerCase() || (activeSection === '' && item === 'About')
+                ? 'text-gray-900 after:scale-x-100'
+                : 'after:scale-x-0'
+                }`}
               variants={staggerItem}
               whileHover={{ y: -2 }}
             >
@@ -101,7 +118,7 @@ const HeroSection = () => {
             </motion.button>
           ))}
         </motion.div>
-        
+
         {/* Mobile Menu Button */}
         <motion.button
           className="md:hidden p-2 hover:bg-white/50 rounded-lg transition-colors backdrop-blur-sm"
@@ -154,7 +171,7 @@ const HeroSection = () => {
                   {item}
                 </motion.button>
               ))}
-              
+
               {/* Mobile Social Links */}
               <div className="flex justify-center space-x-6 pt-4 border-t border-gray-200/50">
                 {socialLinks.map(({ icon: Icon, href }) => (
@@ -196,7 +213,7 @@ const HeroSection = () => {
         <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Side - Text */}
           <motion.div className="space-y-6 lg:space-y-8 text-center lg:text-left order-2 lg:order-1">
-            <motion.h1 
+            <motion.h1
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-gray-900 leading-none tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -206,29 +223,29 @@ const HeroSection = () => {
               <br />
               REDDY
             </motion.h1>
-            
-            <motion.div 
+
+            <motion.div
               className="space-y-4 max-w-md mx-auto lg:mx-0"
               variants={fadeInUp}
               initial="hidden"
               animate="visible"
               transition={{ delay: 0.4 }}
             >
-              <motion.p 
+              <motion.p
                 className="text-gray-600 leading-relaxed text-sm sm:text-base"
                 variants={fadeInUp}
               >
-                <TypingAnimation 
+                <TypingAnimation
                   text="Open to job opportunities."
                   delay={800}
                   speed={50}
                 />
               </motion.p>
-              <motion.p 
+              <motion.p
                 className="text-gray-600 leading-relaxed text-sm sm:text-base"
                 variants={fadeInUp}
               >
-                <TypingAnimation 
+                <TypingAnimation
                   text="I build websites, AI tools, and 3D experiences that are simple, smart, and fun to use. Always curious, always creating...let's make something cool."
                   delay={2000}
                   speed={30}
@@ -242,7 +259,7 @@ const HeroSection = () => {
               animate="visible"
               transition={{ delay: 0.5 }}
             >
-              <Button 
+              <Button
                 asChild
                 className="bg-gray-900 hover:bg-gray-800 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all duration-500 hover:scale-105 hover:shadow-lg text-sm sm:text-base"
               >
@@ -253,32 +270,74 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Side - Image */}
-          <motion.div 
+          {/* Right Side - 3D Floating Card Image */}
+          <motion.div
             className="flex justify-center lg:justify-end order-1 lg:order-2"
             variants={fadeInRight}
             initial="hidden"
             animate="visible"
             transition={{ delay: 0.3 }}
+            style={{ perspective: '1000px' }}
           >
-            <motion.div 
-              className="relative"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+            <motion.div
+              ref={cardRef}
+              className="relative group cursor-pointer"
+              style={{ transformStyle: 'preserve-3d' }}
+              animate={{
+                y: [0, -10, 0],
+                rotateY: isHovering ? mousePosition.x * 12 : 0,
+                rotateX: isHovering ? -mousePosition.y * 12 : 0,
+              }}
+              transition={{
+                y: {
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                },
+                rotateX: { duration: 0.1, ease: "linear" },
+                rotateY: { duration: 0.1, ease: "linear" },
+              }}
+              whileHover={{
+                scale: 1.02,
+                z: 50,
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
-              <motion.img 
-                src="/hero2.png"
-                alt="Arvind Reddy"
-                className="w-[280px] h-[340px] sm:w-[320px] sm:h-[380px] md:w-[350px] md:h-[420px] lg:w-[384px] lg:h-[460px] object-cover transition-all duration-700 rounded-lg shadow-xl"
-                whileHover={{ scale: 1.02 }}
-              />
+              {/* Glow effect behind the card */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ transform: 'translateZ(-50px)' }} />
+
+              {/* Multiple layered shadows for depth */}
+              <div className="absolute inset-0 bg-gray-900/10 rounded-xl blur-xl translate-x-4 translate-y-8" style={{ transform: 'translateZ(-40px) translateX(16px) translateY(32px)' }} />
+              <div className="absolute inset-0 bg-gray-900/10 rounded-xl blur-lg translate-x-2 translate-y-4" style={{ transform: 'translateZ(-30px) translateX(8px) translateY(16px)' }} />
+              <div className="absolute inset-0 bg-gray-900/5 rounded-xl blur-md translate-x-1 translate-y-2" style={{ transform: 'translateZ(-20px) translateX(4px) translateY(8px)' }} />
+
+              {/* Main image with 3D transform */}
+              <motion.div
+                className="relative"
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <motion.img
+                  src="/hero2.png"
+                  alt="Arvind Reddy"
+                  className="w-[280px] h-[340px] sm:w-[320px] sm:h-[380px] md:w-[350px] md:h-[420px] lg:w-[384px] lg:h-[460px] object-cover rounded-xl shadow-2xl transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.35)]"
+                  style={{ transform: 'translateZ(20px)' }}
+                />
+
+                {/* Shine/reflection effect on hover */}
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ transform: 'translateZ(25px)' }} />
+
+                {/* Border glow */}
+                <div className="absolute inset-0 rounded-xl border border-white/10 group-hover:border-white/30 transition-all duration-500" style={{ transform: 'translateZ(30px)' }} />
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
       </div>
 
       {/* Bottom Right Text */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 text-right"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -289,7 +348,7 @@ const HeroSection = () => {
       </motion.div>
 
       {/* Small Arrow Indicator */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

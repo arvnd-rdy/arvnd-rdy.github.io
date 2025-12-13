@@ -12,6 +12,7 @@ import PortfolioWebsite from "./pages/PortfolioWebsite";
 import InsightAdvantage from "./pages/InsightAdvantage";
 import EcoArtMarket from "./pages/EcoArtMarket";
 import NotFound from "./pages/NotFound";
+import SnakeGame from "./components/PacManGame";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <SnakeGame />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
