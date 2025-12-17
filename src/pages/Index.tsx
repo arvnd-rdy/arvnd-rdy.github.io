@@ -11,7 +11,7 @@ const SkillsSection = lazy(() => import("@/components/SkillsSection"));
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
 const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
 
-const FeedbackSection = lazy(() => import("@/components/FeedbackSection"));
+
 const ContactSection = lazy(() => import("@/components/ContactSection"));
 
 // Simple loading placeholder for lazy-loaded sections
@@ -34,7 +34,7 @@ const Index = () => {
         <section><ProjectsSection /></section>
         <section><ExperienceSection /></section>
 
-        <section><FeedbackSection /></section>
+
         <section><ContactSection /></section>
       </Suspense>
     </div>
