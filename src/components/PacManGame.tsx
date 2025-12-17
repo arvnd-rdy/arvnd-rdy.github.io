@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { X } from 'lucide-react';
 
 interface Position {
@@ -39,7 +39,9 @@ const SnakeGame = () => {
     const [lives, setLives] = useState(3);
     const [gameOver, setGameOver] = useState(false);
     const [win, setWin] = useState(false);
-    const [scrollOffset, setScrollOffset] = useState(0);
+
+    const { scrollY } = useScroll();
+    const negativeScrollY = useTransform(scrollY, (value) => -value);
 
     const keysPressed = useRef<Set<string>>(new Set());
     const animationRef = useRef<number | null>(null);
@@ -98,7 +100,6 @@ const SnakeGame = () => {
         setLives(3);
         setGameOver(false);
         setWin(false);
-        setScrollOffset(0);
         setIsActive(true);
     }, [createSnake, createDots, createGhosts]);
 
@@ -151,13 +152,7 @@ const SnakeGame = () => {
         return () => window.removeEventListener('keydown', down);
     }, [isActive, gameOver, win]);
 
-    // Track scroll
-    useEffect(() => {
-        if (!isActive) return;
-        const onScroll = () => setScrollOffset(window.scrollY);
-        window.addEventListener('scroll', onScroll);
-        return () => window.removeEventListener('scroll', onScroll);
-    }, [isActive]);
+
 
     // Game loop
     useEffect(() => {
@@ -237,13 +232,45 @@ const SnakeGame = () => {
                 snakeRef.current = newSnake;
                 setSnake(newSnake);
 
-                // Move ghosts toward snake head
-                setGhosts(gs => gs.map(g => {
+                // Move ghosts toward snake head with separation logic
+                setGhosts(gs => gs.map((g, index) => {
                     const dx = head.x - g.x;
                     const dy = head.y - g.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    // Normalize vector to player
+                    let vx = (dx / dist) * GHOST_SPEED;
+                    let vy = (dy / dist) * GHOST_SPEED;
+
+                    // Separation: Push away from other ghosts
+                    gs.forEach((otherG, otherIndex) => {
+                        if (index !== otherIndex) {
+                            const diffX = g.x - otherG.x;
+                            const diffY = g.y - otherG.y;
+                            const d = Math.sqrt(diffX * diffX + diffY * diffY);
+
+                            // If too close, repulse strongly
+                            if (d < GHOST_SIZE * 2.5) {
+                                const pushStrength = 2.0; // Strong repulsion
+                                vx += (diffX / d) * pushStrength;
+                                vy += (diffY / d) * pushStrength;
+                            }
+                        }
+                    });
+
+                    // Add slight noise to prevent perfect stacking
+                    vx += (Math.random() - 0.5) * 0.5;
+                    vy += (Math.random() - 0.5) * 0.5;
+
+                    // Normalize again to constrain speed (roughly)
+                    const speed = Math.sqrt(vx * vx + vy * vy);
+                    if (speed > GHOST_SPEED) {
+                        vx = (vx / speed) * GHOST_SPEED;
+                        vy = (vy / speed) * GHOST_SPEED;
+                    }
+
                     if (dist > 0) {
-                        return { ...g, x: g.x + (dx / dist) * GHOST_SPEED, y: g.y + (dy / dist) * GHOST_SPEED };
+                        return { ...g, x: g.x + vx, y: g.y + vy };
                     }
                     return g;
                 }));
@@ -307,77 +334,74 @@ const SnakeGame = () => {
                     <X size={20} />
                 </button>
 
-                {/* Snake Body */}
-                {snake.map((segment, i) => {
-                    const screenY = segment.y - scrollOffset;
-                    if (screenY < -30 || screenY > window.innerHeight + 30) return null;
+                {/* Game Layer - Scrolls with page */}
+                <motion.div style={{ y: negativeScrollY }} className="absolute inset-0 w-full h-full">
+                    {/* Snake Body */}
+                    {snake.map((segment, i) => {
+                        // Remove culling to ensure smooth scroll (browser handles it efficiently)
+                        const isHead = i === 0;
+                        const opacity = isHead ? 1 : 0.9 - (i * 0.01);
+                        const size = isHead ? SEGMENT_SIZE + 4 : SEGMENT_SIZE - Math.min(i * 0.2, 5);
 
-                    const isHead = i === 0;
-                    const opacity = isHead ? 1 : 0.9 - (i * 0.01);
-                    const size = isHead ? SEGMENT_SIZE + 4 : SEGMENT_SIZE - Math.min(i * 0.2, 5);
+                        return (
+                            <motion.div
+                                key={i}
+                                className="absolute rounded-full"
+                                style={{
+                                    left: segment.x,
+                                    top: segment.y,
+                                    width: size,
+                                    height: size,
+                                    backgroundColor: isHead ? '#22C55E' : `hsl(${140 - i * 1.5}, 70%, ${50 - i * 0.3}%)`,
+                                    opacity: Math.max(opacity, 0.5),
+                                    boxShadow: isHead ? '0 0 15px 5px rgba(34, 197, 94, 0.6)' : '0 0 5px rgba(34, 197, 94, 0.3)',
+                                    zIndex: 10001 - i,
+                                }}
+                                initial={false}
+                            >
+                                {isHead && (
+                                    <>
+                                        <div className="absolute bg-white rounded-full" style={{ width: 6, height: 6, top: 4, left: direction === 'left' ? 2 : direction === 'right' ? size - 8 : 3 }} />
+                                        <div className="absolute bg-white rounded-full" style={{ width: 6, height: 6, top: 4, right: direction === 'right' ? 2 : direction === 'left' ? size - 8 : 3 }} />
+                                        <div className="absolute bg-black rounded-full" style={{ width: 3, height: 3, top: 5, left: direction === 'left' ? 3 : direction === 'right' ? size - 7 : 4 }} />
+                                        <div className="absolute bg-black rounded-full" style={{ width: 3, height: 3, top: 5, right: direction === 'right' ? 3 : direction === 'left' ? size - 7 : 4 }} />
+                                    </>
+                                )}
+                            </motion.div>
+                        );
+                    })}
 
-                    return (
-                        <motion.div
-                            key={i}
-                            className="absolute rounded-full"
-                            style={{
-                                left: segment.x,
-                                top: screenY,
-                                width: size,
-                                height: size,
-                                backgroundColor: isHead ? '#22C55E' : `hsl(${140 - i * 1.5}, 70%, ${50 - i * 0.3}%)`,
-                                opacity: Math.max(opacity, 0.5),
-                                boxShadow: isHead ? '0 0 15px 5px rgba(34, 197, 94, 0.6)' : '0 0 5px rgba(34, 197, 94, 0.3)',
-                                zIndex: 10001 - i,
-                            }}
-                            initial={false}
-                        >
-                            {isHead && (
-                                <>
-                                    <div className="absolute bg-white rounded-full" style={{ width: 6, height: 6, top: 4, left: direction === 'left' ? 2 : direction === 'right' ? size - 8 : 3 }} />
-                                    <div className="absolute bg-white rounded-full" style={{ width: 6, height: 6, top: 4, right: direction === 'right' ? 2 : direction === 'left' ? size - 8 : 3 }} />
-                                    <div className="absolute bg-black rounded-full" style={{ width: 3, height: 3, top: 5, left: direction === 'left' ? 3 : direction === 'right' ? size - 7 : 4 }} />
-                                    <div className="absolute bg-black rounded-full" style={{ width: 3, height: 3, top: 5, right: direction === 'right' ? 3 : direction === 'left' ? size - 7 : 4 }} />
-                                </>
-                            )}
-                        </motion.div>
-                    );
-                })}
+                    {/* Ghosts */}
+                    {ghosts.map(g => {
+                        return (
+                            <div key={g.id} style={{ position: 'absolute', left: g.x, top: g.y, width: GHOST_SIZE, height: GHOST_SIZE, zIndex: 10002, filter: 'drop-shadow(0 0 10px rgba(255,0,0,0.8))' }}>
+                                <svg viewBox="0 0 24 24" fill={g.color}>
+                                    <path d="M12 2C8.14 2 5 5.14 5 9v9l2-2 2 2 2-2 2 2 2-2 2 2 2-2 2 2V9c0-3.86-3.14-7-7-7zm-3 8a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm6 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" />
+                                </svg>
+                            </div>
+                        );
+                    })}
 
-                {/* Ghosts */}
-                {ghosts.map(g => {
-                    const sy = g.y - scrollOffset;
-                    if (sy < -50 || sy > window.innerHeight + 50) return null;
-                    return (
-                        <div key={g.id} style={{ position: 'absolute', left: g.x, top: sy, width: GHOST_SIZE, height: GHOST_SIZE, zIndex: 10002, filter: 'drop-shadow(0 0 10px rgba(255,0,0,0.8))' }}>
-                            <svg viewBox="0 0 24 24" fill={g.color}>
-                                <path d="M12 2C8.14 2 5 5.14 5 9v9l2-2 2 2 2-2 2 2 2-2 2 2 2-2 2 2V9c0-3.86-3.14-7-7-7zm-3 8a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm6 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" />
-                            </svg>
-                        </div>
-                    );
-                })}
-
-                {/* Dots (Food) */}
-                {dots.filter(d => !d.collected).map(dot => {
-                    const sy = dot.y - scrollOffset;
-                    if (sy < -30 || sy > window.innerHeight + 30) return null;
-                    return (
-                        <motion.div
-                            key={dot.id}
-                            className="absolute rounded-full bg-red-500"
-                            style={{
-                                left: dot.x - DOT_SIZE / 2,
-                                top: sy - DOT_SIZE / 2,
-                                width: DOT_SIZE,
-                                height: DOT_SIZE,
-                                boxShadow: '0 0 8px 3px rgba(239, 68, 68, 0.7)',
-                                zIndex: 10000
-                            }}
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{ repeat: Infinity, duration: 0.6 }}
-                        />
-                    );
-                })}
+                    {/* Dots (Food) */}
+                    {dots.filter(d => !d.collected).map(dot => {
+                        return (
+                            <motion.div
+                                key={dot.id}
+                                className="absolute rounded-full bg-red-500"
+                                style={{
+                                    left: dot.x - DOT_SIZE / 2,
+                                    top: dot.y - DOT_SIZE / 2,
+                                    width: DOT_SIZE,
+                                    height: DOT_SIZE,
+                                    boxShadow: '0 0 8px 3px rgba(239, 68, 68, 0.7)',
+                                    zIndex: 10000
+                                }}
+                                animate={{ scale: [1, 1.2, 1] }}
+                                transition={{ repeat: Infinity, duration: 0.6 }}
+                            />
+                        );
+                    })}
+                </motion.div>
 
                 {/* Game Over */}
                 {gameOver && (

@@ -64,7 +64,7 @@ const ContextualGreeting = () => {
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🌅" };
     }
-    
+
     if (hour >= 8 && hour < 12) {
       const greetings = [
         "Good morning, perfect time to browse through some projects.",
@@ -73,7 +73,7 @@ const ContextualGreeting = () => {
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "☀️" };
     }
-    
+
     if (hour >= 12 && hour < 14) {
       const greetings = [
         "Lunch break scroll? I'll try to make it worth it.",
@@ -82,7 +82,7 @@ const ContextualGreeting = () => {
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🍽️" };
     }
-    
+
     if (hour >= 14 && hour < 18) {
       const greetings = [
         "Hey, glad you stopped by. Let me show you what I've been working on.",
@@ -91,7 +91,7 @@ const ContextualGreeting = () => {
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🌤️" };
     }
-    
+
     if (hour >= 18 && hour < 21) {
       const greetings = [
         "Evening, perfect time to explore something new.",
@@ -100,7 +100,7 @@ const ContextualGreeting = () => {
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🌆" };
     }
-    
+
     if (hour >= 21 && hour < 24) {
       const greetings = [
         "Burning the midnight oil? Me too, check this out.",
@@ -109,7 +109,7 @@ const ContextualGreeting = () => {
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], emoji: "🌙" };
     }
-    
+
     // After midnight (0-5 AM)
     const greetings = [
       "It's past midnight and you're here, love the commitment.",
@@ -148,46 +148,46 @@ const ContextualGreeting = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed bottom-6 right-6 z-50 max-w-xs"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-[calc(100vw-2rem)] sm:max-w-xs"
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
-          animate={{ 
-            opacity: 1, 
-            y: 0, 
+          animate={{
+            opacity: 1,
+            y: 0,
             scale: 1,
           }}
-          exit={{ 
-            opacity: 0, 
-            y: 20, 
+          exit={{
+            opacity: 0,
+            y: 20,
             scale: 0.9,
             transition: { duration: 0.2 }
           }}
-          transition={{ 
-            type: "spring", 
-            stiffness: 300, 
+          transition={{
+            type: "spring",
+            stiffness: 300,
             damping: 20,
             duration: 0.4
           }}
         >
           {/* Chat Bubble */}
-          <div className="relative bg-white border border-gray-200 rounded-2xl shadow-lg p-4 pr-8">
+          <div className="relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-2xl shadow-lg p-3 sm:p-4 pr-7 sm:pr-8 transition-colors duration-300">
             {/* Close Button */}
             <button
               onClick={handleClose}
-              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+              className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
             >
-              <X className="w-4 h-4" />
+              <X className="w-3 h-3 sm:w-4 sm:h-4" />
             </button>
 
             {/* Content */}
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-2 sm:gap-3">
               {/* Avatar/Emoji */}
-              <div className="flex-shrink-0 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-sm">
+              <div className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-xs sm:text-sm">
                 {emoji}
               </div>
-              
+
               {/* Message */}
-              <div className="flex-1 pt-1">
-                <p className="text-gray-900 text-sm font-medium leading-relaxed">
+              <div className="flex-1 pt-0.5 sm:pt-1">
+                <p className="text-gray-900 dark:text-white text-xs sm:text-sm font-medium leading-relaxed">
                   {greeting}
                 </p>
               </div>
@@ -195,7 +195,7 @@ const ContextualGreeting = () => {
 
             {/* Chat Bubble Tail */}
             <div className="absolute bottom-0 right-6 transform translate-y-full">
-              <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-white"></div>
+              <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-white dark:border-t-gray-800"></div>
               <div className="absolute -top-px left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-7 border-r-7 border-t-7 border-l-transparent border-r-transparent border-t-gray-200"></div>
             </div>
           </div>

@@ -18,13 +18,13 @@ export const ScrollProgress = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-1 bg-gray-200 z-50"
+      className="fixed top-0 left-0 right-0 h-1 bg-gray-200 dark:bg-gray-800 z-50 transition-colors duration-300"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
       <motion.div
-        className="h-full bg-gradient-to-r from-gray-900 to-gray-700"
+        className="h-full bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-400"
         style={{
           scaleX: scrollProgress,
           transformOrigin: "0%",

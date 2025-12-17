@@ -78,10 +78,10 @@ const Projects = () => {
     : allProjects.filter(project => project.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#FAFAFA] dark:bg-gray-900">
       {/* Header */}
       <motion.header 
-        className="bg-white py-20"
+        className="bg-[#F8F8F8] dark:bg-gray-800 py-20"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

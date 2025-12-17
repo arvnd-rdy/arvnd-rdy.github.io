@@ -1,28 +1,42 @@
 
+import { lazy, Suspense } from "react";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import ContextualGreeting from "@/components/ContextualGreeting";
 import SoundToggle from "@/components/SoundToggle";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import SkillsSection from "@/components/SkillsSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import ExperienceSection from "@/components/ExperienceSection";
-import FeedbackSection from "@/components/FeedbackSection";
-import ContactSection from "@/components/ContactSection";
+
+// Lazy load sections below the fold for better initial load performance
+const AboutSection = lazy(() => import("@/components/AboutSection"));
+const SkillsSection = lazy(() => import("@/components/SkillsSection"));
+const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
+const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
+
+const FeedbackSection = lazy(() => import("@/components/FeedbackSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+
+// Simple loading placeholder for lazy-loaded sections
+const SectionLoader = () => (
+  <div className="min-h-[400px] flex items-center justify-center">
+    <div className="animate-pulse text-gray-400">Loading...</div>
+  </div>
+);
 
 const Index = () => {
   return (
-    <div className="overflow-y-auto">
+    <div className="overflow-y-auto overflow-x-hidden">
       <ScrollProgress />
       <ContextualGreeting />
       <SoundToggle />
       <section><HeroSection /></section>
-      <section><AboutSection /></section>
-      <section><SkillsSection /></section>
-      <section><ProjectsSection /></section>
-      <section><ExperienceSection /></section>
-      <section><FeedbackSection /></section>
-      <section><ContactSection /></section>
+      <Suspense fallback={<SectionLoader />}>
+        <section><AboutSection /></section>
+        <section><SkillsSection /></section>
+        <section><ProjectsSection /></section>
+        <section><ExperienceSection /></section>
+
+        <section><FeedbackSection /></section>
+        <section><ContactSection /></section>
+      </Suspense>
     </div>
   );
 };

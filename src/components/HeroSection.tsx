@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem } from "@/utils/animations";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useScrollNavigation } from "@/hooks/useScrollNavigation";
+import ThemeToggle from "@/components/ThemeToggle";
+import { InteractiveText } from "@/components/InteractiveText";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/arvnd-rdy" },
@@ -50,11 +52,11 @@ const HeroSection = () => {
     aboutSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const navItems = ['About', 'Skills', 'Projects', 'Experience', 'Blog', 'Contact'];
+  const navItems = ['About', 'Skills', 'Projects', 'Experience', 'Testimonials', 'Blog', 'Contact'];
 
   return (
     <motion.section
-      className="min-h-screen bg-gray-50 flex flex-col"
+      className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors duration-300"
     >
       {/* Social Icons - Left Side */}
       <div className="hidden lg:flex flex-col items-center space-y-4 absolute left-4 xl:left-8 top-1/2 -translate-y-1/2 z-20">
@@ -64,24 +66,38 @@ const HeroSection = () => {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-500 hover:text-gray-900 transition-colors duration-200"
+            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
           >
             <Icon className="w-5 h-5 xl:w-6 xl:h-6" />
           </a>
         ))}
       </div>
+      {/* Social Icons - Mobile Bottom */}
+      <div className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 flex items-center space-x-6 z-20 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 rounded-full px-4 py-2 shadow-lg">
+        {socialLinks.map(({ icon: Icon, href }) => (
+          <a
+            key={href}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+          >
+            <Icon className="w-5 h-5" />
+          </a>
+        ))}
+      </div>
       {/* Sticky Glass Navigation */}
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4 sm:p-6 lg:px-8 lg:py-4 text-xs sm:text-sm text-gray-600 transition-all duration-300 ${isScrolled
-          ? 'bg-white/90 backdrop-blur-lg border-b border-gray-200/50 shadow-lg'
-          : 'bg-white/80 backdrop-blur-md border-b border-white/20 shadow-sm'
+        className={`fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-3 sm:p-4 md:p-6 lg:px-8 lg:py-4 text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-300 ${isScrolled
+          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg'
+          : 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-white/20 dark:border-gray-800/20 shadow-sm'
           }`}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1 }}
       >
         <motion.div
-          className="transition-colors duration-300 hover:text-gray-900 text-xs sm:text-sm lg:text-base font-medium"
+          className="transition-colors duration-300 hover:text-gray-900 text-[10px] xs:text-xs sm:text-sm lg:text-base font-medium"
           whileHover={{ scale: 1.05 }}
         >
           <span className="hidden sm:inline">Full Stack & AI/ML Developer</span>
@@ -107,9 +123,9 @@ const HeroSection = () => {
                 }
               }}
               onMouseEnter={() => playSound('hover')}
-              className={`hover:text-gray-900 transition-all duration-300 relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0 after:bg-gray-900 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left font-medium ${activeSection === item.toLowerCase() || (activeSection === '' && item === 'About')
-                ? 'text-gray-900 after:scale-x-100'
-                : 'after:scale-x-0'
+              className={`hover:text-gray-900 dark:hover:text-white transition-all duration-300 relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0 after:bg-gray-900 dark:after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left font-medium ${activeSection === item.toLowerCase() || (activeSection === '' && item === 'About')
+                ? 'text-gray-900 dark:text-white after:scale-x-100'
+                : 'text-gray-600 dark:text-gray-300 after:scale-x-0'
                 }`}
               variants={staggerItem}
               whileHover={{ y: -2 }}
@@ -117,6 +133,7 @@ const HeroSection = () => {
               {item}
             </motion.button>
           ))}
+          <ThemeToggle />
         </motion.div>
 
         {/* Mobile Menu Button */}
@@ -141,13 +158,13 @@ const HeroSection = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden fixed top-[72px] left-0 right-0 bg-white/95 backdrop-blur-md border-b border-white/20 z-40 shadow-lg"
+            className="md:hidden fixed top-[64px] sm:top-[72px] left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 z-40 shadow-lg max-h-[calc(100vh-64px)] sm:max-h-[calc(100vh-72px)] overflow-y-auto"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-4 py-4 sm:py-6 space-y-3 sm:space-y-4">
               {navItems.map((item, index) => (
                 <motion.button
                   key={item}
@@ -193,15 +210,15 @@ const HeroSection = () => {
 
       {/* Development Warning Banner */}
       <motion.div
-        className="fixed top-[72px] left-0 right-0 bg-amber-50/95 backdrop-blur-sm border-b border-amber-200/50 z-30 shadow-sm"
+        className="fixed top-[64px] sm:top-[72px] left-0 right-0 bg-amber-50/95 dark:bg-amber-900/50 backdrop-blur-sm border-b border-amber-200/50 dark:border-amber-700/50 z-30 shadow-sm"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
       >
-        <div className="container mx-auto px-4 py-2">
-          <div className="flex items-center justify-center gap-2 text-amber-800">
-            <AlertTriangle className="w-4 h-4" />
-            <span className="text-xs sm:text-sm font-medium">
+        <div className="container mx-auto px-3 sm:px-4 py-1.5 sm:py-2">
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-amber-800 dark:text-amber-200">
+            <AlertTriangle className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+            <span className="text-[10px] xs:text-xs sm:text-sm font-medium text-center">
               🚧 Website under development - Some content may be placeholder data
             </span>
           </div>
@@ -209,19 +226,20 @@ const HeroSection = () => {
       </motion.div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32">
-        <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 md:pt-32 pb-8 sm:pb-12">
+        <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center">
           {/* Left Side - Text */}
-          <motion.div className="space-y-6 lg:space-y-8 text-center lg:text-left order-2 lg:order-1">
+          <motion.div className="space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left order-2 lg:order-1">
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-gray-900 leading-none tracking-tight"
+              className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-gray-900 dark:text-white leading-none tracking-tight cursor-default"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             >
-              ARAVIND
-              <br />
-              REDDY
+              <div className="flex flex-col items-center lg:items-start">
+                <InteractiveText text="ARAVIND" />
+                <InteractiveText text="REDDY" />
+              </div>
             </motion.h1>
 
             <motion.div
@@ -232,7 +250,7 @@ const HeroSection = () => {
               transition={{ delay: 0.4 }}
             >
               <motion.p
-                className="text-gray-600 leading-relaxed text-sm sm:text-base"
+                className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm sm:text-base"
                 variants={fadeInUp}
               >
                 <TypingAnimation
@@ -242,7 +260,7 @@ const HeroSection = () => {
                 />
               </motion.p>
               <motion.p
-                className="text-gray-600 leading-relaxed text-sm sm:text-base"
+                className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm sm:text-base"
                 variants={fadeInUp}
               >
                 <TypingAnimation
@@ -261,7 +279,7 @@ const HeroSection = () => {
             >
               <Button
                 asChild
-                className="bg-gray-900 hover:bg-gray-800 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all duration-500 hover:scale-105 hover:shadow-lg text-sm sm:text-base"
+                className="bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-100 text-white dark:text-gray-900 px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all duration-500 hover:scale-105 hover:shadow-lg text-sm sm:text-base"
               >
                 <a href="https://www.linkedin.com/in/arvnd-rdy/" target="_blank" rel="noopener noreferrer">
                   CONTACT →
@@ -309,9 +327,9 @@ const HeroSection = () => {
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ transform: 'translateZ(-50px)' }} />
 
               {/* Multiple layered shadows for depth */}
-              <div className="absolute inset-0 bg-gray-900/10 rounded-xl blur-xl translate-x-4 translate-y-8" style={{ transform: 'translateZ(-40px) translateX(16px) translateY(32px)' }} />
-              <div className="absolute inset-0 bg-gray-900/10 rounded-xl blur-lg translate-x-2 translate-y-4" style={{ transform: 'translateZ(-30px) translateX(8px) translateY(16px)' }} />
-              <div className="absolute inset-0 bg-gray-900/5 rounded-xl blur-md translate-x-1 translate-y-2" style={{ transform: 'translateZ(-20px) translateX(4px) translateY(8px)' }} />
+              <div className="absolute inset-0 bg-gray-900/10 dark:bg-white/5 rounded-xl blur-xl translate-x-4 translate-y-8" style={{ transform: 'translateZ(-40px) translateX(16px) translateY(32px)' }} />
+              <div className="absolute inset-0 bg-gray-900/10 dark:bg-white/5 rounded-xl blur-lg translate-x-2 translate-y-4" style={{ transform: 'translateZ(-30px) translateX(8px) translateY(16px)' }} />
+              <div className="absolute inset-0 bg-gray-900/5 dark:bg-white/5 rounded-xl blur-md translate-x-1 translate-y-2" style={{ transform: 'translateZ(-20px) translateX(4px) translateY(8px)' }} />
 
               {/* Main image with 3D transform */}
               <motion.div
@@ -321,7 +339,7 @@ const HeroSection = () => {
                 <motion.img
                   src="/hero2.png"
                   alt="Arvind Reddy"
-                  className="w-[280px] h-[340px] sm:w-[320px] sm:h-[380px] md:w-[350px] md:h-[420px] lg:w-[384px] lg:h-[460px] object-cover rounded-xl shadow-2xl transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.35)]"
+                  className="w-[240px] h-[300px] xs:w-[280px] xs:h-[340px] sm:w-[320px] sm:h-[380px] md:w-[350px] md:h-[420px] lg:w-[384px] lg:h-[460px] object-cover rounded-xl shadow-2xl dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.35)] dark:group-hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]"
                   style={{ transform: 'translateZ(20px)' }}
                 />
 
@@ -338,18 +356,18 @@ const HeroSection = () => {
 
       {/* Bottom Right Text */}
       <motion.div
-        className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 text-right"
+        className="absolute bottom-2 right-2 xs:bottom-4 xs:right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 text-right z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.6 }}
       >
-        <div className="text-gray-400 text-xs sm:text-sm">AVAILABLE FOR WORK</div>
-        <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900">JUN'25</div>
+        <div className="text-gray-400 text-[10px] xs:text-xs sm:text-sm">AVAILABLE FOR WORK</div>
+        <div className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 dark:text-white">JUN'25</div>
       </motion.div>
 
       {/* Small Arrow Indicator */}
       <motion.div
-        className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8"
+        className="absolute bottom-2 left-2 xs:bottom-4 xs:left-4 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8 z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.7 }}
@@ -358,7 +376,7 @@ const HeroSection = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown className="w-4 h-4 text-gray-400" />
+          <ArrowDown className="w-3 h-3 xs:w-4 xs:h-4 text-gray-400" />
         </motion.div>
       </motion.div>
     </motion.section>

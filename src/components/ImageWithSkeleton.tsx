@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { motion } from "framer-motion";
 
 interface ImageWithSkeletonProps {
@@ -6,19 +6,21 @@ interface ImageWithSkeletonProps {
   alt: string;
   className?: string;
   skeletonClassName?: string;
+  containerClassName?: string;
 }
 
-export const ImageWithSkeleton = ({ 
-  src, 
-  alt, 
-  className = "", 
-  skeletonClassName = "" 
+export const ImageWithSkeleton = memo(({
+  src,
+  alt,
+  className = "",
+  skeletonClassName = "",
+  containerClassName = ""
 }: ImageWithSkeletonProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className={`relative overflow-hidden ${containerClassName}`}>
       {/* Skeleton Loader */}
       {!isLoaded && !hasError && (
         <motion.div
@@ -42,6 +44,8 @@ export const ImageWithSkeleton = ({
         src={src}
         alt={alt}
         className={className}
+        loading="lazy"
+        decoding="async"
         onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
         initial={{ opacity: 0 }}
@@ -60,4 +64,6 @@ export const ImageWithSkeleton = ({
       )}
     </div>
   );
-};
+});
+
+ImageWithSkeleton.displayName = "ImageWithSkeleton";
