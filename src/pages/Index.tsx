@@ -9,6 +9,7 @@ import HeroSection from "@/components/HeroSection";
 const AboutSection = lazy(() => import("@/components/AboutSection"));
 const SkillsSection = lazy(() => import("@/components/SkillsSection"));
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
 const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
 
 
@@ -32,6 +33,7 @@ const Index = () => {
         <section><AboutSection /></section>
         <section><SkillsSection /></section>
         <section><ProjectsSection /></section>
+        <section><TestimonialsSection /></section>
         <section><ExperienceSection /></section>
 
 

@@ -246,3 +246,18 @@
   z-index: -1;
   animation: glitch-anim-2 3s infinite linear alternate-reverse;
 }
+/* Text truncation utilities */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Enhanced background with subtle gradient */
+.enhanced-bg {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.98) 50%, 
+    rgba(241, 245, 249, 0.95) 100%);
+}
