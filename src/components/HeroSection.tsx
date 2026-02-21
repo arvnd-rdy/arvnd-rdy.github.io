@@ -1,5 +1,4 @@
-import { ArrowDown, Menu, X, AlertTriangle } from "lucide-react";
-import { playSound } from "@/utils/soundEffects";
+import { ArrowDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TypingAnimation } from "@/components/TypingAnimation";
 import { useActiveSection } from "@/hooks/useActiveSection";
@@ -9,12 +8,11 @@ import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem } from
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useScrollNavigation } from "@/hooks/useScrollNavigation";
 import ThemeToggle from "@/components/ThemeToggle";
-import { InteractiveText } from "@/components/InteractiveText";
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/arvnd-rdy" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/arvnd-rdy/" },
-  { icon: Mail, href: "mailto:arvindhreddyanugu2002@gmail.com" },
+  { icon: Github, href: "https://github.com/arvnd-rdy", bgColor: "bg-gray-900 hover:bg-gray-800", iconColor: "text-white" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/arvnd-rdy/", bgColor: "bg-blue-600 hover:bg-blue-700", iconColor: "text-white" },
+  { icon: Mail, href: "mailto:arvindhreddyanugu2002@gmail.com", bgColor: "bg-red-500 hover:bg-red-600", iconColor: "text-white" },
 ];
 
 const HeroSection = () => {
@@ -56,31 +54,38 @@ const HeroSection = () => {
 
   return (
     <motion.section
-      className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors duration-300"
+      className="min-h-screen bg-white dark:bg-gray-900 flex flex-col transition-colors duration-300"
     >
+      {/* Enhanced grid background with fade effect */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.15)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(59,130,246,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.2)_1px,transparent_1px)] bg-[size:80px_80px] pointer-events-none" 
+        style={{
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0) 100%)'
+        }}
+      />
       {/* Social Icons - Left Side */}
       <div className="hidden lg:flex flex-col items-center space-y-4 absolute left-4 xl:left-8 top-1/2 -translate-y-1/2 z-20">
-        {socialLinks.map(({ icon: Icon, href }) => (
+        {socialLinks.map(({ icon: Icon, href, bgColor, iconColor }) => (
           <a
             key={href}
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            className={`${bgColor} ${iconColor} transition-all duration-200 p-3 border border-gray-300 dark:border-gray-600 shadow-md hover:shadow-lg hover:scale-105`}
           >
             <Icon className="w-5 h-5 xl:w-6 xl:h-6" />
           </a>
         ))}
       </div>
       {/* Social Icons - Mobile Bottom */}
-      <div className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 flex items-center space-x-6 z-20 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 rounded-full px-4 py-2 shadow-lg">
-        {socialLinks.map(({ icon: Icon, href }) => (
+      <div className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 flex items-center space-x-6 z-20 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-gray-300 dark:border-gray-600 px-6 py-3 shadow-md">
+        {socialLinks.map(({ icon: Icon, href, bgColor, iconColor }) => (
           <a
             key={href}
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            className={`${bgColor} ${iconColor} transition-all duration-200 p-2 border border-gray-300 dark:border-gray-600 shadow-md hover:shadow-lg hover:scale-105`}
           >
             <Icon className="w-5 h-5" />
           </a>
@@ -89,8 +94,8 @@ const HeroSection = () => {
       {/* Sticky Glass Navigation */}
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-3 sm:p-4 md:p-6 lg:px-8 lg:py-4 text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-300 ${isScrolled
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg'
-          : 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-white/20 dark:border-gray-800/20 shadow-sm'
+          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-b border-gray-300 dark:border-gray-600 shadow-sm'
+          : 'bg-transparent border-b border-transparent shadow-none'
           }`}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -111,24 +116,22 @@ const HeroSection = () => {
           initial="hidden"
           animate="visible"
         >
-          {navItems.map((item, index) => (
+          {navItems.map((item) => (
             <motion.button
               key={item}
               onClick={() => {
-                playSound('click');
                 if (item === 'Blog') {
                   window.open('https://avilogs.blogspot.com/', '_blank', 'noopener noreferrer');
                 } else {
                   scrollToSection(item.toLowerCase());
                 }
               }}
-              onMouseEnter={() => playSound('hover')}
-              className={`hover:text-gray-900 dark:hover:text-white transition-all duration-300 relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0 after:bg-gray-900 dark:after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left font-medium ${activeSection === item.toLowerCase() || (activeSection === '' && item === 'About')
-                ? 'text-gray-900 dark:text-white after:scale-x-100'
-                : 'text-gray-600 dark:text-gray-300 after:scale-x-0'
+              className={`px-3 py-2 transition-all duration-300 font-medium border border-transparent hover:border-gray-300 dark:hover:border-gray-600 hover:bg-white/50 dark:hover:bg-gray-800/50 ${activeSection === item.toLowerCase() || (activeSection === '' && item === 'About')
+                ? 'text-gray-900 dark:text-white bg-white/30 dark:bg-gray-800/30 border-gray-300 dark:border-gray-600'
+                : 'text-gray-600 dark:text-gray-300'
                 }`}
               variants={staggerItem}
-              whileHover={{ y: -2 }}
+              whileHover={{ scale: 1.05 }}
             >
               {item}
             </motion.button>
@@ -138,9 +141,8 @@ const HeroSection = () => {
 
         {/* Mobile Menu Button */}
         <motion.button
-          className="md:hidden p-2 hover:bg-white/50 rounded-lg transition-colors backdrop-blur-sm"
+          className="md:hidden p-2 hover:bg-white/50 border border-gray-300 dark:border-gray-600 transition-colors backdrop-blur-sm"
           onClick={() => {
-            playSound('click');
             setIsMobileMenuOpen(!isMobileMenuOpen);
           }}
           whileHover={{ scale: 1.05 }}
@@ -169,7 +171,6 @@ const HeroSection = () => {
                 <motion.button
                   key={item}
                   onClick={() => {
-                    playSound('click');
                     if (item === 'Blog') {
                       window.open('https://avilogs.blogspot.com/', '_blank', 'noopener noreferrer');
                     } else {
@@ -177,8 +178,7 @@ const HeroSection = () => {
                     }
                     setIsMobileMenuOpen(false);
                   }}
-                  onMouseEnter={() => playSound('hover')}
-                  className="block py-3 px-4 text-gray-600 hover:text-gray-900 hover:bg-white/50 rounded-lg transition-all duration-300 text-center font-medium w-full"
+                  className="block py-3 px-4 text-gray-600 hover:text-gray-900 hover:bg-white/50 border border-transparent hover:border-gray-300 transition-all duration-300 text-center font-medium w-full"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -191,13 +191,13 @@ const HeroSection = () => {
 
               {/* Mobile Social Links */}
               <div className="flex justify-center space-x-6 pt-4 border-t border-gray-200/50">
-                {socialLinks.map(({ icon: Icon, href }) => (
+                {socialLinks.map(({ icon: Icon, href, bgColor, iconColor }) => (
                   <a
                     key={href}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-gray-900 transition-colors duration-200"
+                    className={`${bgColor} ${iconColor} transition-all duration-200 p-2 border border-gray-300 dark:border-gray-600 shadow-md hover:shadow-lg hover:scale-105`}
                   >
                     <Icon className="w-5 h-5" />
                   </a>
@@ -208,38 +208,18 @@ const HeroSection = () => {
         )}
       </AnimatePresence>
 
-      {/* Development Warning Banner */}
-      <motion.div
-        className="fixed top-[64px] sm:top-[72px] left-0 right-0 bg-amber-50/95 dark:bg-amber-900/50 backdrop-blur-sm border-b border-amber-200/50 dark:border-amber-700/50 z-30 shadow-sm"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-      >
-        <div className="container mx-auto px-3 sm:px-4 py-1.5 sm:py-2">
-          <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-amber-800 dark:text-amber-200">
-            <AlertTriangle className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-            <span className="text-[10px] xs:text-xs sm:text-sm font-medium text-center">
-              🚧 Website under development - Some content may be placeholder data
-            </span>
-          </div>
-        </div>
-      </motion.div>
-
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 md:pt-32 pb-8 sm:pb-12">
         <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center">
           {/* Left Side - Text */}
           <motion.div className="space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left order-2 lg:order-1">
             <motion.h1
-              className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-gray-900 dark:text-white leading-none tracking-tight cursor-default"
+              className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-gray-900 dark:text-white leading-none tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             >
-              <div className="flex flex-col items-center lg:items-start">
-                <InteractiveText text="ARAVIND" />
-                <InteractiveText text="REDDY" />
-              </div>
+              ARAVIND<br />REDDY
             </motion.h1>
 
             <motion.div
@@ -279,7 +259,7 @@ const HeroSection = () => {
             >
               <Button
                 asChild
-                className="bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-100 text-white dark:text-gray-900 px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all duration-500 hover:scale-105 hover:shadow-lg text-sm sm:text-base"
+                className="bg-blue-500 hover:bg-blue-600 text-white px-7 sm:px-9 py-3 sm:py-4 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg border border-blue-600 text-sm sm:text-base font-bold rounded-none"
               >
                 <a href="https://www.linkedin.com/in/arvnd-rdy/" target="_blank" rel="noopener noreferrer">
                   CONTACT →
@@ -288,68 +268,21 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Side - 3D Floating Card Image */}
+          {/* Right Side - Simple Image */}
           <motion.div
             className="flex justify-center lg:justify-end order-1 lg:order-2"
             variants={fadeInRight}
             initial="hidden"
             animate="visible"
             transition={{ delay: 0.3 }}
-            style={{ perspective: '1000px' }}
           >
-            <motion.div
-              ref={cardRef}
-              className="relative group cursor-pointer"
-              style={{ transformStyle: 'preserve-3d' }}
-              animate={{
-                y: [0, -10, 0],
-                rotateY: isHovering ? mousePosition.x * 12 : 0,
-                rotateX: isHovering ? -mousePosition.y * 12 : 0,
-              }}
-              transition={{
-                y: {
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                },
-                rotateX: { duration: 0.1, ease: "linear" },
-                rotateY: { duration: 0.1, ease: "linear" },
-              }}
-              whileHover={{
-                scale: 1.02,
-                z: 50,
-              }}
-              onMouseMove={handleMouseMove}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              {/* Glow effect behind the card */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ transform: 'translateZ(-50px)' }} />
-
-              {/* Multiple layered shadows for depth */}
-              <div className="absolute inset-0 bg-gray-900/10 dark:bg-white/5 rounded-xl blur-xl translate-x-4 translate-y-8" style={{ transform: 'translateZ(-40px) translateX(16px) translateY(32px)' }} />
-              <div className="absolute inset-0 bg-gray-900/10 dark:bg-white/5 rounded-xl blur-lg translate-x-2 translate-y-4" style={{ transform: 'translateZ(-30px) translateX(8px) translateY(16px)' }} />
-              <div className="absolute inset-0 bg-gray-900/5 dark:bg-white/5 rounded-xl blur-md translate-x-1 translate-y-2" style={{ transform: 'translateZ(-20px) translateX(4px) translateY(8px)' }} />
-
-              {/* Main image with 3D transform */}
-              <motion.div
-                className="relative"
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                <motion.img
-                  src="/hero2.png"
-                  alt="Arvind Reddy"
-                  className="w-[240px] h-[300px] xs:w-[280px] xs:h-[340px] sm:w-[320px] sm:h-[380px] md:w-[350px] md:h-[420px] lg:w-[384px] lg:h-[460px] object-cover rounded-xl shadow-2xl dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-500 group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.35)] dark:group-hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]"
-                  style={{ transform: 'translateZ(20px)' }}
-                />
-
-                {/* Shine/reflection effect on hover */}
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ transform: 'translateZ(25px)' }} />
-
-                {/* Border glow */}
-                <div className="absolute inset-0 rounded-xl border border-white/10 group-hover:border-white/30 transition-all duration-500" style={{ transform: 'translateZ(30px)' }} />
-              </motion.div>
-            </motion.div>
+            <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 p-4 border border-gray-300 dark:border-gray-600 shadow-lg">
+              <img
+                src="/hero2.png"
+                alt="Arvind Reddy"
+                className="w-[240px] h-[300px] xs:w-[280px] xs:h-[340px] sm:w-[320px] sm:h-[380px] md:w-[350px] md:h-[420px] lg:w-[384px] lg:h-[460px] object-cover"
+              />
+            </div>
           </motion.div>
         </div>
       </div>

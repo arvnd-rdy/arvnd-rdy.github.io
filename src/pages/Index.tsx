@@ -2,7 +2,6 @@
 import { lazy, Suspense } from "react";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import ContextualGreeting from "@/components/ContextualGreeting";
-import SoundToggle from "@/components/SoundToggle";
 import HeroSection from "@/components/HeroSection";
 
 // Lazy load sections below the fold for better initial load performance
@@ -27,7 +26,6 @@ const Index = () => {
     <div className="overflow-y-auto overflow-x-hidden">
       <ScrollProgress />
       <ContextualGreeting />
-      <SoundToggle />
       <section><HeroSection /></section>
       <Suspense fallback={<SectionLoader />}>
         <section><AboutSection /></section>
