@@ -8,6 +8,7 @@ import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem } from
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useScrollNavigation } from "@/hooks/useScrollNavigation";
 import ThemeToggle from "@/components/ThemeToggle";
+import { TechMascot } from "@/components/TechMascot";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/arvnd-rdy", bgColor: "bg-gray-900 hover:bg-gray-800", iconColor: "text-white" },
@@ -105,8 +106,8 @@ const HeroSection = () => {
           className="transition-colors duration-300 hover:text-gray-900 text-[10px] xs:text-xs sm:text-sm lg:text-base font-medium"
           whileHover={{ scale: 1.05 }}
         >
-          <span className="hidden sm:inline">Full Stack & AI/ML Developer</span>
-          <span className="sm:hidden">Developer</span>
+          <span className="hidden sm:inline">AI/ML Engineer</span>
+          <span className="sm:hidden">AI/ML Engineer</span>
         </motion.div>
 
         {/* Desktop Navigation */}
@@ -296,6 +297,16 @@ const HeroSection = () => {
       >
         <div className="text-gray-400 text-[10px] xs:text-xs sm:text-sm">AVAILABLE FOR WORK</div>
         <div className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 dark:text-white">JUN'25</div>
+      </motion.div>
+
+      {/* Tech Mascot - Bottom Right */}
+      <motion.div
+        className="absolute bottom-20 right-4 xs:bottom-24 xs:right-6 sm:bottom-28 sm:right-8 lg:bottom-32 lg:right-12 z-10"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
+      >
+        <TechMascot variant="welcome" size={80} />
       </motion.div>
 
       {/* Small Arrow Indicator */}

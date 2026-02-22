@@ -29,12 +29,12 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     // Load theme from localStorage on mount
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme') as Theme | null;
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         if (savedTheme) {
             setThemeState(savedTheme);
-        } else if (prefersDark) {
-            setThemeState('dark');
+        } else {
+            // Default to light mode instead of following system preference
+            setThemeState('light');
         }
         setMounted(true);
     }, []);

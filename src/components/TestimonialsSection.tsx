@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
 import { Linkedin, ExternalLink } from "lucide-react";
+import { TechMascot } from "@/components/TechMascot";
 
 const testimonials = [
   {
@@ -42,6 +43,16 @@ const TestimonialsSection = () => {
         animate={isInView ? "visible" : "hidden"}
         variants={staggerContainer}
       >
+        {/* Tech Mascot - Top Right */}
+        <motion.div
+          className="absolute top-4 right-4 hidden lg:block z-10"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <TechMascot variant="starstruck" size={70} />
+        </motion.div>
+
         {/* Header Label */}
         <motion.div
           className="inline-block bg-black dark:bg-white px-8 py-4 mb-12"

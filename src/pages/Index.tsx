@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import ContextualGreeting from "@/components/ContextualGreeting";
 import HeroSection from "@/components/HeroSection";
+import { NihilistPenguinBanner } from "@/components/NihilistPenguinBanner";
 
 // Lazy load sections below the fold for better initial load performance
 const AboutSection = lazy(() => import("@/components/AboutSection"));
@@ -33,7 +34,9 @@ const Index = () => {
         <section><ProjectsSection /></section>
         <section><TestimonialsSection /></section>
         <section><ExperienceSection /></section>
-
+        
+        {/* Nihilist Penguin Banner - A moment of contemplation */}
+        <NihilistPenguinBanner />
 
         <section><ContactSection /></section>
       </Suspense>

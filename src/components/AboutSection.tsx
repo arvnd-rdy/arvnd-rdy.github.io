@@ -7,6 +7,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInLeft, fadeInRight, staggerContainer, staggerItem } from "@/utils/animations";
 import { Link } from "react-router-dom";
 import { ArrowRight, Download } from "lucide-react";
+import { TechMascot } from "@/components/TechMascot";
 
 const AboutSection = () => {
   const { ref, isInView } = useScrollAnimation();
@@ -30,6 +31,16 @@ const AboutSection = () => {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
+        {/* Tech Mascot - Top Left */}
+        <motion.div
+          className="absolute top-4 left-4 hidden lg:block z-20"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <TechMascot variant="thinking" size={70} />
+        </motion.div>
+
         {/* Swiss Poster Style Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
           

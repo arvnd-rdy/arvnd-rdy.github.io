@@ -7,6 +7,7 @@ import { ExternalLink, Github, ArrowRight, Star, Calendar, Code2, Shuffle } from
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useState, useMemo, useCallback } from "react";
+import { TechMascot } from "@/components/TechMascot";
 
 const allProjects = [
   {
@@ -277,7 +278,7 @@ const ProjectsSection = () => {
 
         {/* CTA Section - Modern Brutalist */}
         <motion.div
-          className="text-center bg-gray-900 dark:bg-gray-800 border-2 border-gray-900 dark:border-white p-6 sm:p-8 md:p-10 lg:p-12 text-white mx-2 sm:mx-4 transition-all duration-300"
+          className="text-center bg-gray-900 dark:bg-gray-800 border-2 border-gray-900 dark:border-white p-6 sm:p-8 md:p-10 lg:p-12 text-white mx-2 sm:mx-4 transition-all duration-300 relative"
           variants={staggerItem}
         >
           <h3 className="text-xl sm:text-2xl md:text-3xl font-black mb-3 sm:mb-4 uppercase tracking-wide">
@@ -296,6 +297,16 @@ const ProjectsSection = () => {
             View Complete Portfolio
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
+          
+          {/* Victory Octopus */}
+          <motion.div
+            className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 hidden sm:block"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <TechMascot variant="success" size={70} />
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>

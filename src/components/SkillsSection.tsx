@@ -4,6 +4,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { TechMascot } from "@/components/TechMascot";
 import {
   SiHtml5, SiCss3, SiJavascript, SiPython, SiC, SiCplusplus, SiReact, SiNodedotjs,
   SiExpress, SiNumpy, SiPandas, SiScikitlearn, SiGithub, SiPostman, SiMongodb,
@@ -143,7 +144,7 @@ const SkillsSection = () => {
       >
         {/* Header */}
         <motion.div
-          className="text-center mb-8 sm:mb-12 md:mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16 relative"
           variants={fadeInUp}
         >
           <motion.h2
@@ -158,6 +159,16 @@ const SkillsSection = () => {
           >
             A comprehensive toolkit spanning multiple domains of modern technology
           </motion.p>
+          
+          {/* Tech Mascot - Top Right */}
+          <motion.div
+            className="absolute top-0 right-4 sm:right-8 lg:right-12 hidden md:block"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <TechMascot variant="coffee" size={80} />
+          </motion.div>
         </motion.div>
 
         {/* Tabs Container */}

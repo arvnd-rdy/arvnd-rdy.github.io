@@ -4,6 +4,7 @@ import { playSound } from "@/utils/soundEffects";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
+import { TechMascot } from "@/components/TechMascot";
 
 const ContactSection = () => {
   const { ref, isInView } = useScrollAnimation();
@@ -61,7 +62,7 @@ const ContactSection = () => {
           
           {/* Left Column - CTA (Red) */}
           <motion.div
-            className="p-8 md:p-10 lg:p-12 flex flex-col justify-center border-4 border-black dark:border-white"
+            className="p-8 md:p-10 lg:p-12 flex flex-col justify-center border-4 border-black dark:border-white relative"
             style={{ backgroundColor: '#E63946' }}
             variants={fadeInUp}
           >
@@ -90,6 +91,16 @@ const ContactSection = () => {
             >
               CONTACT ME
             </motion.a>
+            
+            {/* Tech Mascot - Bottom Left */}
+            <motion.div
+              className="absolute bottom-4 left-4 hidden sm:block"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              <TechMascot variant="cool" size={60} />
+            </motion.div>
           </motion.div>
 
           {/* Middle Column - Contact Links (White/Light) */}
