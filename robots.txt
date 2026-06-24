@@ -12,3 +12,7 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://aravindreddyanugu.netlify.app/sitemap.xml
+Sitemap: https://aravindreddyanugu.netlify.app/sitemap.txt

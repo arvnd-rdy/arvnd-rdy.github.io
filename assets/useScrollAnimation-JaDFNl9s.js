@@ -1,0 +1,1 @@
+import{r as s}from"./react-vendor-DYScToE-.js";import{r as t}from"./ui-vendor-BvNGfaEb.js";const a=(e=.1,o="-50px")=>{const r=s.useRef(null),n=t(r,{amount:e,margin:o,once:!0});return{ref:r,isInView:n}};export{a as u};

@@ -1,0 +1,1 @@
+const d=()=>{const e=document.createElement("a");e.href="/resume.pdf",e.download="Arvind_Reddy_Resume.pdf",e.target="_blank",document.body.appendChild(e),e.click(),document.body.removeChild(e),typeof gtag<"u"&&gtag("event","resume_download",{event_category:"engagement",event_label:"resume_pdf"})};export{d};
