@@ -23,7 +23,9 @@ class SoundManager {
   private createToneSound(name: string, frequency: number, duration: number) {
     try {
       // Create AudioContext
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AudioContextClass) return;
+      const audioContext = new AudioContextClass();
       
       // Create oscillator
       const oscillator = audioContext.createOscillator();
@@ -41,35 +43,41 @@ class SoundManager {
       gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
       
       // Store the function to play this sound
-      this.sounds[name] = {
-        play: () => {
-          if (!this.enabled) return;
+      const soundElement = document.createElement('audio');
+      soundElement.volume = this.volume * 0.1;
+      
+      const playSound = () => {
+        if (!this.enabled) return;
+        
+        try {
+          const newOscillator = audioContext.createOscillator();
+          const newGainNode = audioContext.createGain();
           
-          try {
-            const newOscillator = audioContext.createOscillator();
-            const newGainNode = audioContext.createGain();
-            
-            newOscillator.connect(newGainNode);
-            newGainNode.connect(audioContext.destination);
-            
-            newOscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-            newOscillator.type = 'sine';
-            
-            newGainNode.gain.setValueAtTime(0, audioContext.currentTime);
-            newGainNode.gain.linearRampToValueAtTime(this.volume * 0.1, audioContext.currentTime + 0.01);
-            newGainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
-            
-            newOscillator.start(audioContext.currentTime);
-            newOscillator.stop(audioContext.currentTime + duration);
-          } catch (error) {
-            console.warn('Sound effect failed:', error);
-          }
+          newOscillator.connect(newGainNode);
+          newGainNode.connect(audioContext.destination);
+          
+          newOscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+          newOscillator.type = 'sine';
+          
+          newGainNode.gain.setValueAtTime(0, audioContext.currentTime);
+          newGainNode.gain.linearRampToValueAtTime(this.volume * 0.1, audioContext.currentTime + 0.01);
+          newGainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+          
+          newOscillator.start(audioContext.currentTime);
+          newOscillator.stop(audioContext.currentTime + duration);
+        } catch (error) {
+          console.warn('Sound effect failed:', error);
         }
-      } as any;
+      };
+      
+      soundElement.play = playSound;
+      this.sounds[name] = soundElement;
     } catch (error) {
       console.warn('Web Audio API not supported:', error);
       // Fallback: create silent audio element
-      this.sounds[name] = { play: () => {} } as any;
+      const silentAudio = document.createElement('audio');
+      silentAudio.play = () => Promise.resolve();
+      this.sounds[name] = silentAudio;
     }
   }
 

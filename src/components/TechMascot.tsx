@@ -26,99 +26,279 @@ export const TechMascot = ({ variant, size = 80, className = '' }: TechMascotPro
     switch (variant) {
       case 'welcome':
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="${size}" height="${size}" class="${className}">
-          ${commonElements}
-          <path d="M 110 190 C 50 200, 30 280, 60 300 C 80 320, 110 260, 120 220 Z" fill="#1E293B"/>
-          <path d="M 290 190 C 360 160, 380 90, 340 80 C 310 70, 270 130, 280 180 Z" fill="#1E293B"/>
-          <circle cx="165" cy="155" r="14" fill="#0F172A"/>
-          <circle cx="170" cy="149" r="5" fill="#FFFFFF"/>
-          <circle cx="160" cy="158" r="2" fill="#FFFFFF"/>
-          <circle cx="235" cy="155" r="14" fill="#0F172A"/>
-          <circle cx="240" cy="149" r="5" fill="#FFFFFF"/>
-          <circle cx="230" cy="158" r="2" fill="#FFFFFF"/>
-          <ellipse cx="145" cy="170" rx="12" ry="6" fill="#F472B6" opacity="0.6"/>
-          <ellipse cx="255" cy="170" rx="12" ry="6" fill="#F472B6" opacity="0.6"/>
-          <path d="M 180 175 Q 200 165 220 175 Q 200 190 180 175 Z" fill="#FBBF24"/>
-          <path d="M 183 178 Q 200 205 217 178 Q 200 185 183 178 Z" fill="#F59E0B"/>
-          <path d="M 192 186 Q 200 198 208 186 Q 200 190 192 186 Z" fill="#EF4444"/>
+          <style>
+            @keyframes mascot-bob {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-6px); }
+            }
+
+            .mascot-bob {
+              animation: mascot-bob 2.4s ease-in-out infinite;
+              transform-origin: 200px 200px;
+            }
+
+            @keyframes eye-blink {
+              0%, 5%, 100% { transform: scaleY(1); }
+              2%, 3% { transform: scaleY(0.1); }
+            }
+
+            .eye {
+              animation: eye-blink 4s infinite;
+              transform-origin: center;
+            }
+
+            @keyframes wing-wave {
+              0%, 100% { transform: rotate(0deg); }
+              50% { transform: rotate(-18deg); }
+            }
+
+            .wave-wing {
+              animation: wing-wave 2s ease-in-out infinite;
+              transform-origin: 280px 190px;
+            }
+          </style>
+          <g class="mascot-bob">
+            ${commonElements}
+            <path d="M 110 190 C 50 200, 30 280, 60 300 C 80 320, 110 260, 120 220 Z" fill="#1E293B"/>
+            <g class="wave-wing">
+              <path d="M 290 190 C 360 160, 380 90, 340 80 C 310 70, 270 130, 280 180 Z" fill="#1E293B"/>
+            </g>
+            <circle cx="165" cy="155" r="14" fill="#0F172A" class="eye"/>
+            <circle cx="170" cy="149" r="5" fill="#FFFFFF"/>
+            <circle cx="160" cy="158" r="2" fill="#FFFFFF"/>
+            <circle cx="235" cy="155" r="14" fill="#0F172A" class="eye"/>
+            <circle cx="240" cy="149" r="5" fill="#FFFFFF"/>
+            <circle cx="230" cy="158" r="2" fill="#FFFFFF"/>
+            <ellipse cx="145" cy="170" rx="12" ry="6" fill="#F472B6" opacity="0.6"/>
+            <ellipse cx="255" cy="170" rx="12" ry="6" fill="#F472B6" opacity="0.6"/>
+            <path d="M 180 175 Q 200 165 220 175 Q 200 190 180 175 Z" fill="#FBBF24"/>
+            <path d="M 183 178 Q 200 205 217 178 Q 200 185 183 178 Z" fill="#F59E0B"/>
+            <path d="M 192 186 Q 200 198 208 186 Q 200 190 192 186 Z" fill="#EF4444"/>
+          </g>
         </svg>`;
 
       case 'typing':
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="${size}" height="${size}" class="${className}">
-          ${commonElements}
-          <path d="M 120 300 L 280 300 L 250 230 L 150 230 Z" fill="#64748B"/>
-          <rect x="100" y="295" width="200" height="15" rx="5" fill="#475569"/>
-          <polygon points="155,235 245,235 270,295 130,295" fill="#38BDF8" opacity="0.3"/>
-          <path d="M 110 190 C 50 180, 100 260, 160 280 C 180 280, 140 230, 120 220 Z" fill="#1E293B"/>
-          <path d="M 290 190 C 350 180, 300 260, 240 280 C 220 280, 260 230, 280 220 Z" fill="#1E293B"/>
-          <rect x="140" y="135" width="45" height="35" rx="5" fill="none" stroke="#0F172A" stroke-width="5"/>
-          <rect x="215" y="135" width="45" height="35" rx="5" fill="none" stroke="#0F172A" stroke-width="5"/>
-          <line x1="185" y1="150" x2="215" y2="150" stroke="#0F172A" stroke-width="5" stroke-linecap="round"/>
-          <circle cx="165" cy="155" r="8" fill="#0F172A"/>
-          <circle cx="235" cy="155" r="8" fill="#0F172A"/>
-          <path d="M 185 180 Q 200 185 215 180" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <style>
+            .typing-bob {
+              animation: typing-bob 2.2s ease-in-out infinite;
+              transform-origin: 200px 220px;
+            }
+            @keyframes typing-bob {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-5px); }
+            }
+            .typing-eye {
+              animation: typing-blink 4s infinite;
+              transform-origin: center;
+            }
+            @keyframes typing-blink {
+              0%, 5%, 100% { transform: scaleY(1); }
+              2%, 3% { transform: scaleY(0.1); }
+            }
+            .typing-hands {
+              animation: typing-hands 0.6s ease-in-out infinite;
+              transform-origin: 200px 250px;
+            }
+            @keyframes typing-hands {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(3px); }
+            }
+          </style>
+          <g class="typing-bob">
+            ${commonElements}
+            <g class="typing-hands">
+              <path d="M 120 300 L 280 300 L 250 230 L 150 230 Z" fill="#64748B"/>
+              <rect x="100" y="295" width="200" height="15" rx="5" fill="#475569"/>
+              <polygon points="155,235 245,235 270,295 130,295" fill="#38BDF8" opacity="0.3"/>
+            </g>
+            <path d="M 110 190 C 50 180, 100 260, 160 280 C 180 280, 140 230, 120 220 Z" fill="#1E293B"/>
+            <path d="M 290 190 C 350 180, 300 260, 240 280 C 220 280, 260 230, 280 220 Z" fill="#1E293B"/>
+            <rect x="140" y="135" width="45" height="35" rx="5" fill="none" stroke="#0F172A" stroke-width="5"/>
+            <rect x="215" y="135" width="45" height="35" rx="5" fill="none" stroke="#0F172A" stroke-width="5"/>
+            <line x1="185" y1="150" x2="215" y2="150" stroke="#0F172A" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="165" cy="155" r="8" fill="#0F172A" class="typing-eye"/>
+            <circle cx="235" cy="155" r="8" fill="#0F172A" class="typing-eye"/>
+            <path d="M 185 180 Q 200 185 215 180" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          </g>
         </svg>`;
 
       case 'thinking':
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="${size}" height="${size}" class="${className}">
-          ${commonElements}
-          <path d="M 110 190 C 50 200, 30 280, 60 300 C 80 320, 110 260, 120 220 Z" fill="#1E293B"/>
-          <path d="M 290 190 C 350 160, 270 150, 240 180 C 240 190, 270 210, 280 210 Z" fill="#1E293B"/>
-          <circle cx="260" cy="110" r="6" fill="#FFFFFF"/>
-          <circle cx="285" cy="85" r="12" fill="#FFFFFF"/>
-          <circle cx="320" cy="50" r="22" fill="#FFFFFF"/>
-          <text x="310" y="62" font-family="sans-serif" font-weight="bold" font-size="30" fill="#0F172A">?</text>
-          <circle cx="165" cy="155" r="14" fill="#0F172A"/>
-          <circle cx="172" cy="148" r="4" fill="#FFFFFF"/>
-          <circle cx="235" cy="155" r="14" fill="#0F172A"/>
-          <circle cx="242" cy="148" r="4" fill="#FFFFFF"/>
-          <path d="M 185 185 L 210 175" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <style>
+            .mascot-bob-thinking {
+              animation: mascot-bob-thinking 2.6s ease-in-out infinite;
+              transform-origin: 200px 200px;
+            }
+            @keyframes mascot-bob-thinking {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-5px); }
+            }
+            .eye-thinking {
+              animation: eye-blink-thinking 4.2s infinite;
+              transform-origin: center;
+            }
+            @keyframes eye-blink-thinking {
+              0%, 5%, 100% { transform: scaleY(1); }
+              2%, 3% { transform: scaleY(0.1); }
+            }
+            .thought-bubble-float {
+              animation: thought-float 3s ease-in-out infinite;
+              transform-origin: 320px 50px;
+            }
+            @keyframes thought-float {
+              0%, 100% { transform: translateY(0); opacity: 1; }
+              50% { transform: translateY(-8px); opacity: 0.9; }
+            }
+          </style>
+          <g class="thought-bubble-float">
+            <circle cx="260" cy="110" r="6" fill="#FFFFFF"/>
+            <circle cx="285" cy="85" r="12" fill="#FFFFFF"/>
+            <circle cx="320" cy="50" r="22" fill="#FFFFFF"/>
+            <text x="310" y="62" font-family="sans-serif" font-weight="bold" font-size="30" fill="#0F172A">?</text>
+          </g>
+          <g class="mascot-bob-thinking">
+            ${commonElements}
+            <path d="M 110 190 C 50 200, 30 280, 60 300 C 80 320, 110 260, 120 220 Z" fill="#1E293B"/>
+            <path d="M 290 190 C 350 160, 270 150, 240 180 C 240 190, 270 210, 280 210 Z" fill="#1E293B"/>
+            <circle cx="165" cy="155" r="14" fill="#0F172A" class="eye-thinking"/>
+            <circle cx="172" cy="148" r="4" fill="#FFFFFF"/>
+            <circle cx="235" cy="155" r="14" fill="#0F172A" class="eye-thinking"/>
+            <circle cx="242" cy="148" r="4" fill="#FFFFFF"/>
+            <path d="M 185 185 L 210 175" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          </g>
         </svg>`;
 
       case 'coffee':
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="${size}" height="${size}" class="${className}">
-          ${commonElements}
-          <path d="M 110 190 C 50 200, 30 280, 60 300 C 80 320, 110 260, 120 220 Z" fill="#1E293B"/>
-          <path d="M 290 190 C 350 180, 330 250, 280 250 C 270 250, 280 220, 280 210 Z" fill="#1E293B"/>
-          <rect x="235" y="200" width="40" height="45" rx="5" fill="#F8FAFC"/>
-          <path d="M 275 215 C 290 215 290 235 275 235" fill="none" stroke="#F8FAFC" stroke-width="6"/>
-          <path d="M 245 190 Q 250 180 245 170" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
-          <path d="M 260 190 Q 265 175 260 160" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
-          <circle cx="165" cy="155" r="22" fill="#FFFFFF" stroke="#0F172A" stroke-width="3"/>
-          <circle cx="165" cy="155" r="3" fill="#0F172A"/>
-          <circle cx="235" cy="155" r="22" fill="#FFFFFF" stroke="#0F172A" stroke-width="3"/>
-          <circle cx="235" cy="155" r="3" fill="#0F172A"/>
-          <ellipse cx="140" cy="175" rx="15" ry="8" fill="#F43F5E" opacity="0.6"/>
-          <ellipse cx="260" cy="175" rx="15" ry="8" fill="#F43F5E" opacity="0.6"/>
-          <path d="M 180 180 L 190 175 L 200 185 L 210 175 L 220 180" fill="none" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <style>
+            .coffee-bob {
+              animation: coffee-bob 2.2s ease-in-out infinite;
+              transform-origin: 200px 220px;
+            }
+            @keyframes coffee-bob {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-10px); }
+            }
+            .coffee-eye {
+              animation: coffee-blink 4.5s infinite;
+              transform-origin: center;
+            }
+            @keyframes coffee-blink {
+              0%, 5%, 100% { transform: scaleY(1); }
+              2%, 3% { transform: scaleY(0.1); }
+            }
+            .coffee-steam {
+              animation: coffee-steam 2.4s ease-in-out infinite;
+              transform-origin: 255px 170px;
+            }
+            @keyframes coffee-steam {
+              0%, 100% { transform: translateY(0); opacity: 0.7; }
+              50% { transform: translateY(-14px); opacity: 1; }
+            }
+          </style>
+          <g class="coffee-bob">
+            ${commonElements}
+            <path d="M 110 190 C 50 200, 30 280, 60 300 C 80 320, 110 260, 120 220 Z" fill="#1E293B"/>
+            <path d="M 290 190 C 350 180, 330 250, 280 250 C 270 250, 280 220, 280 210 Z" fill="#1E293B"/>
+            <rect x="235" y="200" width="40" height="45" rx="5" fill="#F8FAFC"/>
+            <path d="M 275 215 C 290 215 290 235 275 235" fill="none" stroke="#F8FAFC" stroke-width="6"/>
+            <g class="coffee-steam">
+              <path d="M 245 190 Q 250 180 245 170" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+              <path d="M 260 190 Q 265 175 260 160" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+            </g>
+            <circle cx="165" cy="155" r="22" fill="#FFFFFF" stroke="#0F172A" stroke-width="3"/>
+            <circle cx="165" cy="155" r="3" fill="#0F172A" class="coffee-eye"/>
+            <circle cx="235" cy="155" r="22" fill="#FFFFFF" stroke="#0F172A" stroke-width="3"/>
+            <circle cx="235" cy="155" r="3" fill="#0F172A" class="coffee-eye"/>
+            <ellipse cx="140" cy="175" rx="15" ry="8" fill="#F43F5E" opacity="0.6"/>
+            <ellipse cx="260" cy="175" rx="15" ry="8" fill="#F43F5E" opacity="0.6"/>
+            <path d="M 180 180 L 190 175 L 200 185 L 210 175 L 220 180" fill="none" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
         </svg>`;
 
       case 'cool':
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="${size}" height="${size}" class="${className}">
-          ${commonElements}
-          <path d="M 110 190 C 80 200, 150 260, 220 230 C 210 210, 150 230, 120 210 Z" fill="#1E293B"/>
-          <path d="M 290 190 C 320 200, 250 260, 180 230 C 190 210, 250 230, 280 210 Z" fill="#0F172A"/>
-          <path d="M 135 145 L 195 145 L 185 165 L 145 165 Z" fill="#0F172A"/>
-          <path d="M 205 145 L 265 145 L 255 165 L 215 165 Z" fill="#0F172A"/>
-          <line x1="195" y1="145" x2="205" y2="145" stroke="#0F172A" stroke-width="4"/>
-          <line x1="150" y1="155" x2="160" y2="145" stroke="#FFFFFF" stroke-width="3" opacity="0.4"/>
-          <line x1="220" y1="155" x2="230" y2="145" stroke="#FFFFFF" stroke-width="3" opacity="0.4"/>
-          <path d="M 185 180 Q 200 185 220 175" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          <style>
+            .cool-bob {
+              animation: cool-bob 2.5s ease-in-out infinite;
+              transform-origin: 200px 220px;
+            }
+            @keyframes cool-bob {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-4px); }
+            }
+            .cool-glasses {
+              animation: cool-glasses-tilt 3s ease-in-out infinite;
+              transform-origin: 200px 150px;
+            }
+            @keyframes cool-glasses-tilt {
+              0%, 100% { transform: rotate(0deg); }
+              50% { transform: rotate(-5deg); }
+            }
+          </style>
+          <g class="cool-bob">
+            ${commonElements}
+            <path d="M 110 190 C 80 200, 150 260, 220 230 C 210 210, 150 230, 120 210 Z" fill="#1E293B"/>
+            <path d="M 290 190 C 320 200, 250 260, 180 230 C 190 210, 250 230, 280 210 Z" fill="#0F172A"/>
+            <g class="cool-glasses">
+              <path d="M 135 145 L 195 145 L 185 165 L 145 165 Z" fill="#0F172A"/>
+              <path d="M 205 145 L 265 145 L 255 165 L 215 165 Z" fill="#0F172A"/>
+              <line x1="195" y1="145" x2="205" y2="145" stroke="#0F172A" stroke-width="4"/>
+              <line x1="150" y1="155" x2="160" y2="145" stroke="#FFFFFF" stroke-width="3" opacity="0.4"/>
+              <line x1="220" y1="155" x2="230" y2="145" stroke="#FFFFFF" stroke-width="3" opacity="0.4"/>
+            </g>
+            <path d="M 185 180 Q 200 185 220 175" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          </g>
         </svg>`;
 
       case 'success':
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="${size}" height="${size}" class="${className}">
-          <ellipse cx="200" cy="355" rx="80" ry="10" fill="#000000" opacity="0.1"/>
-          <g transform="translate(0, -30)">
+          <style>
+            .success-bob {
+              animation: success-bob 1.6s ease-out infinite;
+              transform-origin: 200px 260px;
+            }
+            @keyframes success-bob {
+              0% { transform: translateY(0) scaleY(1); }
+              20% { transform: translateY(0) scaleY(0.9); }
+              40% { transform: translateY(-35px) scaleY(1.02); }
+              70% { transform: translateY(0) scaleY(1); }
+              100% { transform: translateY(0) scaleY(1); }
+            }
+            .success-confetti {
+              animation: success-confetti 1.6s ease-in-out infinite;
+              transform-origin: 200px 230px;
+            }
+            @keyframes success-confetti {
+              0%, 100% { transform: scaleY(1); }
+              40% { transform: scaleY(1.12); }
+            }
+            .success-shadow {
+              animation: success-shadow 1.6s ease-out infinite;
+              transform-origin: 200px 355px;
+            }
+            @keyframes success-shadow {
+              0% { transform: scaleX(1); opacity: 0.18; }
+              40% { transform: scaleX(0.7); opacity: 0.1; }
+              70% { transform: scaleX(1); opacity: 0.18; }
+              100% { transform: scaleX(1); opacity: 0.18; }
+            }
+          </style>
+          <ellipse class="success-shadow" cx="200" cy="355" rx="80" ry="10" fill="#000000" opacity="0.18"/>
+          <g transform="translate(0, -30)" class="success-bob">
             <path d="M 190 100 Q 180 50 205 30 Q 200 60 210 100 Z" fill="#1E293B"/>
             <ellipse cx="140" cy="330" rx="20" ry="30" fill="#F59E0B" transform="rotate(15 140 330)"/>
             <ellipse cx="260" cy="330" rx="20" ry="30" fill="#F59E0B" transform="rotate(-15 260 330)"/>
             <rect x="100" y="90" width="200" height="250" rx="100" fill="#1E293B"/>
             <path d="M 200 120 C 230 90, 270 110, 270 160 C 270 190, 280 270, 200 330 C 120 270, 130 190, 130 160 C 130 110, 170 90, 200 120 Z" fill="#FFFFFF"/>
-            <path d="M 230 230 L 210 310 Q 230 315 250 305 L 260 225 Z" fill="#DC2626"/>
-            <line x1="215" y1="308" x2="210" y2="320" stroke="#DC2626" stroke-width="4" stroke-linecap="round"/>
-            <line x1="230" y1="311" x2="225" y2="323" stroke="#DC2626" stroke-width="4" stroke-linecap="round"/>
-            <line x1="245" y1="307" x2="240" y2="319" stroke="#DC2626" stroke-width="4" stroke-linecap="round"/>
-            <path d="M 95 210 Q 200 245 305 210 Q 305 240 200 270 Q 95 240 95 210 Z" fill="#EF4444"/>
+            <g class="success-confetti">
+              <path d="M 230 230 L 210 310 Q 230 315 250 305 L 260 225 Z" fill="#DC2626"/>
+              <line x1="215" y1="308" x2="210" y2="320" stroke="#DC2626" stroke-width="4" stroke-linecap="round"/>
+              <line x1="230" y1="311" x2="225" y2="323" stroke="#DC2626" stroke-width="4" stroke-linecap="round"/>
+              <line x1="245" y1="307" x2="240" y2="319" stroke="#DC2626" stroke-width="4" stroke-linecap="round"/>
+              <path d="M 95 210 Q 200 245 305 210 Q 305 240 200 270 Q 95 240 95 210 Z" fill="#EF4444"/>
+            </g>
             <path d="M 110 190 C 50 160, 60 80, 90 70 C 110 60, 130 140, 120 180 Z" fill="#1E293B"/>
             <path d="M 290 190 C 350 160, 340 80, 310 70 C 290 60, 270 140, 280 180 Z" fill="#1E293B"/>
             <path d="M 150 155 Q 165 140 180 155" fill="none" stroke="#0F172A" stroke-width="6" stroke-linecap="round"/>
@@ -222,12 +402,32 @@ export const TechMascot = ({ variant, size = 80, className = '' }: TechMascotPro
 
       case 'starstruck':
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="${size}" height="${size}" class="${className}">
-          ${commonElements}
-          <path d="M 110 190 C 140 200, 170 230, 180 210 C 190 190, 160 180, 140 180 Z" fill="#1E293B"/>
-          <path d="M 290 190 C 260 200, 230 230, 220 210 C 210 190, 240 180, 260 180 Z" fill="#1E293B"/>
-          <polygon points="165,140 169,149 179,149 171,155 174,165 165,159 156,165 159,155 151,149 161,149" fill="#FBBF24"/>
-          <polygon points="235,140 239,149 249,149 241,155 244,165 235,159 226,165 229,155 221,149 231,149" fill="#FBBF24"/>
-          <path d="M 180 175 Q 200 165 220 175 Q 200 190 180 175 Z" fill="#FBBF24"/>
+          <style>
+            .star-bob {
+              animation: star-bob 2.4s ease-in-out infinite;
+              transform-origin: 200px 220px;
+            }
+            @keyframes star-bob {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-5px); }
+            }
+            .star-twinkle {
+              animation: star-twinkle 1.8s ease-in-out infinite;
+              transform-origin: center;
+            }
+            @keyframes star-twinkle {
+              0%, 100% { transform: scale(1) rotate(0deg); }
+              50% { transform: scale(1.1) rotate(4deg); }
+            }
+          </style>
+          <g class="star-bob">
+            ${commonElements}
+            <path d="M 110 190 C 140 200, 170 230, 180 210 C 190 190, 160 180, 140 180 Z" fill="#1E293B"/>
+            <path d="M 290 190 C 260 200, 230 230, 220 210 C 210 190, 240 180, 260 180 Z" fill="#1E293B"/>
+            <polygon class="star-twinkle" points="165,140 169,149 179,149 171,155 174,165 165,159 156,165 159,155 151,149 161,149" fill="#FBBF24"/>
+            <polygon class="star-twinkle" points="235,140 239,149 249,149 241,155 244,165 235,159 226,165 229,155 221,149 231,149" fill="#FBBF24"/>
+            <path d="M 180 175 Q 200 165 220 175 Q 200 190 180 175 Z" fill="#FBBF24"/>
+          </g>
         </svg>`;
 
       case 'love':

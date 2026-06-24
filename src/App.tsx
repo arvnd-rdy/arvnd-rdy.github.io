@@ -18,6 +18,7 @@ const JobMonitorBot = lazy(() => import("./pages/JobMonitorBot"));
 const PortfolioWebsite = lazy(() => import("./pages/PortfolioWebsite"));
 const InsightAdvantage = lazy(() => import("./pages/InsightAdvantage"));
 const EcoArtMarket = lazy(() => import("./pages/EcoArtMarket"));
+const UWindsorRagBot = lazy(() => import("./pages/UWindsorRagBot"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Memoize QueryClient to prevent recreation on every render
@@ -60,6 +61,7 @@ const App = () => {
                 <Route path="/projects/portfolio-website" element={<PortfolioWebsite />} />
                 <Route path="/projects/insight-advantage" element={<InsightAdvantage />} />
                 <Route path="/projects/ecoart-market" element={<EcoArtMarket />} />
+                <Route path="/projects/uwindsor-rag-bot" element={<UWindsorRagBot />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

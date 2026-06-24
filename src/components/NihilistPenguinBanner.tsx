@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export const NihilistPenguinBanner = () => {
   return (
     <motion.div
-      className="w-full bg-white dark:bg-gray-100 relative overflow-hidden border-t-4 border-b-4 border-gray-300 dark:border-gray-400"
+      className="w-full bg-white dark:bg-black relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -73,13 +73,15 @@ export const NihilistPenguinBanner = () => {
 
       <style>{`
         .animate-walk-away {
-          animation: move-into-distance 18s linear infinite;
+          animation: move-into-distance 24s ease-out infinite;
         }
         
         @keyframes move-into-distance {
           0% { transform: translate(600px, 320px) scale(0.7); opacity: 0; }
           5% { opacity: 1; }
-          90% { transform: translate(600px, 205px) scale(0.04); opacity: 1; }
+          40% { transform: translate(600px, 260px) scale(0.35); opacity: 1; }
+          70% { transform: translate(600px, 220px) scale(0.15); opacity: 1; }
+          95% { transform: translate(600px, 205px) scale(0.04); opacity: 1; }
           100% { transform: translate(600px, 200px) scale(0); opacity: 0; }
         }
         

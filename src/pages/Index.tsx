@@ -4,6 +4,7 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import ContextualGreeting from "@/components/ContextualGreeting";
 import HeroSection from "@/components/HeroSection";
 import { NihilistPenguinBanner } from "@/components/NihilistPenguinBanner";
+import Navbar from "@/components/Navbar";
 
 // Lazy load sections below the fold for better initial load performance
 const AboutSection = lazy(() => import("@/components/AboutSection"));
@@ -25,6 +26,7 @@ const SectionLoader = () => (
 const Index = () => {
   return (
     <div className="overflow-y-auto overflow-x-hidden">
+      <Navbar />
       <ScrollProgress />
       <ContextualGreeting />
       <section><HeroSection /></section>
@@ -32,8 +34,8 @@ const Index = () => {
         <section><AboutSection /></section>
         <section><SkillsSection /></section>
         <section><ProjectsSection /></section>
-        <section><TestimonialsSection /></section>
         <section><ExperienceSection /></section>
+        <section><TestimonialsSection /></section>
         
         {/* Nihilist Penguin Banner - A moment of contemplation */}
         <NihilistPenguinBanner />

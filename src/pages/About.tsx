@@ -1,651 +1,327 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
+import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem } from "@/utils/animations";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Calendar, Award, Book, GraduationCap, ExternalLink, Code2, Database, Zap, Users } from "lucide-react";
+import { ArrowLeft, MapPin, GraduationCap, Code2, Database, Zap, Users, Book, Download } from "lucide-react";
+import { downloadResume } from "@/utils/downloadResume";
+import Navbar from "@/components/Navbar";
+
+const stats = [
+  { value: "2+", label: "Years Experience" },
+  { value: "15+", label: "Projects Built" },
+  { value: "30+", label: "Technologies" },
+  { value: "🇨🇦", label: "Based in Canada" },
+];
+
+const education = [
+  {
+    degree: "Master's in Applied Computing",
+    school: "University of Windsor",
+    year: "2024 – 2026",
+    status: "Current",
+    location: "Windsor, ON, Canada",
+  },
+  {
+    degree: "B.Tech in Computer Science",
+    school: "Lovely Professional University",
+    year: "2019 – 2023",
+    status: "Completed",
+    grade: "8.6 CGPA",
+    location: "Punjab, India",
+  },
+];
+
+const philosophy = [
+  {
+    icon: <Code2 className="w-5 h-5" />,
+    title: "Clean Code",
+    body: "I write code that's readable and maintainable — not just for me, but for whoever works on it next.",
+  },
+  {
+    icon: <Users className="w-5 h-5" />,
+    title: "User-First",
+    body: "Every technical decision starts with understanding user needs. I build things that genuinely help people.",
+  },
+  {
+    icon: <Zap className="w-5 h-5" />,
+    title: "Always Learning",
+    body: "Tech moves fast. I stay curious, embrace new tools, and every project teaches me something new.",
+  },
+];
+
+const interests = [
+  { emoji: "🎬", label: "Movies" },
+  { emoji: "📺", label: "Web Series" },
+  { emoji: "📖", label: "Web Novels" },
+  { emoji: "🎮", label: "Gaming" },
+  { emoji: "🤖", label: "AI Trends" },
+  { emoji: "🌍", label: "Travel" },
+];
 
 const About = () => {
   const { ref, isInView } = useScrollAnimation();
 
-  const education = [
-    {
-      degree: "Master's in Applied Computing",
-      school: "University of Windsor",
-      year: "2024 - 2026",
-      status: "Current",
-      type: "Master's Degree"
-    },
-    {
-      degree: "Bachelor of Technology in Computer Science",
-      school: "Lovely Professional University",
-      year: "2019 - 2023",
-      status: "Completed",
-      grade: "8.6 CGPA",
-      type: "Bachelor's Degree"
-    }
-  ];
-
-  const skills = [
-    "Full Stack Development",
-    "AI & Machine Learning",
-    "Cloud Architecture",
-    "DevOps & CI/CD",
-    "Mobile Development",
-    "Data Science",
-    "UI/UX Design",
-    "Technical Leadership"
-  ];
-
-  const interests = [
-    "Quantum Computing",
-    "Space Technology",
-    "Open Source",
-    "Photography",
-    "Hiking",
-    "Cooking",
-    "Reading",
-    "Travel"
-  ];
-
-  const stats = [
-    { label: "Years Experience", value: "2+", icon: Calendar },
-    { label: "Projects Built", value: "15+", icon: Award },
-    { label: "Technologies", value: "25+", icon: Book },
-    { label: "Current Location", value: "Canada", icon: MapPin }
-  ];
-
   return (
-    <div className="min-h-screen bg-[#FAFAFA] dark:bg-gray-900">
-      {/* Header */}
-      <motion.header 
-        className="bg-[#F8F8F8] dark:bg-gray-800 py-20"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link to="/" className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8 transition-colors font-medium">
-            <ArrowLeft className="mr-2 h-4 w-4" />
+    <div className="min-h-screen bg-white dark:bg-neutral-950 transition-colors duration-300">
+      <Navbar />
+
+      {/* Hero header */}
+      <div className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 bg-white dark:bg-neutral-950">
+        <div className="absolute inset-0 brand-grid brand-grid-fade pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-orange-600 dark:hover:text-orange-500 transition-colors mb-8 font-medium"
+          >
+            <ArrowLeft className="w-4 h-4" />
             Back to Home
           </Link>
-          <motion.h1 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-4 lg:mb-6"
-            variants={staggerContainer}
+
+          <motion.div
             initial="hidden"
             animate="visible"
+            variants={staggerContainer}
+            className="max-w-3xl"
           >
-            <motion.span variants={staggerItem}>THE STORY BEHIND THE CODE</motion.span>
-          </motion.h1>
-          <motion.p 
-            className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl"
-            variants={staggerItem}
-          >
-            From curious kid taking apart electronics to building enterprise applications—
-            discover the journey, philosophy, and passion that drives my work as a Full Stack & AI/ML Developer.
-          </motion.p>
+            <motion.p
+              variants={staggerItem}
+              className="text-orange-600 dark:text-orange-500 font-semibold text-sm sm:text-base tracking-tight mb-3"
+            >
+              About Me
+            </motion.p>
+            <motion.h1
+              variants={staggerItem}
+              className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold text-neutral-950 dark:text-white leading-none tracking-tight mb-6"
+            >
+              The Story Behind the Code
+            </motion.h1>
+            <motion.p
+              variants={staggerItem}
+              className="text-neutral-600 dark:text-neutral-400 text-base sm:text-lg leading-relaxed"
+            >
+              From curious kid taking apart electronics to building RAG systems and full-stack apps —
+              here's the journey, the philosophy, and what drives me.
+            </motion.p>
+          </motion.div>
         </div>
-      </motion.header>
+      </div>
 
-      {/* Main Content */}
-      <motion.main 
-        className="container mx-auto max-w-7xl px-8 py-16"
+      <motion.main
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
+        variants={staggerContainer}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 space-y-20 sm:space-y-24"
       >
-        {/* Hero Introduction */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
-            {/* Profile Image */}
-            <div className="lg:col-span-1 order-1 lg:order-1">
-              <motion.div 
-                className="lg:sticky lg:top-8"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <img 
-                  src="/hero.png"
-                  alt="Arvind Reddy - Full Stack & AI/ML Developer"
-                  className="w-full max-w-sm mx-auto lg:max-w-none aspect-square object-cover rounded-2xl shadow-2xl"
+        {/* Intro — photo + bio + stats */}
+        <motion.section variants={fadeInUp}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            {/* Photo */}
+            <motion.div variants={fadeInLeft} className="flex justify-center lg:justify-start">
+              <div className="relative group" style={{ perspective: 1200 }}>
+                <div
+                  className="absolute -inset-6 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at 60% 40%, rgba(234,88,12,0.4) 0%, rgba(234,88,12,0.05) 60%, transparent 75%)",
+                  }}
                 />
-                <div className="mt-4 lg:mt-6 text-center">
-                  <div className="inline-block bg-gray-900 text-white px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">
-                    👋 Available for opportunities
-                  </div>
+                <div className="relative overflow-hidden rounded-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18)] dark:shadow-[0_25px_60px_-12px_rgba(0,0,0,0.55)]">
+                  <img
+                    src="/hero.png"
+                    alt="Aravind Reddy"
+                    className="w-[280px] sm:w-[340px] lg:w-[380px] object-cover block"
+                    style={{ aspectRatio: "3/4" }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-white/5 pointer-events-none" />
                 </div>
-              </motion.div>
-            </div>
-            
-            {/* Content */}
-            <div className="lg:col-span-2 space-y-6 lg:space-y-8 order-2 lg:order-2">
-              <div>
-                <h2 className="text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
-                  Driven by curiosity and a love for clean code
-                </h2>
-                <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  I'm Arvind Reddy, and I build user-friendly experiences that solve real problems, 
-                  one line of code at a time.
+              </div>
+            </motion.div>
+
+            {/* Bio + stats */}
+            <motion.div variants={fadeInRight} className="space-y-6">
+              <div className="space-y-4 text-neutral-600 dark:text-neutral-400 text-sm sm:text-[15px] leading-relaxed">
+                <p>
+                  Hey, I'm Aravind — an AI/ML Engineer and Full Stack Developer currently pursuing my
+                  Master's in Applied Computing at the University of Windsor.
                 </p>
-              </div>
-              
-              {/* Quick stats grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center">
-                  <div className="text-3xl font-black text-gray-900">2+</div>
-                  <div className="text-sm text-gray-600 uppercase tracking-wide">Years Experience</div>
-                </div>
-                <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center">
-                  <div className="text-3xl font-black text-gray-900">15+</div>
-                  <div className="text-sm text-gray-600 uppercase tracking-wide">Projects Built</div>
-                </div>
-                <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center">
-                  <div className="text-3xl font-black text-gray-900">3</div>
-                  <div className="text-sm text-gray-600 uppercase tracking-wide">Featured Projects</div>
-                </div>
-                <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center">
-                  <div className="text-3xl font-black text-gray-900">🇨🇦</div>
-                  <div className="text-sm text-gray-600 uppercase tracking-wide">Based in Canada</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* My Story - Timeline Layout */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-12 lg:mb-16 text-center uppercase tracking-wide">My Journey</h2>
-            
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-              
-              <div className="space-y-12">
-                {/* Childhood Curiosity */}
-                <div className="relative flex items-start gap-8">
-                  <div className="flex-shrink-0 w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center relative z-10">
-                    <span className="text-white text-xl">🔧</span>
-                  </div>
-                  <div className="flex-1 bg-white rounded-lg p-8 shadow-sm border border-gray-200">
-                    <h3 className="text-xl font-black text-gray-900 mb-3 uppercase tracking-wide">The Spark</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      My journey into technology started with a simple fascination: <strong className="text-gray-900">how do things work?</strong> 
-                      As a kid, I was the one taking apart old electronics just to see the circuits inside, much to my parents' dismay. 
-                      That curiosity never left me; it just evolved from hardware to software.
-                    </p>
-                  </div>
-                </div>
-
-                {/* College Discovery */}
-                <div className="relative flex items-start gap-8">
-                  <div className="flex-shrink-0 w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center relative z-10">
-                    <GraduationCap className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="flex-1 bg-white rounded-lg p-8 shadow-sm border border-gray-200">
-                    <h3 className="text-xl font-black text-gray-900 mb-3 uppercase tracking-wide">The Discovery</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      During my Bachelor's in Computer Science, I discovered the magic of turning ideas into reality through code. 
-                      But what really hooked me was seeing how technology could solve real-world problems. Whether it was automating 
-                      a tedious process or creating an intuitive interface that just <em>makes sense</em>, I found my passion in 
-                      building solutions that genuinely help people.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Current Focus */}
-                <div className="relative flex items-start gap-8">
-                  <div className="flex-shrink-0 w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center relative z-10">
-                    <Code2 className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="flex-1 bg-white rounded-lg p-8 shadow-sm border border-gray-200">
-                    <h3 className="text-xl font-black text-gray-900 mb-3 uppercase tracking-wide">The Mission</h3>
-                    <p className="text-gray-600 leading-relaxed mb-4">
-                      Today, as I pursue my Master's in Applied Computing at the University of Windsor, I channel that same curiosity 
-                      into creating <strong className="text-gray-900">clean, efficient, and scalable applications</strong>. From automating job searches 
-                      with Python to building enterprise consulting platforms with React and Node.js, I love the challenge of 
-                      turning complex problems into elegant solutions.
-                    </p>
-                    <div className="bg-gray-50 border-l-4 border-gray-900 p-4 rounded-r-lg">
-                      <p className="text-gray-700 font-medium italic">
-                        "For me, there's no better feeling than solving a complex puzzle with code and seeing it come to life to help a user."
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* My Philosophy & Process */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-black text-gray-900 mb-4 uppercase tracking-wide">How I Work</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                My approach to development is rooted in understanding problems deeply and crafting solutions that last.
-              </p>
-            </div>
-
-            {/* Process Steps */}
-            <div className="grid md:grid-cols-4 gap-8 mb-16">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-black text-xl">1</span>
-                </div>
-                <h3 className="font-black text-gray-900 mb-2 uppercase tracking-wide">Understand</h3>
-                <p className="text-gray-600 text-sm">Deep dive into the real problem behind the requirement</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-black text-xl">2</span>
-                </div>
-                <h3 className="font-black text-gray-900 mb-2 uppercase tracking-wide">Research</h3>
-                <p className="text-gray-600 text-sm">Explore solutions, technologies, and best practices</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-black text-xl">3</span>
-                </div>
-                <h3 className="font-black text-gray-900 mb-2 uppercase tracking-wide">Build</h3>
-                <p className="text-gray-600 text-sm">Create clean, maintainable solutions with user focus</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-black text-xl">4</span>
-                </div>
-                <h3 className="font-black text-gray-900 mb-2 uppercase tracking-wide">Iterate</h3>
-                <p className="text-gray-600 text-sm">Continuously improve based on feedback and learning</p>
-              </div>
-            </div>
-
-            {/* Philosophy Cards */}
-            <div className="grid lg:grid-cols-3 gap-8">
-              <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6">
-                  <Code2 className="w-6 h-6 text-gray-700" />
-                </div>
-                <h3 className="text-lg font-black text-gray-900 mb-4 uppercase tracking-wide">Clean Code</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  I write code that's readable and maintainable. Clean code isn't just about following conventions—
-                  it's about respecting the next developer who will work with it.
+                <p>
+                  My journey started with a simple fascination: <span className="text-neutral-900 dark:text-white font-medium">how do things work?</span> As a kid
+                  I was the one taking apart electronics just to see the circuits inside. That curiosity
+                  never left — it just evolved from hardware to software, and now to AI systems.
+                </p>
+                <p>
+                  Today I build RAG pipelines, multi-agent workflows, and full-stack applications.
+                  I like making things that actually help people — whether it's a smart tool, a clean UI,
+                  or an immersive 3D scene, I'm all in.
+                </p>
+                <p className="text-neutral-900 dark:text-neutral-200 font-medium text-xs sm:text-sm">
+                  Open to full-time roles in AI/ML and Full Stack Engineering.
                 </p>
               </div>
 
-              <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6">
-                  <Users className="w-6 h-6 text-gray-700" />
-                </div>
-                <h3 className="text-lg font-black text-gray-900 mb-4 uppercase tracking-wide">User-First</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Every technical decision starts with understanding user needs. I focus on solving real problems 
-                  that genuinely help people in their daily lives.
-                </p>
+              {/* Stats */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                {stats.map((s) => (
+                  <div
+                    key={s.label}
+                    className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 p-4 text-center"
+                  >
+                    <div className="text-2xl font-bold text-neutral-950 dark:text-white mb-1">{s.value}</div>
+                    <div className="text-xs text-neutral-500 dark:text-neutral-400">{s.label}</div>
+                  </div>
+                ))}
               </div>
 
-              <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6">
-                  <Zap className="w-6 h-6 text-gray-700" />
-                </div>
-                <h3 className="text-lg font-black text-gray-900 mb-4 uppercase tracking-wide">Continuous Learning</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Technology evolves rapidly. I stay curious, embrace new tools and methodologies, 
-                  and believe every project teaches something valuable.
-                </p>
+              <div className="flex gap-3 pt-1">
+                <Button
+                  onClick={downloadResume}
+                  className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-2.5 text-xs sm:text-sm font-bold rounded-none border border-orange-700 transition-all duration-300 hover:scale-105"
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download Resume
+                </Button>
+                <Link to="/">
+                  <Button
+                    variant="outline"
+                    className="border-2 border-neutral-950 dark:border-white text-neutral-950 dark:text-white hover:bg-neutral-950 hover:text-white dark:hover:bg-white dark:hover:text-neutral-950 px-5 py-2.5 text-xs sm:text-sm font-bold rounded-none bg-transparent transition-all duration-300 hover:scale-105"
+                  >
+                    View Projects
+                  </Button>
+                </Link>
               </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Stats Grid */}
-        <motion.section className="mb-16" variants={fadeInUp}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map((stat, index) => (
-              <motion.div 
-                key={stat.label}
-                className="bg-white rounded-lg p-6 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-300"
-                variants={staggerItem}
-                whileHover={{ y: -4 }}
-              >
-                <stat.icon className="h-8 w-8 mx-auto mb-4 text-gray-600" />
-                <div className="text-3xl font-black text-gray-900 mb-2">{stat.value}</div>
-                <div className="text-gray-600 text-sm uppercase tracking-wide">{stat.label}</div>
-              </motion.div>
-            ))}
+            </motion.div>
           </div>
         </motion.section>
 
         {/* Education */}
-        <motion.section className="mb-16" variants={fadeInUp}>
-          <h2 className="text-3xl font-black text-gray-900 mb-8 uppercase tracking-wide">Education</h2>
-          <div className="space-y-6">
-            {education.map((edu, index) => (
-              <motion.div 
-                key={index}
-                className="bg-white rounded-lg p-6 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-300"
+        <motion.section variants={fadeInUp}>
+          <p className="text-orange-600 dark:text-orange-500 font-semibold text-sm sm:text-base tracking-tight mb-3">
+            Education
+          </p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 dark:text-white tracking-tight mb-8 sm:mb-10">
+            Academic Background
+          </h2>
+          <div className="space-y-4">
+            {education.map((edu, idx) => (
+              <motion.div
+                key={idx}
                 variants={staggerItem}
-                whileHover={{ y: -2 }}
+                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 hover:border-orange-300 dark:hover:border-orange-700 transition-all duration-300 p-6"
               >
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <GraduationCap className="w-5 h-5 text-gray-600" />
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">
-                        {edu.type}
-                      </Badge>
-                    </div>
-                    <h3 className="text-xl font-black text-gray-900 mb-2 uppercase tracking-wide">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center flex-shrink-0">
+                    <GraduationCap className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-neutral-950 dark:text-white text-base sm:text-lg leading-tight">
                       {edu.degree}
                     </h3>
-                    <p className="text-gray-600 font-medium mb-2">{edu.school}</p>
-                    {edu.grade && (
-                      <p className="text-sm text-gray-500">Grade: {edu.grade}</p>
-                    )}
+                    <p className="text-orange-600 dark:text-orange-500 text-sm font-medium mt-0.5">{edu.school}</p>
+                    <div className="flex items-center gap-2 mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                      <MapPin className="w-3 h-3" />
+                      {edu.location}
+                      {edu.grade && <span>· {edu.grade}</span>}
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <Badge 
-                      variant={edu.status === 'Current' ? 'default' : 'secondary'}
-                      className={edu.status === 'Current' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-700'}
-                    >
-                      {edu.status}
-                    </Badge>
-                    <p className="text-sm text-gray-500 mt-2">{edu.year}</p>
-                  </div>
+                </div>
+                <div className="flex items-center gap-3 sm:flex-col sm:items-end">
+                  <span
+                    className={`px-2.5 py-0.5 text-xs font-semibold rounded-full ${
+                      edu.status === "Current"
+                        ? "bg-orange-100 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-800"
+                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700"
+                    }`}
+                  >
+                    {edu.status}
+                  </span>
+                  <span className="text-xs text-neutral-500 dark:text-neutral-500">{edu.year}</span>
                 </div>
               </motion.div>
             ))}
           </div>
         </motion.section>
 
-        {/* Skills & Expertise */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-12 lg:mb-16 text-center uppercase tracking-wide">Skills & Expertise</h2>
-            
-            <div className="space-y-6">
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-6">
-                  <div className="bg-gray-900 rounded-lg p-3 flex-shrink-0">
-                    <Code2 className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-black text-gray-900 uppercase tracking-wide mb-2">Frontend Development</h3>
-                    <p className="text-gray-600 text-sm mb-4">Building responsive and interactive user interfaces</p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">React</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">TypeScript</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Tailwind CSS</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Next.js</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Framer Motion</Badge>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-6">
-                  <div className="bg-gray-900 rounded-lg p-3 flex-shrink-0">
-                    <Database className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-black text-gray-900 uppercase tracking-wide mb-2">Backend Development</h3>
-                    <p className="text-gray-600 text-sm mb-4">Creating robust server-side applications and APIs</p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Node.js</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Python</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">SQL Server</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Express.js</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Socket.IO</Badge>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-6">
-                  <div className="bg-gray-900 rounded-lg p-3 flex-shrink-0">
-                    <Zap className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-black text-gray-900 uppercase tracking-wide mb-2">Automation & Tools</h3>
-                    <p className="text-gray-600 text-sm mb-4">Automating processes and building efficient tools</p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Selenium</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Web Scraping</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">APIs</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Git</Badge>
-                      <Badge variant="outline" className="border-gray-300 text-gray-700">Docker</Badge>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* My Philosophy */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-12 lg:mb-16 text-center uppercase tracking-wide">My Philosophy</h2>
-            
-            <div className="bg-gray-900 rounded-lg p-12 text-white">
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Code2 className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="font-black mb-3 uppercase tracking-wide">Code Quality</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed">
-                    I'm a strong advocate for writing readable, maintainable code. Clean code isn't just 
-                    about following conventions—it's about respecting the next developer.
-                  </p>
-                </div>
-                
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Users className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="font-black mb-3 uppercase tracking-wide">Problem-First Approach</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed">
-                    I start by understanding the real problem behind the technical requirement. 
-                    Then I research, prototype, and iterate with user needs first.
-                  </p>
-                </div>
-                
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Book className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="font-black mb-3 uppercase tracking-wide">Continuous Learning</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed">
-                    Technology evolves rapidly, and I believe in staying curious and adapting. 
-                    Every project teaches me something new.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Current Focus */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-12 lg:mb-16 text-center uppercase tracking-wide">Current Focus</h2>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
-                <h3 className="text-xl font-black text-gray-900 mb-6 uppercase tracking-wide">Academic Pursuits</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <GraduationCap className="w-5 h-5 text-gray-600" />
-                    <span className="text-gray-600">Master's in Applied Computing</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-gray-600" />
-                    <span className="text-gray-600">University of Windsor, Canada</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
-                <h3 className="text-xl font-black text-gray-900 mb-6 uppercase tracking-wide">Technical Focus</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <Code2 className="w-5 h-5 text-gray-600" />
-                    <span className="text-gray-600">Full-Stack Development</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Database className="w-5 h-5 text-gray-600" />
-                    <span className="text-gray-600">AI/ML Integration</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Zap className="w-5 h-5 text-gray-600" />
-                    <span className="text-gray-600">Process Automation</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Beyond the Code */}
-        <motion.section className="mb-20" variants={fadeInUp}>
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-12 lg:mb-16 text-center uppercase tracking-wide">Beyond the Code</h2>
-            
-            <div className="space-y-8">
-              {/* Personal Interests */}
-              <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
-                <h3 className="text-2xl font-black text-gray-900 mb-6 uppercase tracking-wide">
-                  What I Love Doing
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-8">
-                  When I'm not coding, you'll find me binge-watching the latest web series or getting completely absorbed 
-                  in a captivating movie. I'm also an avid reader of web novels—there's something magical about diving into 
-                  different worlds and storylines that keeps my imagination active. Whether it's a thrilling sci-fi series, 
-                  a mind-bending movie, or an epic fantasy web novel, I love stories that challenge perspectives and spark creativity.
-                </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl flex-shrink-0">🎬</div>
-                    <div className="text-sm font-medium text-gray-700">Movies</div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl flex-shrink-0">📺</div>
-                    <div className="text-sm font-medium text-gray-700">Web Series</div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl flex-shrink-0">📖</div>
-                    <div className="text-sm font-medium text-gray-700">Web Novels</div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl flex-shrink-0">🎮</div>
-                    <div className="text-sm font-medium text-gray-700">Gaming</div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl flex-shrink-0">🍕</div>
-                    <div className="text-sm font-medium text-gray-700">Food Exploration</div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl flex-shrink-0">🎵</div>
-                    <div className="text-sm font-medium text-gray-700">Music Discovery</div>
-                  </div>
-                </div>
-
-                {/* Fun Fact */}
-                <div className="bg-gray-50 rounded-lg p-6 border-l-4 border-gray-900">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-gray-900 rounded-full p-2 flex-shrink-0">
-                      <span className="text-white text-lg">💡</span>
-                    </div>
-                    <div>
-                      <h4 className="font-black text-gray-900 mb-2 uppercase tracking-wide">Fun Fact</h4>
-                      <p className="text-gray-600 leading-relaxed text-sm">
-                        I once built a Python script to automatically track and notify me of job postings 
-                        because I was tired of missing opportunities—and it actually helped me land interviews! 
-                        Sometimes the best solutions come from personal frustrations. That project is now featured 
-                        in my portfolio as the "Job Monitor Bot."
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Spotify Now Playing */}
-              <div className="bg-gray-900 rounded-lg p-6 text-white">
-                <h3 className="text-lg font-black mb-4 uppercase tracking-wide flex items-center gap-2">
-                  <svg className="w-5 h-5 text-green-400" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/>
-                  </svg>
-                  Now Playing
-                </h3>
-                
-                {/* Spotify Embed */}
-                <div className="bg-black/30 rounded-lg p-4 mb-4">
-                  <iframe 
-                    src="https://open.spotify.com/embed/track/4iV5W9uYEdYUVa79Axb7Rh?utm_source=generator&theme=0" 
-                    width="100%" 
-                    height="152" 
-                    frameBorder="0" 
-                    allowfullscreen="" 
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                    loading="lazy"
-                    className="rounded-lg"
-                  ></iframe>
-                </div>
-                
-                <div className="flex items-center gap-2 text-green-400 text-sm">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  Live from Spotify
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Call to Action */}
-        <motion.section className="text-center bg-gray-900 rounded-lg p-12 text-white" variants={fadeInUp}>
-          <h2 className="text-3xl font-black mb-6">
-            Think We'd Be a Good Fit?
-          </h2>
-          <p className="text-gray-300 leading-relaxed mb-8 max-w-2xl mx-auto text-lg">
-            I'm always excited to collaborate on projects that challenge me to grow and create meaningful impact. 
-            Whether you're looking for a full-stack developer, need automation solutions, or want to discuss 
-            the latest in AI/ML, I'd love to hear from you.
+        {/* Philosophy */}
+        <motion.section variants={fadeInUp}>
+          <p className="text-orange-600 dark:text-orange-500 font-semibold text-sm sm:text-base tracking-tight mb-3">
+            How I Work
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/#contact">
-              <Button className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3 rounded-full font-medium shadow-lg">
-                Let's Get In Touch
-                <ExternalLink className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
-            <Link to="/projects">
-              <Button 
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full font-medium"
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 dark:text-white tracking-tight mb-8 sm:mb-10">
+            My Philosophy
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {philosophy.map((p, idx) => (
+              <motion.div
+                key={idx}
+                variants={staggerItem}
+                className="group rounded-2xl border border-neutral-200 dark:border-neutral-800 border-l-4 border-l-orange-500 bg-white dark:bg-neutral-950 hover:shadow-md hover:shadow-orange-100 dark:hover:shadow-orange-950/20 transition-all duration-300 p-6"
               >
-                Check Out My Work
-              </Button>
-            </Link>
+                <div className="w-9 h-9 rounded-full bg-orange-600 flex items-center justify-center text-white mb-4">
+                  {p.icon}
+                </div>
+                <h3 className="font-bold text-neutral-950 dark:text-white text-base mb-2">{p.title}</h3>
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">{p.body}</p>
+              </motion.div>
+            ))}
           </div>
-          <div className="mt-6">
-            <p className="text-gray-400 text-sm">
-              Want the full details? 
-              <Button 
-                variant="link" 
-                className="text-white hover:text-gray-200 p-0 ml-1 underline"
-                onClick={() => {/* Add resume download logic */}}
+        </motion.section>
+
+        {/* Beyond the code */}
+        <motion.section variants={fadeInUp}>
+          <p className="text-orange-600 dark:text-orange-500 font-semibold text-sm sm:text-base tracking-tight mb-3">
+            Outside Work
+          </p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-950 dark:text-white tracking-tight mb-6">
+            Beyond the Code
+          </h2>
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-[15px] leading-relaxed max-w-2xl mb-8">
+            When I'm not coding I'm binge-watching the latest web series, getting absorbed in a good movie,
+            or diving into epic fantasy web novels. I love stories that challenge perspectives and spark creativity —
+            they feed into how I think about building products.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {interests.map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm font-medium text-neutral-700 dark:text-neutral-300"
               >
-                Download my resume
+                <span>{item.emoji}</span>
+                {item.label}
+              </div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* CTA */}
+        <motion.section variants={fadeInUp}>
+          <div className="rounded-2xl bg-neutral-950 dark:bg-neutral-900 border border-neutral-800 p-8 sm:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div>
+              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                Let's work together
+              </h3>
+              <p className="text-neutral-400 text-sm sm:text-base">
+                Open to full-time roles, collaborations, and interesting projects.
+              </p>
+            </div>
+            <div className="flex gap-3 flex-shrink-0">
+              <Button
+                onClick={downloadResume}
+                className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-2.5 text-sm font-bold rounded-none border border-orange-700 transition-all duration-300 hover:scale-105"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Resume
               </Button>
-            </p>
+              <Link to="/#contact">
+                <Button
+                  variant="outline"
+                  className="border-2 border-white text-white hover:bg-white hover:text-neutral-950 px-5 py-2.5 text-sm font-bold rounded-none bg-transparent transition-all duration-300 hover:scale-105"
+                >
+                  Contact Me
+                </Button>
+              </Link>
+            </div>
           </div>
         </motion.section>
       </motion.main>

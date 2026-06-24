@@ -236,7 +236,7 @@ const SnakeGame = () => {
                 setGhosts(gs => gs.map((g, index) => {
                     const dx = head.x - g.x;
                     const dy = head.y - g.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
+                    const dist = Math.sqrt(dx * dx + dy * dy);
 
                     // Normalize vector to player
                     let vx = (dx / dist) * GHOST_SPEED;

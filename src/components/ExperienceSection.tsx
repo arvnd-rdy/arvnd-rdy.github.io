@@ -1,128 +1,149 @@
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { fadeInUp, staggerContainer, staggerItem } from "@/utils/animations";
-import { MapPin, Calendar, ArrowRight } from "lucide-react";
-import { TechMascot } from "@/components/TechMascot";
+import { staggerContainer, staggerItem, fadeInUp } from "@/utils/animations";
+import { MapPin, CalendarDays } from "lucide-react";
+
+const experiences = [
+  {
+    index: "01",
+    company: "Pure Flavor® Farms",
+    role: "Information Technology Specialist",
+    type: "Co-op",
+    duration: "Sep 2025 – Apr 2026",
+    period: "8 mos",
+    location: "Leamington, Ontario, Canada · On-site",
+    description:
+      "Engineered custom Python scripts to automate business processes, demonstrating an automation-first approach to resolving complex administrative bottlenecks. Maintained scalable server operations, enterprise system environments, and endpoint security. Designed, tested, and deployed internal micro-applications and scripts, significantly improving organizational data reporting and operational efficiency.",
+    skills: ["Python", "Automation", "IT Infrastructure", "Networking", "Endpoint Security", "Server Operations"],
+  },
+  {
+    index: "02",
+    company: "Insight Advantage",
+    role: "Full Stack Engineer AI",
+    type: "Apprenticeship",
+    duration: "May 2025 – Aug 2025",
+    period: "4 mos",
+    location: "Windsor, Ontario, Canada · Remote",
+    description:
+      "Built and integrated AI-powered features into a full-stack consulting platform. Worked across the entire stack to ship production-ready features combining modern web development with LLM-driven workflows.",
+    skills: ["React", "Node.js", "AI Integration", "Full Stack", "LLMs"],
+  },
+  {
+    index: "03",
+    company: "EPAM Systems",
+    role: "Frontend Developer",
+    type: "Apprenticeship",
+    duration: "Jan 2023 – May 2023",
+    period: "5 mos",
+    location: "Remote",
+    description:
+      "Developed responsive web interfaces using modern frameworks. Collaborated with the design team to implement pixel-perfect UIs.",
+    skills: ["HTML5", "TypeScript", "React", "Responsive Design", "CSS"],
+  },
+];
 
 const ExperienceSection = () => {
   const { ref, isInView } = useScrollAnimation();
 
-  const experiences = [
-    {
-      company: "Pure Flavor® Farms",
-      role: "Information Technology Specialist",
-      type: "Co-op",
-      duration: "Sep 2025 - Dec 2025",
-      period: "4 mos",
-      location: "Leamington, Ontario, Canada",
-      year: "2025",
-      description: "Provided comprehensive IT support and system maintenance. Troubleshot hardware and software issues while implementing security protocols."
-    },
-    {
-      company: "Dexian",
-      role: "Technical Recruiter",
-      type: "Full-time",
-      duration: "May 2023 - Aug 2023",
-      period: "4 mos",
-      location: "Pune, Maharashtra, India",
-      year: "2023",
-      description: "Sourced and screened technical candidates for various positions. Managed recruitment pipeline and coordinated interview processes."
-    },
-    {
-      company: "EPAM Systems",
-      role: "Frontend Developer",
-      type: "Apprenticeship",
-      duration: "Jan 2023 - May 2023",
-      period: "5 mos",
-      location: "Remote",
-      year: "2023",
-      description: "Developed responsive web interfaces using modern frameworks. Collaborated with design team to implement pixel-perfect UIs."
-    }
-  ];
-
   return (
-    <motion.section
+    <section
       id="experience"
-      className="py-16 sm:py-20 md:py-24 bg-gray-100 dark:bg-gray-950 relative transition-colors duration-300"
+      className="bg-white dark:bg-black relative transition-colors duration-300 py-16 sm:py-20 scroll-mt-20"
     >
+      <div className="absolute inset-0 brand-grid brand-grid-fade pointer-events-none" />
+
       <motion.div
-        className="container mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 relative"
         ref={ref}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={staggerContainer}
       >
-        {/* Tech Mascot - Top Left */}
-        <motion.div
-          className="absolute top-4 left-4 hidden lg:block z-10"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          <TechMascot variant="typing" size={70} />
-        </motion.div>
-
-        {/* Header Label */}
-        <motion.div
-          className="inline-block bg-black dark:bg-white px-8 py-4 mb-12"
-          variants={fadeInUp}
-        >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-white dark:text-black uppercase tracking-widest">
-            WORK EXPERIENCE
+        {/* Header */}
+        <motion.div className="mb-12 sm:mb-16" variants={fadeInUp}>
+          <p className="text-orange-600 dark:text-orange-500 font-semibold text-sm sm:text-base tracking-tight mb-3">
+            Experience
+          </p>
+          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-neutral-950 dark:text-white leading-none tracking-tight">
+            Work History
           </h2>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Thick vertical line */}
-          <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-black dark:bg-white"></div>
+        {/* Experience rows */}
+        <div>
+          {experiences.map((exp, idx) => (
+            <motion.div
+              key={exp.company}
+              variants={staggerItem}
+              className="group"
+            >
+              {/* Top border */}
+              <div className="h-px bg-neutral-200 dark:bg-white/20 group-hover:bg-orange-400 dark:group-hover:bg-orange-600 transition-colors duration-300" />
 
-          {/* Experience Items */}
-          <div className="space-y-12 sm:space-y-16">
-            {experiences.map((exp, idx) => (
-              <motion.div
-                key={exp.company}
-                className="relative pl-12 sm:pl-16"
-                variants={staggerItem}
-              >
-                {/* Yellow dot */}
-                <div className="absolute left-0 top-2 w-6 h-6 sm:w-7 sm:h-7 bg-yellow-400 dark:bg-yellow-500 rounded-full border-4 border-black dark:border-white transform -translate-x-[10px] sm:-translate-x-[11px]"></div>
+              <div className="grid grid-cols-1 lg:grid-cols-[80px_1fr_auto] gap-4 lg:gap-8 py-8 sm:py-10">
 
-                {/* Content */}
-                <div className="space-y-3">
-                  {/* Role Title */}
-                  <div className="inline-block bg-black dark:bg-white px-4 py-2">
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-black text-white dark:text-black uppercase tracking-tight">
+                {/* Index number */}
+                <div className="hidden lg:flex items-start pt-1">
+                  <span className="text-4xl font-bold text-neutral-200 dark:text-neutral-800 leading-none select-none group-hover:text-orange-200 dark:group-hover:text-orange-900 transition-colors duration-300">
+                    {exp.index}
+                  </span>
+                </div>
+
+                {/* Main content */}
+                <div className="space-y-4">
+                  {/* Role + company + badge */}
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                      <span className="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-800">
+                        {exp.type}
+                      </span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-neutral-950 dark:text-white tracking-tight leading-tight">
                       {exp.role}
                     </h3>
-                  </div>
-
-                  {/* Company & Duration */}
-                  <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base mb-2">
-                    <span className="font-black text-gray-900 dark:text-white">
+                    <p className="text-orange-600 dark:text-orange-500 font-semibold text-sm sm:text-base mt-1">
                       {exp.company}
-                    </span>
-                    <span className="text-gray-500 dark:text-gray-500 font-mono">
-                      // {exp.duration}
-                    </span>
-                  </div>
-
-                  {/* Location */}
-                  <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-500 font-medium mb-3">
-                    📍 {exp.location}
+                    </p>
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm sm:text-base text-gray-700 dark:text-gray-400 leading-relaxed max-w-3xl font-mono">
+                  <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-[15px] leading-relaxed max-w-2xl">
                     {exp.description}
                   </p>
+
+                  {/* Skill chips */}
+                  <div className="flex flex-wrap gap-2">
+                    {exp.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-2.5 py-1 text-xs font-medium bg-neutral-50 dark:bg-black border border-neutral-200 dark:border-white/20 text-neutral-700 dark:text-neutral-300 rounded-md"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+
+                {/* Meta — duration + location */}
+                <div className="flex lg:flex-col items-start lg:items-end gap-3 lg:gap-2 lg:pt-1 flex-wrap">
+                  <div className="flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-500">
+                    <CalendarDays className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span className="whitespace-nowrap">{exp.duration} · {exp.period}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-500">
+                    <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span className="whitespace-nowrap">{exp.location}</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Bottom border */}
+          <div className="h-px bg-neutral-200 dark:bg-white/20" />
         </div>
       </motion.div>
-    </motion.section>
+    </section>
   );
 };
 
